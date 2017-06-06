@@ -9,9 +9,7 @@ import android.view.View;
 
 public class QuestionHolder  extends RecyclerView.ViewHolder {
     // each data item is just a string in this case
-    //public View holderView;
     public QuestionHolder(View v) {
         super(v);
-        //holderView=v;
     }
 }

@@ -35,11 +35,11 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     @Override
     public void onBindViewHolder(QuestionHolder myViewHolder, int position) {
 
-        final Quizz quizzOnView = listQuizz.get(position);
+        final Quizz quizz = listQuizz.get(position);
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickCallback.onQuizzClicked(quizzOnView);
+                clickCallback.onQuizzClicked(quizz);
             }
         });
     }

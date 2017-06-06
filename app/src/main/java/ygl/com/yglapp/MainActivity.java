@@ -5,11 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
@@ -29,11 +26,19 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
-        Quizz quizz = new Quizz("quizz1","dddddd",20,new JSONArray());
+
+        /*POUR TESTER*/
+        Quizz quizz = new Quizz("quizz1","desc",20,new JSONArray());
+        Quizz quizz2 = new Quizz("quizz2","desc",20,new JSONArray());
         ArrayList<Quizz> listQuizz = new ArrayList<>();
         listQuizz.add(quizz);
+        for(int i=0;i<20;i++){
+
+            listQuizz.add(quizz2);
+        }
         QuizzAdapter adapter = new QuizzAdapter(listQuizz,this);
         myRecyclerView.setAdapter(adapter);
+        /********/
 
     }
 
@@ -41,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
-        Toast.makeText(this,"bobob",Toast.LENGTH_SHORT);
+        //DO SOMETHING WITH QUIZZ SELECTED
+        Toast.makeText(this,myQuizz.getName(),Toast.LENGTH_SHORT).show();
 
     }
 
