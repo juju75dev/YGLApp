@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
-        //DO SOMETHING WITH QUIZZ CLICKED
+        //DO SOMETHING WITH QUIZZ CLICK
         Toast.makeText(this,myQuizz.getName(),Toast.LENGTH_SHORT).show();
 
     }
