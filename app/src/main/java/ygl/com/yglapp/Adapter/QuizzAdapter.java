@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
@@ -15,12 +16,14 @@ import ygl.com.yglapp.R;
  * Created by juju on 06/06/2017.
  */
 
-public class QuestionsAdapter extends RecyclerView.Adapter<QuestionHolder> {
+public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     private ArrayList<Quizz> listQuizz;
+    private OnQuizzClicked clickCallback;
 
-    public QuestionsAdapter(ArrayList<Quizz> list) {
+    public QuizzAdapter(ArrayList<Quizz> list, OnQuizzClicked callback) {
         this.listQuizz = list;
+        this.clickCallback=callback;
     }
 
     @Override
@@ -31,7 +34,14 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     @Override
     public void onBindViewHolder(QuestionHolder myViewHolder, int position) {
-        listQuizz.get(position);
+
+        final Quizz quizzOnView = listQuizz.get(position);
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCallback.onQuizzClicked(quizzOnView);
+            }
+        });
     }
 
     @Override

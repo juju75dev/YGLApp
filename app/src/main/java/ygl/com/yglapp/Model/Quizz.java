@@ -13,6 +13,13 @@ public class Quizz {
     private int duration;
     private JSONArray questions;
 
+    public Quizz(String name, String description, int duration, JSONArray questions) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.questions = questions;
+    }
+
     public String getName() {
         return name;
     }

@@ -4,11 +4,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ygl.com.yglapp.Adapter.QuizzAdapter;
+import ygl.com.yglapp.Model.OnQuizzClicked;
+import ygl.com.yglapp.Model.Quizz;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
     @BindView(R.id.recycler_view) RecyclerView myRecyclerView;
     private LinearLayoutManager recyclerViewManager;
@@ -21,8 +29,20 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
-
-
+        Quizz quizz = new Quizz("quizz1","dddddd",20,new JSONArray());
+        ArrayList<Quizz> listQuizz = new ArrayList<>();
+        listQuizz.add(quizz);
+        QuizzAdapter adapter = new QuizzAdapter(listQuizz,this);
+        myRecyclerView.setAdapter(adapter);
 
     }
+
+
+    @Override
+    public void onQuizzClicked(Quizz myQuizz){
+
+        Toast.makeText(this,"bobob",Toast.LENGTH_SHORT);
+
+    }
+
 }
