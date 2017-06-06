@@ -6,13 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ygl.com.yglapp.Adapter.QuizzAdapter;
 import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.Model.Quizz;
 
@@ -37,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
-        //DO SOMETHING WITH QUIZZ SELECTED
+        //DO SOMETHING WITH QUIZZ CLICKED
         Toast.makeText(this,myQuizz.getName(),Toast.LENGTH_SHORT).show();
 
     }
