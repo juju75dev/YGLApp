@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
@@ -29,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
         QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizz,this);
 
         myRecyclerView.setAdapter(adapterQuizz);
-
-
 
 
         /****RECUPERATION DE LA LISTE DES QUIZZ AND SET ADAPTER*****/

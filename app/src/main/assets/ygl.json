@@ -1,9 +1,9 @@
 [
   {
-    "name": "quiz java",
-    "description": "questions de compétences techniques",
+    "name": "Quiz Java",
+    "description": "Questions de compétences techniques",
     "quiztitle": "Calcul DN4",
-    "id": "0",
+    "id": "quiz0",
     "duration": "20",
     "type": "0",
     "evaluationType": "0",
@@ -11,130 +11,329 @@
       {
         "key": "0",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test1{\n public static void main(String[] args){\n  int arr[] = new int[3];\n  for(int i = 0;i<arr.length;i++{\n   System.out.println(arr[i]);\n  }\n }\n}",
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûlure",
+            "text": "0 0 0",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "ArrayIndexoutOfBoundsException",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "NullPointerException",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "null null null",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "1",
+        "type": "2",
+        "text": "Quelles réponses déclarent un tableau correctement ?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "int arr[] = new int[];",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "1",
-            "text": "Sensation de froid douleureux",
+            "text": "float arr[10] = new float[];",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "double[] arr = new double[10];",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Aucune des autres réponses",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "2",
+        "type": "2",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test3{\n public void method(){\n  System.out.println(\"Called\");\n }\n public static void main (String[] args){\n  method();\n }\n}",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "\"Called\"",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Compiler error",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
             "key": "2",
-            "text": "Décharges électriques",
+            "text": "Runtime error",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Rien",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "3",
+        "type": "2",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test4{\n public static void method(){\n  System.out.println(\"Called\");\n }\n public static void main(String[] args){\n  Test4 t4 = null;\n  t4.method();\n }\n}",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "\"Called\"",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Compiler error",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Runtime error",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Rien",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "4",
+        "type": "2",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test5{\n public void Test5(){\n  System.out.println(\"Constructor\");\n }\n public Test5(){\n  System.out.println(\"Constructor2\");\n }\n public static void main(String[] args){\n  Test5 t5 = new test5();\n }\n}",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "\"Constructor1\"",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "\"Constructor2\"",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
             "key": "2",
-            "text": "Décharges électriques",
+            "text": "\"Constructor1\"\"Constructor2\"",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Compiler error",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "5",
+        "type": "2",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test6{\n public Test6(){\n  this(4);\n }\n public Test6(byte var){\n  System.out.println(var);\n }\n public static void main(String[] args){\n  Test6 t6 = new Test6();\n }\n}",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "4",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "4 4",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Compiler error",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Compile et s'execute sans problème",
             "isCorrectResponse": "true",
             "target": "2"
           }
         ]
       },
       {
-        "key": "0",
+        "key": "6",
         "type": "2",
-        "text": "sdf",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Qu'affiche ce programme ?",
+        "enonce": "public class Test7{\n public Test7(){}\n public Test7(Test7 ref){\n  this(ref,\"Hai\");\n }\n public Test7(Test7 ref, String str){\n  ref.Test7(str);\n  System.out.println(\"Hi\");\n }\n public void Test7(String str){\n  System.out.println(str);\n }\n  public static void main(String[] args){\n  Test7 t = new Test7();\n  Test7 t7 = new Test7(t);\n }\n}",
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûe",
+            "text": "Hi",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "1",
-            "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
+            "text": "Hai",
+            "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "2",
-            "text": "Décctriques",
+            "text": "Hai Hi",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
+            "key": "3",
+            "text": "Hi Hai",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "7",
+        "type": "2",
+        "text": "Quelle portée a ce constructeur ?",
+        "enonce": "Test8(){}",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "public",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "private",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
             "key": "2",
-            "text": "Décharges électriques",
+            "text": "protected",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Compiler error",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "8",
+        "type": "2",
+        "text": "Parmi les propositions suivantes, quelle déclaration de classe est invalide ?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "class Test10",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "public class Test10",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "final class test10",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "abstract final class Test10",
             "isCorrectResponse": "true",
             "target": "2"
           }
         ]
       },
       {
-        "key": "0",
+        "key": "9",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "propositions": [
-          {
-            "key": "0",
-            "text": "Brûlure",
-            "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
-          }
-        ]
-      },
-      {
-        "key": "0",
-        "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Avec quoi le mot clé 'transient' est-il compatible ?",
+        "enonce": null,
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûlure",
+            "text": "méthode",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "1",
-            "text": "Sensation de froid douleureux",
+            "text": "attribut",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
             "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
+            "text": "classe",
+            "isCorrectResponse": "false",
             "target": "2"
           },
           {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
+            "key": "3",
+            "text": "constructeur",
+            "isCorrectResponse": "false",
             "target": "2"
           }
         ]
@@ -145,7 +344,7 @@
     "name": "quiz java",
     "description": "questions de compétences techniques",
     "quiztitle": "Calcul DN4",
-    "id": "1",
+    "id": "quiz7",
     "duration": "20",
     "type": "0",
     "evaluationType": "0",
@@ -174,12 +373,6 @@
             "text": "Décharges électriques",
             "isCorrectResponse": "true",
             "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
           }
         ]
       },
@@ -207,12 +400,6 @@
             "text": "Décharges électriques",
             "isCorrectResponse": "true",
             "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
           }
         ]
       },
@@ -231,12 +418,6 @@
           {
             "key": "1",
             "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
             "isCorrectResponse": "true",
             "target": "2"
           },
@@ -264,12 +445,6 @@
           {
             "key": "1",
             "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
             "isCorrectResponse": "true",
             "target": "2"
           },
