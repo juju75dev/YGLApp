@@ -3,16 +3,13 @@ package ygl.com.yglapp.Utlities;
 import android.content.Context;
 import android.util.Log;
 
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import ygl.com.yglapp.Model.Quizz;
-import ygl.com.yglapp.R;
 
 import static android.content.ContentValues.TAG;
 
@@ -40,7 +37,7 @@ public class ParsingUtil {
 
     }
 
-    public static Quizz[] getConfig(Context context) {
+       public static Quizz[] getConfig(Context context) {
         String json = getStringjsonFromFile(context);
         Quizz[] quizz = null;
         try {

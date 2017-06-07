@@ -41,6 +41,12 @@ public class Quizz implements Serializable{
         this.questions = questions;
     }
 
+    public Quizz(){
+
+
+
+    }
+
     public static Quizz getInstance() {
         return mInstance;
     }

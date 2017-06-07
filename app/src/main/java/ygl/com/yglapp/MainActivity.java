@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
-        ParsingUtil.getConfig(this);
+        Quizz[] listQuizz =ParsingUtil.getConfig(this);
+
 
         /****RECUPERATION DE LA LISTE DES QUIZZ AND SET ADAPTER*****/
 
