@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme">
 
             <intent-filter>
@@ -22,10 +22,10 @@
 
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
         </activity>
 
-        <activity android:name=".QuizzActivity"
+        <activity android:name=".Activity.QuizzActivity"
             android:theme="@style/AppTheme"/>
 
 

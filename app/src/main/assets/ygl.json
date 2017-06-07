@@ -11,7 +11,7 @@
       {
         "key": "0",
         "type": "2",
-        "text": "Qu'affiche ce programme ?",
+        "text": "Qu'affiche ce programme ? \n ",
         "enonce": "public class Test1{\n public static void main(String[] args){\n  int arr[] = new int[3];\n  for(int i = 0;i<arr.length;i++{\n   System.out.println(arr[i]);\n  }\n }\n}",
         "weight": "20",
         "propositions": [
@@ -352,7 +352,7 @@
       {
         "key": "0",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ? \n",
         "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
         "weight": "20",
         "propositions": [

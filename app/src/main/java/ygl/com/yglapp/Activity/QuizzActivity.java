@@ -1,4 +1,4 @@
-package ygl.com.yglapp;
+package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,6 +20,8 @@ import ygl.com.yglapp.Model.OnTimerFinished;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
 import ygl.com.yglapp.Model.Quizz;
+import ygl.com.yglapp.MyCountDownTimer;
+import ygl.com.yglapp.R;
 
 public class QuizzActivity extends AppCompatActivity implements OnTimerFinished {
 
