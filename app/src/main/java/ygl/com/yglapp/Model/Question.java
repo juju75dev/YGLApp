@@ -28,7 +28,6 @@ public class Question implements Serializable{
     private List<Propositions> propositions;
 
 
-
     public int getKey() {
         return key;
     }

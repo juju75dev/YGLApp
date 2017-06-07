@@ -1,10 +1,10 @@
 package ygl.com.yglapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
         ParsingUtil.getConfig(this);
-       // Toast.makeText(this, ParsingUtil.getConfig(this).getName(),Toast.LENGTH_SHORT).show();
+
+        /****RECUPERATION DE LA LISTE DES QUIZZ AND SET ADAPTER*****/
 
 
     }
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
-        //DO SOMETHING WITH QUIZZ CLICK
-        Toast.makeText(this,myQuizz.getName(),Toast.LENGTH_SHORT).show();
+        /****PARSE QUIZZ PROPERTIES AND START ACTIVITY WITH QUIZZ PROPERTIES****/
+
+        Intent intent =new Intent(this,QuizzActivity.class);
+        startActivity(intent);
 
     }
 
