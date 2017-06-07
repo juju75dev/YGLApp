@@ -21,6 +21,9 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     @BindView(R.id.timer_view) TextView timerView;
     @BindView(R.id.start_quizz_button) Button startQuizzButton;
     @BindView(R.id.warning_layout) LinearLayout warningLayout;
+    @BindView(R.id.enonce_view) TextView enonceView;
+    @BindView(R.id.question_text_view) TextView questionTextView;
+
 
     private MyCountDownTimer countDownTimer;
 
