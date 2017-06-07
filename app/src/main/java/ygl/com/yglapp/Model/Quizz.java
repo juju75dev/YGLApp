@@ -34,12 +34,12 @@ public class Quizz implements Serializable{
     @JsonProperty("quizz")
     private static Quizz mInstance;
 
-//    public Quizz(String description, int duration, String name, Question questions) {
-//        this.description = description;
-//        this.duration = duration;
-//        this.name = name;
-//        this.questions = questions;
-//    }
+    public Quizz(String description, int duration, String name, List<Question> questions) {
+        this.description = description;
+        this.duration = duration;
+        this.name = name;
+        this.questions = questions;
+    }
 
     public static Quizz getInstance() {
         return mInstance;
