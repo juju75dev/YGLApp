@@ -1,29 +1,31 @@
 package ygl.com.yglapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.json.JSONArray;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by juju on 06/06/2017.
  */
 
-public class Question {
+public class Question implements Serializable{
 
+
+    @JsonProperty("key")
     private int key;
+    @JsonProperty("type")
     private int type;
+    @JsonProperty("text")
     private String text;
+    @JsonProperty("enonce")
     private String enonce;
+    @JsonProperty("weight")
     private int weight;
-    private JSONArray propositions;
-
-
-    public Question(int key, int type, String text, String enonce, int weight, JSONArray propositions) {
-        this.key = key;
-        this.type = type;
-        this.text = text;
-        this.enonce = enonce;
-        this.weight = weight;
-        this.propositions = propositions;
-    }
+    @JsonProperty("propositions")
+    private List<Propositions> propositions;
 
 
     public int getKey() {
@@ -66,11 +68,11 @@ public class Question {
         this.weight = weight;
     }
 
-    public JSONArray getPropositions() {
+    public List<Propositions> getPropositions() {
         return propositions;
     }
 
-    public void setPropositions(JSONArray propositions) {
+    public void setPropositions(List<Propositions> propositions) {
         this.propositions = propositions;
     }
 }

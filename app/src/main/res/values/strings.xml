@@ -26,4 +26,6 @@
 
     </string>
 
+
+    <string name="jsonFile">ygl.json</string>
 </resources>
