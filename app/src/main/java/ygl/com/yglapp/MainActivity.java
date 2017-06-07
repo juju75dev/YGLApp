@@ -1,13 +1,15 @@
 package ygl.com.yglapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
-
+import org.json.JSONArray;
+import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ygl.com.yglapp.Adapter.QuizzAdapter;
 import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.Model.Quizz;
 
@@ -25,6 +27,22 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
 
+        /****RECUPERATION DE LA LISTE DES QUIZZ AND SET ADAPTER****/
+
+
+
+        /*POUR TESTER*/
+        Quizz quizz = new Quizz("quizz1","desc",20,new JSONArray());
+        Quizz quizz2 = new Quizz("quizz2","desc",20,new JSONArray());
+        ArrayList<Quizz> listQuizz = new ArrayList<>();
+        listQuizz.add(quizz);
+        for(int i=0;i<20;i++){
+
+            listQuizz.add(quizz2);
+        }
+        QuizzAdapter adapter = new QuizzAdapter(listQuizz,this);
+        myRecyclerView.setAdapter(adapter);
+        /********/
 
     }
 
@@ -32,8 +50,10 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
-        //DO SOMETHING WITH QUIZZ CLICK
-        Toast.makeText(this,myQuizz.getName(),Toast.LENGTH_SHORT).show();
+        /****PARSE QUIZZ PROPERTIES AND START ACTIVITY WITH QUIZZ PROPERTIES****/
+
+        Intent intent =new Intent(this,QuizzActivity.class);
+        startActivity(intent);
 
     }
 
