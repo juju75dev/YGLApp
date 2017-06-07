@@ -26,12 +26,14 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
-
         Quizz[] listQuizz =ParsingUtil.getConfig(this);
 
         QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizz,this);
 
         myRecyclerView.setAdapter(adapterQuizz);
+
+
+        /****RECUPERATION DE LA LISTE DES QUIZZ AND SET ADAPTER*****/
 
 
     }
@@ -40,7 +42,12 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
+        /****PARSE QUIZZ PROPERTIES AND START ACTIVITY WITH QUIZZ PROPERTIES****/
 
+
+        Intent intent =new Intent(this,QuizzActivity.class);
+        intent.putExtra("quiz",myQuizz);
+        startActivity(intent);
 
     }
 
