@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YGLApp</string>
+
+    <string name="jsonFile">ygl.json</string>
 </resources>

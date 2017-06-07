@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.Model.Quizz;
+import ygl.com.yglapp.Utlities.ParsingUtil;
 
 public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
@@ -22,8 +23,11 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
+        ParsingUtil.getConfig(this);
+       // Toast.makeText(this, ParsingUtil.getConfig(this).getName(),Toast.LENGTH_SHORT).show();
 
 
     }
