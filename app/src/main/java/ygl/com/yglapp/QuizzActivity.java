@@ -13,9 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.OnTimerFinished;
@@ -49,6 +47,10 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     RadioButton prop4;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
+    @BindView(R.id.warning_title_view)
+    TextView warningTitleView;
+    @BindView(R.id.warning_desc_view)
+    TextView warningDescView;
 
 
     private MyCountDownTimer countDownTimer;
@@ -68,6 +70,13 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         quiz = (Quizz) getIntent().getSerializableExtra("quiz");
         setTitle(quiz.getName());
 
+        warningTitleView.setText(getString(R.string.you_choose)+" : "+quiz.getName());
+
+        warningDescView.setText("- "+getString(R.string.questions_number)+" : " +quiz.getQuestions().size()+
+                "\n\n- "+getString(R.string.duration) +" : "+ quiz.getDuration()+"min"+
+                "\n\n- "+getString(R.string.quizz_contains_two_types)+
+                "\n\n- "+getString(R.string.dont_getout_of_app)+" !");
+
         setQuestion(index);
         questionsCounterView.setText("Question "+1+"/"+quiz.getQuestions().size());
 
@@ -83,14 +92,12 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
                     setQuestion(++index);
 
                 }else{
-                    //QUIZ FINI
                     stopQuizz();
                 }
             }
         });
 
-        // 120000 = EXAMPLE DUREE QUIZZ
-        countDownTimer = new MyCountDownTimer(10000, 1000, timerView, this);
+        countDownTimer = new MyCountDownTimer(quiz.getDuration()*60000, 1000, timerView, this);
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {

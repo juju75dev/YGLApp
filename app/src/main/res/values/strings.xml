@@ -1,31 +1,13 @@
 <resources>
+
     <string name="app_name">YGLApp</string>
     <string name="finished">Terminé</string>
     <string name="time_remaining">Temps restant</string>
-
-    <string name="enonce_exemple">
-        public class Test1{\n
-        &#160;public static void main (String[] args){\n
-        &#160;&#160;int arr[] = new int[3];\n
-        &#160;&#160;&#160;for(int i =0 ; i &#60; arr.length;i++){\n
-        &#160;&#160;&#160;&#160;system.out.println(arr[i]);\n
-        &#160;&#160;}\n
-        &#160;}\n
-        }
-
-    </string>
-
-    <string name="warning_exemple">
-
-        - Durée 45 min.\n\n
-        - 40 questions.\n\n
-        - Impossible de revenir en arrière.\n\n
-        - Ce questionnaire possède des questions libres et des QCM.\n\n
-        - Ne pas sortir de l\'application pendant le test !
-
-
-    </string>
-
-
+    <string name="you_choose">Vous avez choisi</string>
+    <string name="questions_number">Nombre de questions</string>
+    <string name="duration">Durée</string>
+    <string name="quizz_contains_two_types">Ce questionnaire possède des questions libres et des QCM</string>
+    <string name="dont_getout_of_app">Ne pas sortir de l\'application pendant le test</string>
     <string name="jsonFile">ygl.json</string>
+
 </resources>

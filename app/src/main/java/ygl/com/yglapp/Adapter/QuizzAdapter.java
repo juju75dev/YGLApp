@@ -41,7 +41,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
         titleView.setText(quizz.getName());
         descView.setText(quizz.getDescription()+"\n\n"+"- Nombre de questions : "+quizz.getQuestions().size()+
-        "\n"+"- Durée : 45min");
+        "\n"+"- Durée : "+quizz.getDuration()+"min");
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
