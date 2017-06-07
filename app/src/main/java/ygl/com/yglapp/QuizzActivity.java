@@ -87,4 +87,10 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countDownTimer.cancel();
+
+    }
 }

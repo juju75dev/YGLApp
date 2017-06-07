@@ -1,6 +1,7 @@
 package ygl.com.yglapp;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.TextView;
 
 import ygl.com.yglapp.Model.OnTimerFinished;
@@ -24,6 +25,7 @@ public class MyCountDownTimer extends CountDownTimer {
     @Override
     public void onTick(long millisUntilFinished) {
 
+        Log.d("timerFF","timerFF"+millisUntilFinished);
         long minutes = 0;
         long secondes = millisUntilFinished/1000;
         String minuString="00";
