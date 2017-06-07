@@ -50,7 +50,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     private MyCountDownTimer countDownTimer;
     private Quizz quiz;
     Question question;
-    int i = 0;
+    int i = 1;
 
 
     @Override
