@@ -79,6 +79,7 @@
         "type": "2",
         "text": "Qu'affiche ce programme ?",
         "enonce": "public class Test3{\n public void method(){\n  System.out.println(\"Called\");\n }\n public static void main (String[] args){\n  method();\n }\n}",
+        "weight": "20",
         "propositions": [
           {
             "key": "0",
