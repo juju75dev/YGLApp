@@ -40,16 +40,15 @@ public class ParsingUtil {
 
     }
 
-    public static Quizz getConfig(Context context) {
+    public static Quizz[] getConfig(Context context) {
         String json = getStringjsonFromFile(context);
-        Quizz quizz = new Quizz();
+        Quizz[] quizz = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-          //  objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
-             quizz = objectMapper.readValue(json, Quizz.class);
+            objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+            quizz = objectMapper.readValue(json, Quizz[].class);
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e(TAG, "getConfig: ");
 //            Log.e("Une erreur s'est produite lors du parsing du fichier de pré-configuration");
 //            e.printStackTrace();

@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Utlities.ParsingUtil;
 

@@ -1,4 +1,6 @@
-package ygl.com.yglapp.Model;
+package ygl.com.yglapp;
+
+import ygl.com.yglapp.Model.Quizz;
 
 /**
  * Created by juju on 06/06/2017.
