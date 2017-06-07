@@ -77,11 +77,10 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
                 checkAnswer(index);
 
-                if (index < quiz.getQuestions().size()){
+                if (index < quiz.getQuestions().size()-1){
 
                     radioGroup.clearCheck();
                     setQuestion(++index);
-
 
                 }else{
                     //QUIZ FINI
