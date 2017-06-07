@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by ahmed on 06/06/2017.
  */
 
-public class Propositions implements Serializable {
+public class Proposition implements Serializable {
 
     @JsonProperty("key")
     private int key;

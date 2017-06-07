@@ -34,8 +34,10 @@
 
 
         <TextView
+            android:id="@+id/question_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textSize="14dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
@@ -53,6 +55,7 @@
             >
 
             <TextView
+                android:id="@+id/enonce_text"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,24 +94,28 @@
             android:orientation="vertical">
 
             <ygl.com.yglapp.ToggleRadioButton
+                android:id="@+id/prop1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="int arr[] = new int[]"
                 />
 
             <ygl.com.yglapp.ToggleRadioButton
+                android:id="@+id/prop2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="float arr[10] = new float[]"
                 />
 
-            <ygl.com.yglapp.ToggleRadioButton android:id="@+id/radio_pirates"
+            <ygl.com.yglapp.ToggleRadioButton
+                android:id="@+id/prop3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="double[] arr = new double[10]"
                 />
 
-            <ygl.com.yglapp.ToggleRadioButton android:id="@+id/radio_ninjas"
+            <ygl.com.yglapp.ToggleRadioButton
+                android:id="@+id/prop4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aucune des autres réponses"
@@ -116,6 +123,7 @@
         </RadioGroup>
 
         <Button
+            android:id="@+id/validate"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
