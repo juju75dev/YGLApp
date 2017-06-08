@@ -24,7 +24,7 @@ public class MyCountDownTimer extends CountDownTimer {
 
     public String getFormatedTimeRemaining(){
 
-        long minutes = 0;
+        long minutes = 00;
         long secondes = timeRemaining/1000;
         String minuString="00";
         String seconString;
