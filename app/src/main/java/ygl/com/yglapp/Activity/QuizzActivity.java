@@ -92,7 +92,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        monitorActionBarAnimation();
         quiz = (Quizz) getIntent().getSerializableExtra("quiz");
         setTitle(quiz.getName());
 
@@ -275,28 +274,4 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
-    private void monitorActionBarAnimation() {
-
-        try {
-            // Get the Animator used internally
-            final Class<?> actionBarImpl = getSupportActionBar().getClass();
-            final Field currentAnimField = actionBarImpl.getDeclaredField("mCurrentShowAnim");
-
-            // Monitor the animation
-            final Animator currentAnim = (Animator) currentAnimField.get(getSupportActionBar());
-            currentAnim.addListener(new AnimatorListenerAdapter() {
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    // Do something
-                    Log.d("gooo","goooo");
-                }
-
-            });
-        } catch (final Exception ignored) {
-            // Nothing to do
-            ignored.printStackTrace();
-            Log.d("gooo","gooooaaaa");
-        }
-    }
 }
