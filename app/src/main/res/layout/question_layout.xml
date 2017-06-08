@@ -1,3 +1,4 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/question_layout"
     android:layout_width="match_parent"
@@ -17,12 +18,14 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1">
 
+
             <TextView
                 android:id="@+id/timer_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/questions_counter_view"
@@ -30,8 +33,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="5dp"
+                android:text=""
                 android:textSize="12dp"
-                android:text=""/>
+                android:textStyle="bold" />
+
 
         </RelativeLayout>
 
@@ -45,12 +50,17 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+
+
+            />
 
         <LinearLayout
+            android:id="@+id/enonce_layout"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="5">
+            android:layout_weight="5"
+           >
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
@@ -97,12 +107,14 @@
             </android.support.v7.widget.CardView>
 
 
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="7"
+
 
             android:orientation="vertical">
 
@@ -111,12 +123,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+
                 android:orientation="vertical">
 
                 <ygl.com.yglapp.ToggleRadioButton
                     android:id="@+id/prop1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
 
                     />
 
@@ -124,6 +138,7 @@
                     android:id="@+id/prop2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
 
                     />
 
@@ -131,6 +146,7 @@
                     android:id="@+id/prop3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
 
                     />
 
@@ -138,6 +154,7 @@
                     android:id="@+id/prop4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
 
                     />
             </RadioGroup>
@@ -146,8 +163,8 @@
                 android:id="@+id/validate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:layout_gravity="bottom|center"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
                 android:text="Valider"

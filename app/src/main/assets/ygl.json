@@ -4,7 +4,7 @@
     "description": "Questions de compétences techniques",
     "quiztitle": "Calcul DN4",
     "id": "quiz0",
-    "duration": "1",
+    "duration": "20",
     "type": "0",
     "evaluationType": "0",
     "questions": [

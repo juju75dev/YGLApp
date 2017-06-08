@@ -1,7 +1,8 @@
-package ygl.com.yglapp;
+package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.OnTimerFinished;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
 import ygl.com.yglapp.Model.Quizz;
+import ygl.com.yglapp.MyCountDownTimer;
+import ygl.com.yglapp.R;
 
 
 public class QuizzActivity extends AppCompatActivity implements OnTimerFinished {
@@ -51,6 +57,8 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     TextView warningTitleView;
     @BindView(R.id.warning_desc_view)
     TextView warningDescView;
+    @BindView(R.id.enonce_layout)
+    LinearLayout enonce_layout;
     @BindView(R.id.question_layout)
     LinearLayout questionLayout;
 
@@ -69,7 +77,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     Question question;
     int index = 0;
 
-    private int score=0;
+    private int score = 0;
 
 
     @Override
@@ -77,20 +85,21 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_quizz);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         quiz = (Quizz) getIntent().getSerializableExtra("quiz");
         setTitle(quiz.getName());
 
-        warningTitleView.setText(getString(R.string.you_choose)+" : "+quiz.getName());
+        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
 
-        warningDescView.setText("- "+getString(R.string.questions_number)+" : " +quiz.getQuestions().size()+
-                "\n\n- "+getString(R.string.duration) +" : "+ quiz.getDuration()+"min"+
-                "\n\n- "+getString(R.string.quizz_contains_two_types)+
-                "\n\n- "+getString(R.string.dont_getout_of_app)+" !");
+        warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
+                "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
+                "\n\n- " + getString(R.string.quizz_contains_two_types) +
+                "\n\n- " + getString(R.string.dont_getout_of_app) + " !");
 
         setQuestion(index);
-        questionsCounterView.setText("Question "+1+"/"+quiz.getQuestions().size());
+        questionsCounterView.setText("Question " + 1 + "/" + quiz.getQuestions().size());
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,18 +107,18 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
                 checkAnswer(index);
 
-                if (index < quiz.getQuestions().size()-1){
+                if (index < quiz.getQuestions().size() - 1) {
 
                     radioGroup.clearCheck();
                     setQuestion(++index);
 
-                }else{
+                } else {
                     stopQuizz();
                 }
             }
         });
 
-        countDownTimer = new MyCountDownTimer(quiz.getDuration()*60000, 1000, timerView, this);
+        countDownTimer = new MyCountDownTimer(quiz.getDuration() * 60000, 1000, timerView, this);
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +157,11 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         prop4.setText(question.getPropositions().get(3).getText());
 
         questionsCounterView.setText("Question "+ String.valueOf(index+1)+"/"+quiz.getQuestions().size());
+
+        if (question.getEnonce() == null)
+            enonce_layout.setVisibility(View.GONE);
+        else
+            enonce_layout.setVisibility(View.VISIBLE);
 
     }
 
@@ -209,22 +223,22 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         return anim;
     }
 
-    private void checkAnswer(int indexQuestion){
+    private void checkAnswer(int indexQuestion) {
 
         //POUR LE TYPE 2
         List<Proposition> propositions = quiz.getQuestions().get(indexQuestion).getPropositions();
 
         int questionWeight = quiz.getQuestions().get(indexQuestion).getWeight();
 
-        if(prop1.isChecked() && propositions.get(0).isCorrectResponse()||
-                prop2.isChecked()&& propositions.get(1).isCorrectResponse()||
-                prop3.isChecked() && propositions.get(2).isCorrectResponse()||
-                prop4.isChecked() && propositions.get(3).isCorrectResponse()){
+        if (prop1.isChecked() && propositions.get(0).isCorrectResponse() ||
+                prop2.isChecked() && propositions.get(1).isCorrectResponse() ||
+                prop3.isChecked() && propositions.get(2).isCorrectResponse() ||
+                prop4.isChecked() && propositions.get(3).isCorrectResponse()) {
 
             //TRUE ANSWER
-            score+=questionWeight;
+            score += questionWeight;
 
-        }else{
+        } else {
             //WRONG ANSWER
         }
 
@@ -242,6 +256,12 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     protected void onDestroy() {
         super.onDestroy();
         countDownTimer.cancel();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
 

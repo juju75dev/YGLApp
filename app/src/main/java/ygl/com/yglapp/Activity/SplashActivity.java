@@ -1,4 +1,4 @@
-package ygl.com.yglapp;
+package ygl.com.yglapp.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
