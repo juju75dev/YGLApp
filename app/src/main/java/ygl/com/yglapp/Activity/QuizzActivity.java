@@ -2,6 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import butterknife.BindView;
@@ -91,6 +92,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        monitorActionBarAnimation();
         quiz = (Quizz) getIntent().getSerializableExtra("quiz");
         setTitle(quiz.getName());
 
@@ -122,7 +124,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         });
 
         countDownTimer = new MyCountDownTimer(quiz.getDuration() * 60000, 1000, timerView, this);
-
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,5 +275,28 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
+    private void monitorActionBarAnimation() {
 
+        try {
+            // Get the Animator used internally
+            final Class<?> actionBarImpl = getSupportActionBar().getClass();
+            final Field currentAnimField = actionBarImpl.getDeclaredField("mCurrentShowAnim");
+
+            // Monitor the animation
+            final Animator currentAnim = (Animator) currentAnimField.get(getSupportActionBar());
+            currentAnim.addListener(new AnimatorListenerAdapter() {
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    // Do something
+                    Log.d("gooo","goooo");
+                }
+
+            });
+        } catch (final Exception ignored) {
+            // Nothing to do
+            ignored.printStackTrace();
+            Log.d("gooo","gooooaaaa");
+        }
+    }
 }
