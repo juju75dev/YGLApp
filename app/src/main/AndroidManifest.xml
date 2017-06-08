@@ -27,7 +27,7 @@
 
         <activity android:name=".Activity.QuizzActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".Activity.MainActivity"/>
 
         <!-- Parent activity meta-data to support 4.0 and lower -->
         <meta-data

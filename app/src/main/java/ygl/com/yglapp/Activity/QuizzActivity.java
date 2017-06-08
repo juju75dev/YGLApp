@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
@@ -13,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -134,7 +134,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             startQuizz();
-                            quizStarted=true;
                         }
                     });
 
@@ -167,9 +166,9 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
-
     private void startQuizz(){
 
+        quizStarted=true;
         warningLayout.setVisibility(View.GONE);
         countDownTimer.start();
         getSupportActionBar().hide();
@@ -177,6 +176,8 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     }
 
     private void stopQuizz() {
+
+        quizStarted=false;
 
         countDownTimer.cancel();
 
@@ -253,7 +254,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -266,8 +266,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         if (!quizStarted) {
             super.onBackPressed();
         }
-
     }
-
 
 }
