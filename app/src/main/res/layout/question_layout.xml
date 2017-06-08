@@ -178,9 +178,9 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:text="Valider"
-                android:textColor="@android:color/white" />
+                android:background="@drawable/button_ripple"
+                android:textColor="@android:color/white"
+                android:text="Valider" />
 
 
         </LinearLayout>

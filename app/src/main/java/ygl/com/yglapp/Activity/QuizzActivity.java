@@ -2,11 +2,13 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
@@ -14,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import butterknife.BindView;
@@ -122,7 +124,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
         countDownTimer = new MyCountDownTimer(quiz.getDuration() * 60000, 1000, timerView, this);
 
-
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +172,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     private void startQuizz(){
 
+        quizStarted=true;
         warningLayout.setVisibility(View.GONE);
         countDownTimer.start();
         getSupportActionBar().hide();
@@ -178,6 +180,8 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     }
 
     private void stopQuizz() {
+
+        quizStarted=false;
 
         countDownTimer.cancel();
 
@@ -269,6 +273,5 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         }
 
     }
-
 
 }

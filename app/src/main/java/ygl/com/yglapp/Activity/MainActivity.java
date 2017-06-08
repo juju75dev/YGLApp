@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
         /****PARSE QUIZZ PROPERTIES AND START ACTIVITY WITH QUIZZ PROPERTIES****/
 
-
         Intent intent =new Intent(this,QuizzActivity.class);
         intent.putExtra("quiz",myQuizz);
         startActivity(intent);
 
     }
+
 
 }
