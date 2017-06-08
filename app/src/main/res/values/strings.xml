@@ -9,5 +9,9 @@
     <string name="quizz_contains_two_types">Ce questionnaire possède des questions libres et des QCM</string>
     <string name="dont_getout_of_app">Ne pas sortir de l\'application pendant le test</string>
     <string name="jsonFile">ygl.json</string>
+    <string name="test_is_over">Le test est terminé !</string>
+    <string name="thanks">Merci d\'avoir participé à ce test.</string>
+    <string name="details_sended">Un rapport a été envoyé à YGL Consulting.</string>
+    <string name="go_back_home">Retour à l\'accueil</string>
 
 </resources>

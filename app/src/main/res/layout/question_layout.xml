@@ -1,10 +1,7 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +17,12 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1">
 
-
             <TextView
                 android:id="@+id/timer_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textSize="10dp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/questions_counter_view"
@@ -34,9 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="5dp"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:text=""/>
-
 
         </RelativeLayout>
 
@@ -50,14 +45,10 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-
-
-             />
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-
             android:layout_height="0dp"
             android:layout_weight="5">
 
@@ -104,7 +95,6 @@
 
 
             </android.support.v7.widget.CardView>
-
 
 
         </LinearLayout>

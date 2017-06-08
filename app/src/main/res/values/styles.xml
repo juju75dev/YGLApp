@@ -12,5 +12,13 @@
         <item name="android:windowBackground">@drawable/splash_drawable</item>
     </style>
 
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <style name="SelectableItemBackground">
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
 
 </resources>

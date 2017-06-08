@@ -35,7 +35,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     public void onBindViewHolder(QuestionHolder myViewHolder, int position) {
 
         final Quizz quizz = listQuizz[position];
-
+        
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
 

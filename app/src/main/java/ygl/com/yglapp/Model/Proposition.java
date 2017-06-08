@@ -20,7 +20,6 @@ public class Proposition implements Serializable {
     private boolean isCorrectResponse;
 
 
-
     public boolean isCorrectResponse() {
         return isCorrectResponse;
     }

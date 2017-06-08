@@ -4,7 +4,7 @@
     "description": "Questions de compétences techniques",
     "quiztitle": "Calcul DN4",
     "id": "quiz0",
-    "duration": "20",
+    "duration": "1",
     "type": "0",
     "evaluationType": "0",
     "questions": [
@@ -341,7 +341,7 @@
     ]
   },
   {
-    "name": "quiz java",
+    "name": "Quiz Test",
     "description": "questions de compétences techniques",
     "quiztitle": "Calcul DN4",
     "id": "quiz7",
@@ -359,19 +359,90 @@
           {
             "key": "0",
             "text": "Brûlure",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Sensation de froid douleureux",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Décharges électriques",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Décharges électriques",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "0",
+        "type": "2",
+        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "Brûlure",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "1",
             "text": "Sensation de froid douleureux",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Décharges électriques",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Décharges électriques",
             "isCorrectResponse": "true",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "0",
+        "type": "2",
+        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "Brûlure",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Sensation de froid douleureux",
+            "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "2",
             "text": "Décharges électriques",
             "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Décharges électriques",
+            "isCorrectResponse": "false",
             "target": "2"
           }
         ]
@@ -398,60 +469,13 @@
           {
             "key": "2",
             "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
-          }
-        ]
-      },
-      {
-        "key": "0",
-        "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "propositions": [
-          {
-            "key": "0",
-            "text": "Brûlure",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
+            "key": "3",
             "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
-          }
-        ]
-      },
-      {
-        "key": "0",
-        "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "weight": "20",
-        "propositions": [
-          {
-            "key": "0",
-            "text": "Brûlure",
             "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
             "target": "2"
           }
         ]

@@ -1,7 +1,6 @@
 package ygl.com.yglapp;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.widget.TextView;
 
 import ygl.com.yglapp.Model.OnTimerFinished;
@@ -14,6 +13,7 @@ public class MyCountDownTimer extends CountDownTimer {
 
     private TextView countTextView;
     private OnTimerFinished timerCallback;
+    public long timeRemaining;
 
     public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView nCountTextView, OnTimerFinished callback) {
         super(millisInFuture, countDownInterval);
@@ -22,19 +22,17 @@ public class MyCountDownTimer extends CountDownTimer {
 
     }
 
-    @Override
-    public void onTick(long millisUntilFinished) {
+    public String getFormatedTimeRemaining(){
 
-        Log.d("timerFF","timerFF"+millisUntilFinished);
         long minutes = 0;
-        long secondes = millisUntilFinished/1000;
+        long secondes = timeRemaining/1000;
         String minuString="00";
         String seconString;
 
-        if(millisUntilFinished/60000>=1){
+        if(timeRemaining/60000>=1){
 
-            minutes=millisUntilFinished / 60000;
-            secondes= (millisUntilFinished -minutes*60000)/1000;
+            minutes=timeRemaining / 60000;
+            secondes= (timeRemaining -minutes*60000)/1000;
 
             minuString = minutes<10 ? "0"+minutes:String.valueOf(minutes);
             seconString = secondes<10 ? "0"+secondes:String.valueOf(secondes);
@@ -45,8 +43,13 @@ public class MyCountDownTimer extends CountDownTimer {
 
         }
 
+        return "Temps restant : "+ minuString+"min : "+seconString+"sec";
+    }
 
-        countTextView.setText("Temps restant "+ minuString+":"+seconString);
+    @Override
+    public void onTick(long millisUntilFinished) {
+        timeRemaining=millisUntilFinished;
+        countTextView.setText(getFormatedTimeRemaining());
 
     }
 
@@ -54,6 +57,7 @@ public class MyCountDownTimer extends CountDownTimer {
     public void onFinish() {
 
         countTextView.setText(R.string.finished);
+        timeRemaining=0;
         timerCallback.onTimerFinished();
     }
 }
