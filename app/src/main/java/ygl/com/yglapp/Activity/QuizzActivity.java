@@ -78,6 +78,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     int index = 0;
 
     private int score = 0;
+    private boolean quizStarted=false;
 
 
     @Override
@@ -133,6 +134,7 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             startQuizz();
+                            quizStarted=true;
                         }
                     });
 
@@ -261,6 +263,9 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     @Override
     public void onBackPressed() {
+        if (!quizStarted) {
+            super.onBackPressed();
+        }
 
     }
 
