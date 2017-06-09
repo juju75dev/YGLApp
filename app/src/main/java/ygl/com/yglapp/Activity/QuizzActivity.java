@@ -82,7 +82,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     TextView enonce_text;
 
 
-
     //SCORE LAYOUT
     @BindView(R.id.back_home_button)
     Button backHomeButton;
