@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.squareup.otto.Subscribe;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
@@ -124,10 +126,11 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-        int scorePercent=0;
+        double scorePercent=0;
 
-        if(quizTotalPoints>0 && score>0)
-            scorePercent = score/(quizTotalPoints/100);
+        if(quizTotalPoints>0 && score>0){
+            scorePercent = score/(((double)quizTotalPoints/100));
+        }
 
         scoreView.setText("Score Qcm : "+scorePercent+"%");
         scoreQuizzNameView.setText(quiz.getName());
