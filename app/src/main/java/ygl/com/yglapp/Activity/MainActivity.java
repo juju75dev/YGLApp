@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
 
     }
 
-
     @Override
     public void onQuizzClicked(Quizz myQuizz){
 
