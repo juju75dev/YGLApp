@@ -45,5 +45,6 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.5'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+   // compile 'me.grantland:autofittextview:0.2.+'
     testCompile 'junit:junit:4.12'
 }

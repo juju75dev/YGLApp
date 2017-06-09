@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import ygl.com.yglapp.Model.OnTimerFinished;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;

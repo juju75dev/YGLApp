@@ -63,7 +63,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="5"
-            card_view:cardCornerRadius="5dp"
+            card_view:cardCornerRadius="10dp"
             card_view:cardElevation="4sp"
             card_view:cardUseCompatPadding="true">
 
@@ -71,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+
                 >
 
                 <TextView
@@ -78,9 +79,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text=""
+                    android:text="sdssd \n sd  sd\n sdsd \n saas\nas \n ]n ]n asa"
                     android:textColor="@android:color/black"
-                    android:textSize="14dp"
+                    android:textSize="@dimen/textsize"
                     android:textStyle="italic" />
 
             </ScrollView>
@@ -123,7 +124,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                card_view:cardCornerRadius="5dp"
+                card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="4sp"
                 card_view:cardUseCompatPadding="true">
 
