@@ -3,6 +3,7 @@ package ygl.com.yglapp.Utlities;
 import android.animation.Animator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.AlphaAnimation;
 
 /**
  * Created by juju on 09/06/2017.
@@ -44,5 +45,16 @@ public class AppUtils {
                 ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
 
         return anim;
+    }
+
+    public static AlphaAnimation initAlphaAnim(){
+
+        AlphaAnimation animation;
+        animation = new AlphaAnimation(0.2f, 1.0f);
+        animation.setDuration(300);
+        animation.setStartOffset(0);
+        animation.setFillAfter(false);
+
+        return animation;
     }
 }

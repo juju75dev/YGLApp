@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,6 +77,8 @@ public class QuestionsFragment extends Fragment {
     private int nbFreeQuestionsAnswered=0;
     private ArrayList<Question> listAnswersLibres;
     private Quizz myQuizz;
+    private  AlphaAnimation alphaAanimation;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +89,7 @@ public class QuestionsFragment extends Fragment {
 
         listAnswersLibres=new ArrayList<>();
 
+        alphaAanimation= AppUtils.initAlphaAnim();
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +107,7 @@ public class QuestionsFragment extends Fragment {
                 if (index < myQuizz.getQuestions().size() - 1) {
 
                     radioGroup.clearCheck();
+                    questionLayout.startAnimation(alphaAanimation);
                     setQuestion(++index);
 
                 } else {
@@ -180,7 +185,6 @@ public class QuestionsFragment extends Fragment {
             //POUR LE TYPE 1
             if(!editAnswerView.getText().toString().equals(""))
                 nbFreeQuestionsAnswered++;
-
 
             Question questionAnswered = question;
 
