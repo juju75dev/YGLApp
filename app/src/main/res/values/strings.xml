@@ -13,5 +13,7 @@
     <string name="thanks">Merci d\'avoir participé à ce test.</string>
     <string name="details_sended">Un rapport a été envoyé à YGL Consulting.</string>
     <string name="go_back_home">Retour à l\'accueil</string>
+    <string name="question">Question</string>
+    <string name="questions_free_answered">Réponses questions libres</string>
 
 </resources>

@@ -44,7 +44,7 @@
       {
         "key": "1",
         "type": "2",
-        "text": "Quelles réponses déclarent un tableau correctement ?",
+        "text": "Quelle réponse déclare un tableau correctement ?",
         "enonce": null,
         "weight": "20",
         "propositions": [
@@ -307,6 +307,14 @@
       },
       {
         "key": "9",
+        "type": "1",
+        "text": "Comment logguez-vous vos applications ?",
+        "enonce": null,
+        "weight": "0",
+        "propositions": null
+      },
+      {
+        "key": "10",
         "type": "2",
         "text": "Avec quoi le mot clé 'transient' est-il compatible ?",
         "enonce": null,
@@ -420,6 +428,7 @@
         "type": "2",
         "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
         "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "weight": "20",
         "propositions": [
           {
             "key": "0",
