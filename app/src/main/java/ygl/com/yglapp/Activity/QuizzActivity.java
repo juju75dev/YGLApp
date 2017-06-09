@@ -2,7 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,13 +11,16 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,21 +32,24 @@ import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.MyCountDownTimer;
 import ygl.com.yglapp.R;
 
+import static android.R.id.list;
+
 
 public class QuizzActivity extends AppCompatActivity implements OnTimerFinished {
 
-    @BindView(R.id.timer_view)
-    TextView timerView;
-    @BindView(R.id.questions_counter_view)
-    TextView questionsCounterView;
-    @BindView(R.id.question_text)
-    TextView question_text;
-    @BindView(R.id.enonce_text)
-    TextView enonce_text;
+
+    //WARNING LAYOUT
     @BindView(R.id.start_quizz_button)
     Button startQuizzButton;
     @BindView(R.id.warning_layout)
     LinearLayout warningLayout;
+    @BindView(R.id.warning_title_view)
+    TextView warningTitleView;
+    @BindView(R.id.warning_desc_view)
+    TextView warningDescView;
+
+
+    //QUESTION LAYOUT
     @BindView(R.id.validate)
     Button validate;
     @BindView(R.id.prop1)
@@ -56,14 +62,26 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     RadioButton prop4;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
-    @BindView(R.id.warning_title_view)
-    TextView warningTitleView;
-    @BindView(R.id.warning_desc_view)
-    TextView warningDescView;
     @BindView(R.id.enonce_layout)
     CardView enonce_layout;
     @BindView(R.id.question_layout)
     LinearLayout questionLayout;
+    @BindView(R.id.card_edit_answer_view)
+    CardView cardEditAnswerView;
+    @BindView(R.id.edit_answer_view)
+    EditText editAnswerView;
+    @BindView(R.id.card_radio_group)
+    CardView cardRadioGroup;
+    @BindView(R.id.timer_view)
+    TextView timerView;
+    @BindView(R.id.questions_counter_view)
+    TextView questionsCounterView;
+    @BindView(R.id.question_text)
+    TextView question_text;
+    @BindView(R.id.enonce_text)
+    TextView enonce_text;
+
+
 
     //SCORE LAYOUT
     @BindView(R.id.back_home_button)
@@ -74,6 +92,8 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     TextView scoreTimeView;
     @BindView(R.id.score_view)
     TextView scoreView;
+    @BindView(R.id.score_questions_free_view)
+    TextView scoreQuestionsFreeView;
 
     private MyCountDownTimer countDownTimer;
     private Quizz quiz;
@@ -81,7 +101,11 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
     int index = 0;
 
     private int score = 0;
+    private int nbFreeQuestionsAnswered=0;
+    private int quizTotalPoints=0;
     private boolean quizStarted=false;
+
+    private ArrayList<Question> listAnswersLibres;
 
 
     @Override
@@ -92,8 +116,18 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         quiz = (Quizz) getIntent().getSerializableExtra("quiz");
+
         setTitle(quiz.getName());
+
+        countDownTimer = new MyCountDownTimer(quiz.getDuration() * 60000, 1000, timerView, this);
+
+        for(int i=0;i<quiz.getQuestions().size();i++){
+
+            quizTotalPoints+=quiz.getQuestions().get(i).getWeight();
+
+        }
 
         warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
 
@@ -103,12 +137,19 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
                 "\n\n- " + getString(R.string.dont_getout_of_app) + " !");
 
         setQuestion(index);
-        questionsCounterView.setText("Question " + 1 + "/" + quiz.getQuestions().size());
+
+        //questionsCounterView.setText("Question " + 1 + "/" + quiz.getQuestions().size());
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if(quiz.getQuestions().get(index).getType()==1){
+
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(editAnswerView.getWindowToken(), 0);
+
+                }
                 checkAnswer(index);
 
                 if (index < quiz.getQuestions().size() - 1) {
@@ -122,7 +163,6 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
             }
         });
 
-        countDownTimer = new MyCountDownTimer(quiz.getDuration() * 60000, 1000, timerView, this);
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,12 +195,25 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
         question = quiz.getQuestions().get(position);
         question_text.setText(String.valueOf(index+1)+" - "+question.getText());
         enonce_text.setText(question.getEnonce());
-        prop1.setText(question.getPropositions().get(0).getText());
-        prop2.setText(question.getPropositions().get(1).getText());
-        prop3.setText(question.getPropositions().get(2).getText());
-        prop4.setText(question.getPropositions().get(3).getText());
 
-        questionsCounterView.setText("Question "+ String.valueOf(index+1)+"/"+quiz.getQuestions().size());
+        if(question.getType()==2){
+
+            cardEditAnswerView.setVisibility(View.GONE);
+            cardRadioGroup.setVisibility(View.VISIBLE);
+
+            prop1.setText(question.getPropositions().get(0).getText());
+            prop2.setText(question.getPropositions().get(1).getText());
+            prop3.setText(question.getPropositions().get(2).getText());
+            prop4.setText(question.getPropositions().get(3).getText());
+
+        }else{
+
+            cardRadioGroup.setVisibility(View.GONE);
+            cardEditAnswerView.setVisibility(View.VISIBLE);
+        }
+
+
+        questionsCounterView.setText(getString(R.string.question)+" "+ String.valueOf(index+1)+"/"+quiz.getQuestions().size());
 
         if (question.getEnonce() == null)
             enonce_layout.setVisibility(View.GONE);
@@ -169,30 +222,48 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     }
 
-
     private void startQuizz(){
 
         quizStarted=true;
         warningLayout.setVisibility(View.GONE);
         countDownTimer.start();
         getSupportActionBar().hide();
+        listAnswersLibres=new ArrayList<>();
 
     }
 
     private void stopQuizz() {
 
         quizStarted=false;
-
         countDownTimer.cancel();
+        displayScore();
+        backHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        scoreView.setText("Score : "+score);
+                finish();
+            }
+        });
+
+    }
+
+    private void displayScore(){
+
+        int scorePercent=0;
+
+        if(quizTotalPoints>0 && score>0){
+            scorePercent = score/(quizTotalPoints/100);
+
+        }
+        scoreView.setText("Score Qcm : "+scorePercent+"%");
         scoreQuizzNameView.setText(quiz.getName());
         scoreTimeView.setText(countDownTimer.getFormatedTimeRemaining());
+
+        scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered)+" : "+nbFreeQuestionsAnswered);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             Animator anim  = initCircularAnim(questionLayout);
-
             anim.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -208,15 +279,9 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
         }
 
-        backHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-            }
-        });
 
     }
+
 
     private Animator initCircularAnim(View view){
 
@@ -232,21 +297,45 @@ public class QuizzActivity extends AppCompatActivity implements OnTimerFinished 
 
     private void checkAnswer(int indexQuestion) {
 
+        Question question = quiz.getQuestions().get(indexQuestion);
         //POUR LE TYPE 2
-        List<Proposition> propositions = quiz.getQuestions().get(indexQuestion).getPropositions();
+        if(question.getType()==2){
 
-        int questionWeight = quiz.getQuestions().get(indexQuestion).getWeight();
+            List<Proposition> propositions = question.getPropositions();
 
-        if (prop1.isChecked() && propositions.get(0).isCorrectResponse() ||
-                prop2.isChecked() && propositions.get(1).isCorrectResponse() ||
-                prop3.isChecked() && propositions.get(2).isCorrectResponse() ||
-                prop4.isChecked() && propositions.get(3).isCorrectResponse()) {
+            int questionWeight = question.getWeight();
 
-            //TRUE ANSWER
-            score += questionWeight;
+            if (prop1.isChecked() && propositions.get(0).isCorrectResponse() ||
+                    prop2.isChecked() && propositions.get(1).isCorrectResponse() ||
+                    prop3.isChecked() && propositions.get(2).isCorrectResponse() ||
+                    prop4.isChecked() && propositions.get(3).isCorrectResponse()) {
 
-        } else {
-            //WRONG ANSWER
+                //TRUE ANSWER
+                score += questionWeight;
+
+            } else {
+                //WRONG ANSWER
+            }
+
+        }else{
+         //POUR LE TYPE 1
+            if(!editAnswerView.getText().toString().equals(""))
+                nbFreeQuestionsAnswered++;
+
+
+            Question questionAnswered = question;
+
+            Proposition proposition = new Proposition();
+            proposition.setText(editAnswerView.getText().toString());
+            proposition.setCorrectResponse(true);
+            proposition.setKey(0);
+            proposition.setTarget(2);
+
+            List<Proposition> list = Arrays.asList(proposition);
+            questionAnswered.setPropositions(list);
+            listAnswersLibres.add(questionAnswered);
+
+
         }
 
     }
