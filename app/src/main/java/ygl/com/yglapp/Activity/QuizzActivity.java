@@ -112,7 +112,6 @@ public class QuizzActivity extends AppCompatActivity {
 
     }
 
-
     private void displayScore(int score,int nbFreeQuestionsAnswered, long timeRemaining){
 
         quizStarted=false;
