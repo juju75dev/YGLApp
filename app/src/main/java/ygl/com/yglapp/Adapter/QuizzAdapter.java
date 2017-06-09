@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ygl.com.yglapp.Model.Quizz;
-import ygl.com.yglapp.OnQuizzClicked;
+import ygl.com.yglapp.Model.OnQuizzClicked;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
 
