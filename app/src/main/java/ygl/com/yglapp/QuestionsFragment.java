@@ -127,7 +127,6 @@ public class QuestionsFragment extends Fragment {
             }
         });
 
-
         return fragmentView;
     }
 
@@ -260,7 +259,6 @@ public class QuestionsFragment extends Fragment {
 
         }
     }
-
 
     @Subscribe
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
