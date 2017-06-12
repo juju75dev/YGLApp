@@ -1,6 +1,7 @@
 package ygl.com.yglapp;
 
 import android.os.CountDownTimer;
+import android.text.Html;
 import android.widget.TextView;
 
 import ygl.com.yglapp.Model.MyEventBus;
@@ -13,7 +14,7 @@ import ygl.com.yglapp.Utlities.AppUtils;
 public class MyCountDownTimer extends CountDownTimer {
 
     private TextView countTextView;
-    public long timeRemaining;
+    public long timeRemaining=-1;
 
     public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView nCountTextView) {
         super(millisInFuture, countDownInterval);
@@ -24,7 +25,22 @@ public class MyCountDownTimer extends CountDownTimer {
     @Override
     public void onTick(long millisUntilFinished) {
         timeRemaining=millisUntilFinished;
-        countTextView.setText(AppUtils.getFormatedTimeRemaining(timeRemaining));
+        String formatedTime = AppUtils.getFormatedTimeRemaining(timeRemaining);
+
+        if (timeRemaining<60000){
+
+            formatedTime="<font color='red'>"+formatedTime+"</font>";
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                countTextView.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                countTextView.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
+            }
+
+        }else{
+
+            countTextView.setText(formatedTime);
+
+        }
 
     }
 

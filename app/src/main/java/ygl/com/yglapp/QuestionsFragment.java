@@ -250,6 +250,18 @@ public class QuestionsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(countDownTimer!=null ){
+
+            if(countDownTimer.timeRemaining<=0)
+            GlobalBus.getBus().post(new MyEventBus.TimeisOver());
+
+        }
+    }
+
+
     @Subscribe
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
 

@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="ygl.com.yglapp.Activity.QuizzActivity">
+    tools:context="ygl.com.yglapp.Activity.LoginActivityExample">
 
     <!-- Changer le toolContext pour l'activité connexion ! -->
     <ProgressBar
@@ -19,7 +19,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:src="@drawable/ygl_drawable"
         android:scaleType="centerInside"/>
 
@@ -42,8 +42,7 @@
                 android:text="YGL"
                 android:hint="Pseudo"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -70,10 +69,9 @@
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/white"
             android:background="@drawable/button_selector"
-            android:padding="10dp"
             android:text="Se connecter"
             android:textStyle="bold" />
 
