@@ -348,11 +348,12 @@
       }
     ]
   },
+
   {
-    "name": "Quiz Test",
-    "description": "questions de compétences techniques",
-    "quiztitle": "Calcul DN4",
-    "id": "quiz7",
+    "name": "Quiz Android",
+    "description": "Questions de compétences techniques",
+    "quiztitle": "Android",
+    "id": "quiz0",
     "duration": "20",
     "type": "0",
     "evaluationType": "0",
@@ -360,130 +361,361 @@
       {
         "key": "0",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Comment obtenir une réponse d'une activité dans Android?",
+        "enonce": null,
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûlure",
-            "isCorrectResponse": "true",
-            "target": "2"
-          },
-          {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
+            "text": "startActivityToResult()",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
+            "key": "1",
+            "text": "startActiivtyForResult()",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
             "key": "2",
-            "text": "Décharges électriques",
+            "text": "Bundle()",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "3",
-            "text": "Décharges électriques",
+            "text": "Aucun des éléments ci-dessus",
             "isCorrectResponse": "false",
             "target": "2"
           }
         ]
       },
       {
-        "key": "0",
+        "key": "1",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Combien de formats sont pris en charge par Android?",
+        "enonce": null,
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûlure",
+            "text": "Android pris en charge toutes les tailles",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "1",
-            "text": "Sensation de froid douleureux",
+            "text": "Android ne prend pas en charge toutes les tailles",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "2",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "3",
-            "text": "Décharges électriques",
-            "isCorrectResponse": "true",
-            "target": "2"
-          }
-        ]
-      },
-      {
-        "key": "0",
-        "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "weight": "20",
-        "propositions": [
-          {
-            "key": "0",
-            "text": "Brûlure",
-            "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
-            "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "2",
-            "text": "Décharges électriques",
+            "text": "Android prend en charge les petites, normales, grandes et extra-grandes tailles",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
             "key": "3",
-            "text": "Décharges électriques",
+            "text": "La taille est indéfinie dans Android",
             "isCorrectResponse": "false",
             "target": "2"
           }
         ]
       },
       {
-        "key": "0",
+        "key": "2",
         "type": "2",
-        "text": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
-        "enonce": "La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes ?",
+        "text": "Combien de threads existe-t-il dans AsyncTask dans Android?",
+        "enonce":null,
         "weight": "20",
         "propositions": [
           {
             "key": "0",
-            "text": "Brûlure",
-            "isCorrectResponse": "false",
-            "target": "2"
-          },
-          {
-            "key": "1",
-            "text": "Sensation de froid douleureux",
+            "text": "Un seul",
             "isCorrectResponse": "true",
             "target": "2"
           },
           {
+            "key": "1",
+            "text": "Deux",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
             "key": "2",
-            "text": "Décharges électriques",
+            "text": "AsyncTask n'a pas de bande de roulement",
             "isCorrectResponse": "false",
             "target": "2"
           },
           {
             "key": "3",
-            "text": "Décharges électriques",
+            "text": "Rien",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "3",
+        "type": "2",
+        "text": "Quel est le délai du récepteur de radiodiffusion dans Android?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "10 sec",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "15 sec",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "5 sec",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "1 heure",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "4",
+        "type": "2",
+        "text": "Quelles autorisations sont requises pour obtenir un emplacement dans Android?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "ACCESS_FINE et ACCESS_COARSE",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Autorisation GPRS",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Autorisation d'Internet",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "permission WIFI",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "5",
+        "type": "2",
+        "text": "Quel est le log dans Android?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "Le log sert à déboguer un programme.",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Identique à printf ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Identique à Toast ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Aucun de ce qui précède",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "6",
+        "type": "2",
+        "text": "Qu'est-ce que httpclient.execute () retourne dans Android?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "entité Http",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Réponse Http",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Résultat Http",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Aucun de ce qui précède",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "7",
+        "type": "2",
+        "text": "Quelle portée a ce constructeur ?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "public",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "private",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "protected",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Compiler error",
+            "isCorrectResponse": "true",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "8",
+        "type": "2",
+        "text": "Fragment dans Android peut être trouvé à travers",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "findByID ()",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "findFragmentByID ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "getContext.findFragmentByID ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "FragmentManager.findFragmentByID ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "9",
+        "type": "2",
+        "text": "Est-il obligatoire d'appeler OnCreate () et OnStart () dans Android?",
+        "enonce": null,
+        "weight": "0",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "Non, nous pouvons écrire le programme sans écrire surCreate () et onStart ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "Oui, nous devrions appeler onCreate () et onStart () pour écrire le programme",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "Au moins, nous devons appeler onCreate () une fois",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Aucun des éléments ci-dessus",
+            "isCorrectResponse": "false",
+            "target": "2"
+          }
+        ]
+      },
+      {
+        "key": "10",
+        "type": "2",
+        "text": "Quel est le cycle de vie de l'activité de premier plan dans Android?",
+        "enonce": null,
+        "weight": "20",
+        "propositions": [
+          {
+            "key": "0",
+            "text": "onCreate () -> onStart () -> onResume () -> onStop () -> onRestart",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "1",
+            "text": "onCreate () -> onStart () -> onResume () -> onStop ()",
+            "isCorrectResponse": "false",
+            "target": "2"
+          },
+          {
+            "key": "2",
+            "text": "onCreate () -> onStart () -> onResume ()",
+            "isCorrectResponse": "true",
+            "target": "2"
+          },
+          {
+            "key": "3",
+            "text": "Aucun des éléments ci-dessus",
             "isCorrectResponse": "false",
             "target": "2"
           }
