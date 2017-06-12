@@ -2,7 +2,6 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -57,7 +56,7 @@ public class QuizzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_quizz);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -76,7 +75,8 @@ public class QuizzActivity extends AppCompatActivity {
         warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
                 "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
                 "\n\n- " + getString(R.string.quizz_contains_two_types) +
-                "\n\n- " + getString(R.string.dont_getout_of_app) + " !");
+                "\n\n- " + getString(R.string.dont_getout_of_app) + " !"+
+                "\n\n- " +getString(R.string.can_jump_question) + " ! ");
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {

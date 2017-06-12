@@ -1,12 +1,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/question_layout"
+    android:orientation="vertical"
+    android:background="@color/lightGray"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:id="@+id/timer_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/questions_counter_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10"
+        android:id="@+id/question_layout"
         android:background="@color/lightGray"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -14,46 +42,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1.5"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
-
-
-                <TextView
-                    android:id="@+id/timer_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/questions_counter_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:padding="5dp"
-
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
-
-
-            </RelativeLayout>
 
             <TextView
                 android:id="@+id/question_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
+                android:textSize="36dp"
                 android:textStyle="bold"
 
 
@@ -67,9 +69,9 @@
             android:id="@+id/enonce_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="5"
             card_view:cardCornerRadius="10dp"
             card_view:cardElevation="4sp"
@@ -158,6 +160,7 @@
                         android:id="@+id/prop1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:textSize="@dimen/textsize"
 
 
@@ -167,6 +170,7 @@
                         android:id="@+id/prop2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:textSize="@dimen/textsize"
 
 
@@ -176,6 +180,7 @@
                         android:id="@+id/prop3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:textSize="@dimen/textsize"
 
 
@@ -185,20 +190,25 @@
                         android:id="@+id/prop4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:textSize="@dimen/textsize"
 
 
                         />
                 </RadioGroup>
+
             </android.support.v7.widget.CardView>
 
             <Button
                 android:id="@+id/validate"
+                android:textAllCaps="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
+                android:textSize="30dp"
+                android:padding="10dp"
                 android:background="@drawable/button_selector"
                 android:text="Valider"
                 android:textColor="@android:color/white" />

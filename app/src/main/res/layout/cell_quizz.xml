@@ -13,6 +13,7 @@
         android:padding="5dp"
         android:orientation="vertical">
 
+
     <TextView
         android:id="@+id/quizz_name_view"
         android:layout_width="match_parent"
