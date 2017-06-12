@@ -76,7 +76,8 @@ public class QuizzActivity extends AppCompatActivity {
         warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
                 "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
                 "\n\n- " + getString(R.string.quizz_contains_two_types) +
-                "\n\n- " + getString(R.string.dont_getout_of_app) + " !");
+                "\n\n- " + getString(R.string.dont_getout_of_app) + " !"+
+                "\n\n- " +getString(R.string.can_jump_question) + " ! ");
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
