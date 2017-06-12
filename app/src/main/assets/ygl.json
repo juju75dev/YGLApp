@@ -4,7 +4,7 @@
     "description": "Questions de compétences techniques",
     "quiztitle": "Calcul DN4",
     "id": "quiz0",
-    "duration": "1",
+    "duration": "10",
     "type": "0",
     "evaluationType": "0",
     "questions": [
@@ -354,7 +354,7 @@
     "description": "Questions de compétences techniques",
     "quiztitle": "Android",
     "id": "quiz0",
-    "duration": "20",
+    "duration": "10",
     "type": "0",
     "evaluationType": "0",
     "questions": [
