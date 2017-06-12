@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="ygl.com.yglapp.Activity.QuizzActivity">
+    tools:context="ygl.com.yglapp.Activity.LoginActivityExample">
 
     <!-- Changer le toolContext pour l'activité connexion ! -->
     <ProgressBar
@@ -50,6 +50,7 @@
                 />
 
         </android.support.design.widget.TextInputLayout>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
