@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
@@ -53,10 +54,12 @@ public class QuestionsFragment extends Fragment {
     RadioGroup radioGroup;
     @BindView(R.id.enonce_layout)
     CardView enonce_layout;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.question_layout)
     LinearLayout questionLayout;
-    @BindView(R.id.card_edit_answer_view)
-    CardView cardEditAnswerView;
+//    @BindView(R.id.card_edit_answer_view)
+//    CardView cardEditAnswerView;
     @BindView(R.id.edit_answer_view)
     EditText editAnswerView;
     @BindView(R.id.card_radio_group)
@@ -94,6 +97,8 @@ public class QuestionsFragment extends Fragment {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                scrollView.scrollTo(0, 0);
 
                 if(myQuizz.getQuestions().get(index).getType()==1){
 
@@ -135,8 +140,8 @@ public class QuestionsFragment extends Fragment {
 
         if(question.getType()==2){
 
-            cardEditAnswerView.setVisibility(View.GONE);
-            cardRadioGroup.setVisibility(View.VISIBLE);
+            editAnswerView.setVisibility(View.GONE);
+            radioGroup.setVisibility(View.VISIBLE);
 
             prop1.setText(question.getPropositions().get(0).getText());
             prop2.setText(question.getPropositions().get(1).getText());
@@ -145,8 +150,8 @@ public class QuestionsFragment extends Fragment {
 
         }else{
 
-            cardRadioGroup.setVisibility(View.GONE);
-            cardEditAnswerView.setVisibility(View.VISIBLE);
+            radioGroup.setVisibility(View.GONE);
+            editAnswerView.setVisibility(View.VISIBLE);
         }
 
 

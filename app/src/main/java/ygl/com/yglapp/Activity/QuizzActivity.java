@@ -48,8 +48,8 @@ public class QuizzActivity extends AppCompatActivity {
     TextView scoreQuestionsFreeView;
 
     private Quizz quiz;
-    private int quizTotalPoints=0;
-    private boolean quizStarted=false;
+    private int quizTotalPoints = 0;
+    private boolean quizStarted = false;
 
 
     @Override
@@ -65,9 +65,9 @@ public class QuizzActivity extends AppCompatActivity {
 
         setTitle(quiz.getName());
 
-        for(int i=0;i<quiz.getQuestions().size();i++){
+        for (int i = 0; i < quiz.getQuestions().size(); i++) {
 
-            quizTotalPoints+=quiz.getQuestions().get(i).getWeight();
+            quizTotalPoints += quiz.getQuestions().get(i).getWeight();
 
         }
 
@@ -87,37 +87,38 @@ public class QuizzActivity extends AppCompatActivity {
                 GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                    Animator anim  = AppUtils.initCircularAnim(warningLayout);
+                    Animator anim = AppUtils.initCircularAnim(warningLayout);
                     anim.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             startQuizz();
-                            quizStarted=true;
+                            quizStarted = true;
                         }
                     });
 
                     anim.start();
                 } else {
 
-                   startQuizz();
+                    startQuizz();
+                    quizStarted = true;
 
                 }
             }
         });
     }
 
-    private void startQuizz(){
+    private void startQuizz() {
 
-        quizStarted=true;
+        quizStarted = true;
         warningLayout.setVisibility(View.GONE);
         getSupportActionBar().hide();
 
     }
 
-    private void displayScore(int score,int nbFreeQuestionsAnswered, long timeRemaining){
+    private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
 
-        quizStarted=false;
+        quizStarted = false;
         backHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,16 +128,16 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-        double scorePercent=0;
+        double scorePercent = 0;
 
-        if(quizTotalPoints>0 && score>0){
-            scorePercent = score/(((double)quizTotalPoints/100));
+        if (quizTotalPoints > 0 && score > 0) {
+            scorePercent = score / (((double) quizTotalPoints / 100));
         }
 
-        scoreView.setText("Score Qcm : "+scorePercent+"%");
+        scoreView.setText("Score Qcm : " + scorePercent + "%");
         scoreQuizzNameView.setText(quiz.getName());
         scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(timeRemaining));
-        scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered)+" : "+nbFreeQuestionsAnswered);
+        scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered) + " : " + nbFreeQuestionsAnswered);
 
     }
 
@@ -164,7 +165,7 @@ public class QuizzActivity extends AppCompatActivity {
     @Subscribe
     public void getMessage(MyEventBus.QuizzOverMessage message) {
 
-        displayScore(message.getScore(),message.getNbFreeQAnswered(),message.getTimeRemaining());
+        displayScore(message.getScore(), message.getNbFreeQAnswered(), message.getTimeRemaining());
 
     }
 

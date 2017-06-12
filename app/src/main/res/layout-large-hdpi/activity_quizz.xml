@@ -7,7 +7,16 @@
 
     <include layout="@layout/score_layout"/>
 
-    <include layout="@layout/question_layout"/>
+    <!-- <include layout="@layout/question_layout"/> -->
+
+    <fragment
+        android:name="ygl.com.yglapp.QuestionsFragment"
+        android:id="@+id/fragment_questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
 
     <include layout="@layout/warning_layout"/>
 

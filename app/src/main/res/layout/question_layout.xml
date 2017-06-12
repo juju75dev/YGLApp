@@ -1,13 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/lightGray">
+    android:background="@color/lightGray"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/timer_view"
@@ -40,35 +39,29 @@
         android:orientation="vertical">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
             android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            >
+            android:layout_weight="1.5"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/question_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14dp"
-                android:gravity="center"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
                 android:textStyle="bold"
 
 
                 />
 
 
-
         </LinearLayout>
-
-
-
 
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -85,6 +78,7 @@
             card_view:cardUseCompatPadding="true">
 
             <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -105,27 +99,18 @@
 
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_edit_answer_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:visibility="gone"
-            card_view:cardElevation="4sp"
-            card_view:cardUseCompatPadding="true">
+        <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/card_edit_answer_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:gravity="center"-->
+            <!--card_view:cardElevation="4sp"-->
 
-            <EditText
-                android:id="@+id/edit_answer_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                android:gravity="center"
-                android:hint="Saisissez votre réponse ici"
-                android:padding="5dp"
-                android:textSize="14dp" />
+            <!--card_view:cardUseCompatPadding="true">-->
 
 
-        </android.support.v7.widget.CardView>
+        <!--</android.support.v7.widget.CardView>-->
 
 
         <LinearLayout
@@ -146,6 +131,18 @@
                 card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="4sp"
                 card_view:cardUseCompatPadding="true">
+
+                <EditText
+                    android:id="@+id/edit_answer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:hint="Saisissez votre réponse ici"
+                    android:padding="5dp"
+                    android:textSize="14dp"
+                    android:visibility="gone" />
 
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/radio_group"
@@ -198,9 +195,9 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:textColor="@android:color/white"
                 android:background="@drawable/button_selector"
-                android:text="Valider" />
+                android:text="Valider"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
