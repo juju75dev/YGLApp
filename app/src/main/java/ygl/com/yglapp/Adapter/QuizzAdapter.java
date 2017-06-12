@@ -1,13 +1,14 @@
 package ygl.com.yglapp.Adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.OnQuizzClicked;
+import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
 
@@ -40,8 +41,15 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
 
         titleView.setText(quizz.getName());
-        descView.setText(quizz.getDescription()+"\n\n"+"- Nombre de questions : "+quizz.getQuestions().size()+
-        "\n"+"- Durée : "+quizz.getDuration()+"min");
+        String descText = "<font color='#ed9e02'>"+quizz.getDescription()+"</font>"+"<br><br>"+
+                "- Nombre de questions : "+
+                quizz.getQuestions().size()+"<br><br>- Durée : "+quizz.getDuration()+"min";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            descView.setText(Html.fromHtml(descText,Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            descView.setText(Html.fromHtml(descText), TextView.BufferType.SPANNABLE);
+        }
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -60,5 +68,3 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
 
 }
-
-

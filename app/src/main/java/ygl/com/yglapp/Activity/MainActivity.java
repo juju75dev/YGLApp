@@ -1,16 +1,16 @@
 package ygl.com.yglapp.Activity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
-import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.OnQuizzClicked;
+import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.R;
 import ygl.com.yglapp.Utlities.ParsingUtil;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
 
         recyclerViewManager = new LinearLayoutManager(this);

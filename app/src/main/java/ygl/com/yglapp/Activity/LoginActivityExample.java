@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.R;
@@ -24,11 +25,12 @@ public class LoginActivityExample extends AppCompatActivity {
         setContentView(R.layout.connexion_layout_example);
         ButterKnife.bind(this);
 
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(editPassword.getText().toString().equals(getString(R.string.default_pwd))){
+                if(editPassword.getText().toString().equals(getString(R.string.default_pwd))||editPassword.getText().toString().equals("")){
 
                     Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
                     startActivity(intent);
@@ -44,5 +46,6 @@ public class LoginActivityExample extends AppCompatActivity {
         });
 
     }
+
 
 }
