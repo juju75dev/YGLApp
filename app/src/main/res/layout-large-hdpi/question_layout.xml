@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp"
-                    android:gravity="center"
+
                     android:text="sdsdsd sdssd dsf ad fsf sf sf s f s fs fs f s f s fs fs f  sdf s df sf  sfs dfsf s fs f sf sdf sdf dsasa"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/textsize"
