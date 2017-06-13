@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="textsize">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!--<dimen name="cardviewsize">300dp</dimen>-->
+    <dimen name="cardview_size_enonce">150dp</dimen>
+
+
+</resources>
