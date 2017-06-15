@@ -31,6 +31,8 @@ public class Quizz implements Serializable{
     @JsonProperty("questions")
     private List<Question> questions;
 
+    boolean isChecked;
+
     @JsonProperty("quizz")
     private static Quizz mInstance;
 
@@ -81,5 +83,13 @@ public class Quizz implements Serializable{
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

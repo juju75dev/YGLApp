@@ -8,6 +8,11 @@
 
     </style>
 
+    <!--<style name="CustomCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">-->
+        <!--<item name="android:button">@mipmap/checkbox_notchecked</item>-->
+        <!--<item name="android:checkMark">@mipmap/checkbox_not_checked</item>-->
+    <!--</style>-->
+
     <style name="QuizzTheme" parent="AppTheme">
         <item name="windowActionBarOverlay">true</item>
     </style>
