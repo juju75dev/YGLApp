@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +36,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     @Override
     public QuestionHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz, viewGroup, false);
         return new QuestionHolder(view);
     }
 
@@ -45,6 +48,24 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
         ImageView imageView = (ImageView) myViewHolder.itemView.findViewById(R.id.image_cell);
+        CheckBox checkBox = (CheckBox) myViewHolder.itemView.findViewById(R.id.checkbox_quiz);
+        final RadioGroup radioGroup = (RadioGroup) myViewHolder.itemView.findViewById(R.id.radioGroup);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    radioGroup.setVisibility(View.VISIBLE);
+                    quizz.setChecked(true);
+
+                } else {
+                    radioGroup.setVisibility(View.GONE);
+                    if (checkedQuiz.size() != 0)
+                        quizz.setChecked(false);
+
+                }
+            }
+        });
 
         titleView.setText(quizzGroup.getName());
 

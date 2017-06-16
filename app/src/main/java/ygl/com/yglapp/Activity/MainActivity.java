@@ -1,6 +1,9 @@
 package ygl.com.yglapp.Activity;
 
+import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import android.text.format.Formatter;
+import android.view.View;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
@@ -22,10 +28,14 @@ import ygl.com.yglapp.Utlities.FireBaseQuizParsing;
 
 public class MainActivity extends AppCompatActivity implements OnQuizzGroupClicked {
 
-    @BindView(R.id.recycler_view) RecyclerView myRecyclerView;
+    @BindView(R.id.recycler_view)
+    RecyclerView myRecyclerView;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,25 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
 
         recyclerViewManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(recyclerViewManager);
+
+        final Quizz[] listQuizz = ParsingUtil.getConfig(this);
+
+        final QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizz, this);
+
+        myRecyclerView.setAdapter(adapterQuizz);
+
+
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
+                //adapterQuizz.notifyDataSetChanged();
+                //intent.putExtra("quiz", listQuizz[0]);
+                //startActivity(intent);
+            }
+        });
 
     }
 

@@ -5,6 +5,11 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AlphaAnimation;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by juju on 09/06/2017.
  */
@@ -58,4 +63,7 @@ public class AppUtils {
 
         return animation;
     }
+
+
+
 }
