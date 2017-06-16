@@ -166,6 +166,7 @@ public class QuizzActivity extends AppCompatActivity {
 
         displayScore(message.getScore(), message.getNbFreeQAnswered(), message.getTimeRemaining());
 
+
     }
 
 }

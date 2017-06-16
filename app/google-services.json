@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "723520716785",
+    "firebase_url": "https://test-mail-f32c4.firebaseio.com",
+    "project_id": "test-mail-f32c4",
+    "storage_bucket": "test-mail-f32c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723520716785:android:d204f78e34c9549c",
+        "android_client_info": {
+          "package_name": "ygl.com.yglapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723520716785-c2omokh9had43sav0selolbmuo3ke8or.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4duc-yrGwYawW8ChOGMpmMwNHQKNvxlM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

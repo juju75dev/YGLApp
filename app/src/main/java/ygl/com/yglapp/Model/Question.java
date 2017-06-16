@@ -1,7 +1,5 @@
 package ygl.com.yglapp.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,36 +7,33 @@ import java.util.List;
  * Created by juju on 06/06/2017.
  */
 
-public class Question implements Serializable{
+public class Question implements Serializable {
 
 
-    @JsonProperty("key")
-    private int key;
-    @JsonProperty("type")
-    private int type;
-    @JsonProperty("text")
+
+    private String key;
+    private long type;
     private String text;
-    @JsonProperty("enonce")
     private String enonce;
-    @JsonProperty("weight")
-    private int weight;
-    @JsonProperty("propositions")
+    private long weight;
     private List<Proposition> propositions;
 
+    public Question() {
+    }
 
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    public int getType() {
+    public long getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(long type) {
         this.type = type;
     }
 
@@ -58,11 +53,11 @@ public class Question implements Serializable{
         this.enonce = enonce;
     }
 
-    public int getWeight() {
+    public long getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(long weight) {
         this.weight = weight;
     }
 

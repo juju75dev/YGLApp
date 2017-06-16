@@ -1,7 +1,5 @@
 package ygl.com.yglapp.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 
 /**
@@ -10,14 +8,14 @@ import java.io.Serializable;
 
 public class Proposition implements Serializable {
 
-    @JsonProperty("key")
-    private int key;
-    @JsonProperty("target")
-    private int target;
-    @JsonProperty("text")
+
+    private String key;
+    private String target;
     private String text;
-    @JsonProperty("isCorrectResponse")
     private boolean isCorrectResponse;
+
+    public Proposition() {
+    }
 
 
     public boolean isCorrectResponse() {
@@ -28,19 +26,19 @@ public class Proposition implements Serializable {
         isCorrectResponse = correctResponse;
     }
 
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    public int getTarget() {
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(int target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 

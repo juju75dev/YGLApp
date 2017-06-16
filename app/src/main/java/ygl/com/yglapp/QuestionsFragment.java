@@ -171,7 +171,7 @@ public class QuestionsFragment extends Fragment {
 
             List<Proposition> propositions = question.getPropositions();
 
-            int questionWeight = question.getWeight();
+            long questionWeight = question.getWeight();
 
             if (prop1.isChecked() && propositions.get(0).isCorrectResponse() ||
                     prop2.isChecked() && propositions.get(1).isCorrectResponse() ||
@@ -195,8 +195,8 @@ public class QuestionsFragment extends Fragment {
             Proposition proposition = new Proposition();
             proposition.setText(editAnswerView.getText().toString());
             proposition.setCorrectResponse(true);
-            proposition.setKey(0);
-            proposition.setTarget(2);
+            proposition.setKey("0");
+            proposition.setTarget("2");
 
             List<Proposition> list = Arrays.asList(proposition);
             questionAnswered.setPropositions(list);
