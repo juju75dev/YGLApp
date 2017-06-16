@@ -33,7 +33,7 @@
                 android:id="@+id/image_cell"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="left|center_vertical"
+
                 android:layout_marginLeft="20dp"
 
                 android:background="#f2f2f2"
@@ -45,9 +45,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:visibility="gone"
                 android:layout_marginLeft="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
 
                 <RadioButton
@@ -78,11 +78,10 @@
 
                 <CheckBox
                     android:id="@+id/checkbox_quiz"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_gravity="right|center_vertical" />
+                    android:layout_gravity="right|center_vertical"
+                    android:button="@drawable/checkbox_selector" />
 
             </LinearLayout>
 

@@ -1,11 +1,13 @@
 package ygl.com.yglapp.Activity;
 
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.Formatter;
 import android.view.View;
 
 import butterknife.BindView;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzClicked {
         final QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizz, this);
 
         myRecyclerView.setAdapter(adapterQuizz);
+
+
 
 
         fab.setOnClickListener(new View.OnClickListener() {
