@@ -46,7 +46,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
         
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
-        TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
+        //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
         ImageView imageView = (ImageView) myViewHolder.itemView.findViewById(R.id.image_cell);
         CheckBox checkBox = (CheckBox) myViewHolder.itemView.findViewById(R.id.checkbox_quiz);
         final RadioGroup radioGroup = (RadioGroup) myViewHolder.itemView.findViewById(R.id.radioGroup);
@@ -56,12 +56,12 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     radioGroup.setVisibility(View.VISIBLE);
-                    quizz.setChecked(true);
+                    //quizz.setChecked(true);
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
-                    if (checkedQuiz.size() != 0)
-                        quizz.setChecked(false);
+                    //if (checkedQuiz.size() != 0)
+                        //quizz.setChecked(false);
 
                 }
             }

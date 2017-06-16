@@ -2,6 +2,7 @@ package ygl.com.yglapp.Model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,23 +17,13 @@ public class Quizz implements Serializable{
     private long duration;
     private long level;
     private String name;
-    private List<Question> questions;
-
+    private ArrayList<Question> questions;
     boolean isChecked;
 
-    @JsonProperty("quizz")
-    private static Quizz mInstance;
 
     public Quizz() {
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
 
     public Quizz(String description, int duration, int level, String name, List<Question> questions) {
         this.description = description;
@@ -77,19 +68,19 @@ public class Quizz implements Serializable{
         this.duration = duration;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
     public boolean isChecked() {
         return isChecked;
     }
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+    }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(ArrayList<Question> questions) {
+        this.questions = questions;
     }
 }
