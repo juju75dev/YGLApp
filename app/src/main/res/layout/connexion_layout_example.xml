@@ -18,6 +18,7 @@
 
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,7 +87,7 @@
         android:name="ygl.com.yglapp.FormCandidatFragment"
         android:id="@+id/form_candidat_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
 
         />

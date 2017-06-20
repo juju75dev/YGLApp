@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +28,7 @@ import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
 import ygl.com.yglapp.Injection.QuizParser;
 import ygl.com.yglapp.Injection.QuizParsingComponent;
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
+import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
 
@@ -36,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     RecyclerView myRecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.quizz_progress)
+    ProgressBar quizzProgress;
+
+
 
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
@@ -58,10 +64,26 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
 
         ButterKnife.bind(this);
 
+        getSupportActionBar().setTitle(getString(R.string.quiz_selection));
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Quiz");
 
         myRecyclerView.setAdapter(adapterQuizz);
+
+        //TEST ENVOI RESULTS BY EMAIL
+        /*Pair pair = new Pair("Comment ça va ?","Bien");
+        ArrayList<Pair> freeAnswers = new ArrayList<>();
+        freeAnswers.add(pair);
+
+        QuizResult r1 = new QuizResult("aaa@aa.aa","ttt","senior","King","Arthur",90,"Android",10000000,
+                1000000,freeAnswers);
+
+        ArrayList<QuizResult> listResults = new ArrayList<>();
+        listResults.add(r1);
+        listResults.add(r1);
+
+        sendResultsToFirebase(listResults);*/
 
 
         //SET DAGGER2
@@ -73,10 +95,13 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                quizzProgress.setVisibility(View.GONE);
+
                 listQuizGroup= firebaseParser.quizParsing(dataSnapshot);
                 adapterQuizz.setListQuizzGroup(listQuizGroup);
                 adapterQuizz.setClickCallback(MainActivity.this);
                 adapterQuizz.notifyDataSetChanged();
+
 
                 /*
                 QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
@@ -88,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
+                quizzProgress.setVisibility(View.GONE);
             }
         });
 
@@ -118,6 +144,19 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
                 }
             }
         });
+
+    }
+
+    private void sendResultsToFirebase(ArrayList<QuizResult> listResults){
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        for(int i=0;i<listResults.size();i++){
+
+            String postId = mDatabase.push().getKey();
+            mDatabase.child("Historic").child(postId).setValue(listResults.get(i));
+
+        }
 
     }
 

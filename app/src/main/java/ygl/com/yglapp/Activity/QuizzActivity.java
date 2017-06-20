@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -61,6 +62,8 @@ public class QuizzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_quizz);
+
+        Log.d("quuu","quuuuuu");
 
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -133,6 +136,8 @@ public class QuizzActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
     }
+
+
 
     private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
 
@@ -226,14 +231,12 @@ public class QuizzActivity extends AppCompatActivity {
 //        quizzGroup=quizMessage.getQuizz();
 //        quiz =  quizzGroup.getListQuiz().get(0);
 
-
     }
 
     @Subscribe
     public void getMessage(MyEventBus.QuizzOverMessage message) {
 
         displayScore(message.getScore(), message.getNbFreeQAnswered(), message.getTimeRemaining());
-
 
     }
 
