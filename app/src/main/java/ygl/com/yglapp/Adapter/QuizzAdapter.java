@@ -1,7 +1,6 @@
 package ygl.com.yglapp.Adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,11 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
         RadioButton radiobutton;
 
+
+        final int fPosition = position;
+
+
+
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
         ImageView imageView = (ImageView) myViewHolder.itemView.findViewById(R.id.image_cell);
@@ -71,6 +78,24 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
             radiobutton = new RadioButton(context);
             radiobutton.setText(listQuizzGroup.get(position).getListQuiz().get(i).getLevel());
+
+            final int fIndex=i;
+
+            radiobutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+
+                        listQuizzGroup.get(fPosition).setIdcheckedQuiz(fIndex);
+
+                    }else{
+
+                        listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
+
+                    }
+                }
+            });
+
             listQuizzGroup.get(position).setIdcheckedQuiz(i);
             final int finalI = i;
             radiobutton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +127,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
+                    listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
                     //if (checkedQuiz.size() != 0)
                     quizzGroup.setChecked(false);
                     listQuizzresult.remove(position);
@@ -111,28 +137,17 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         });
 
 
+
         titleView.setText(quizzGroup.getName());
 
-        // Dans le dur pour le moment (Seulement android et java
-        if (quizzGroup.getName().toLowerCase().contains("android")) {
+        StorageReference imageRef =  FirebaseStorage.getInstance().
+                getReferenceFromUrl("gs://test-mail-f32c4.appspot.com").
+                child("/" + quizzGroup.getName()+".png");
 
-            Glide.with(imageView.getContext()).load("").placeholder(ContextCompat.
-                    getDrawable(imageView.getContext(), R.drawable.android_logo)).into(imageView);
-
-        } else {
-
-            Glide.with(imageView.getContext()).load("").placeholder(ContextCompat.
-                    getDrawable(imageView.getContext(), R.drawable.java_logo)).into(imageView);
-        }
-
-        /****/
-
-/*
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            descView.setText(Html.fromHtml(descText,Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            descView.setText(Html.fromHtml(descText), TextView.BufferType.SPANNABLE);
-        }*/
+        Glide.with(imageView.getContext())
+                .using(new FirebaseImageLoader())
+                .load(imageRef)
+                .into(imageView);
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

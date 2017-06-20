@@ -2,7 +2,6 @@ package ygl.com.yglapp.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 /**
  * Created by juju on 16/06/2017.
@@ -13,7 +12,7 @@ public class QuizzGroup implements Serializable {
     private String iconName;
     private ArrayList<Quizz> listQuiz;
     boolean isChecked;
-    private int idcheckedQuiz;
+    private int idcheckedQuiz=-1;
 
     public QuizzGroup(String name, String iconName, ArrayList<Quizz> listQuiz) {
         this.name = name;

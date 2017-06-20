@@ -34,14 +34,7 @@ public class Quizz implements Serializable{
         this.name = name;
 
 
-
-
     }
-
-
-
-
-
 
     public String getName() {
         return name;
@@ -66,7 +59,6 @@ public class Quizz implements Serializable{
     public void setDuration(long duration) {
         this.duration = duration;
     }
-
 
 
     public ArrayList<Question> getQuestions() {
