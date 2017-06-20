@@ -1,7 +1,6 @@
 package ygl.com.yglapp;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ygl.com.yglapp.Activity.MainActivity;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Utlities.AppUtils;
 
@@ -70,14 +68,8 @@ public class FormCandidatFragment extends Fragment {
     }
 
     private void validateInfos(String prenom, String nom, String email){
-
         //On enregistre les infos du candidat et on lance notre activité.
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("prenom",prenom);
-        intent.putExtra("nom",nom);
-        intent.putExtra("email",email);
-        startActivity(intent);
-
+        GlobalBus.getBus().post(new MyEventBus.InfoUserValidate(prenom, nom, email));
 
     }
 

@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,6 +98,29 @@ public class LoginActivityExample extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Subscribe
+    public void getMessageValidateUser(MyEventBus.InfoUserValidate validateMessage) {
+
+        Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
+        intent.putExtra("prenom",validateMessage.prenom);
+        intent.putExtra("nom",validateMessage.nom);
+        intent.putExtra("email",validateMessage.email);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        GlobalBus.getBus().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        GlobalBus.getBus().unregister(this);
     }
 
 

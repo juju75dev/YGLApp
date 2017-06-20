@@ -22,13 +22,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import ygl.com.yglapp.Adapter.QuizzAdapter;
 import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
 import ygl.com.yglapp.Injection.QuizParser;
 import ygl.com.yglapp.Injection.QuizParsingComponent;
-import ygl.com.yglapp.GlobalBus;
-import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
@@ -103,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onClick(View v) {
                 // listQuizGroup.size();
                 //  GlobalBus.getBus().post(new MyEventBus.QuizzGroupReadyMessage(listQuizGroup.get(0)));
-
 
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
                 checkedListQuizGroup = new ArrayList<QuizzGroup>();

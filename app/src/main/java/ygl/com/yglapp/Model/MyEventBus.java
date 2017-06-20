@@ -50,6 +50,19 @@ public class MyEventBus {
         }
     }
 
+    public static class InfoUserValidate {
+
+        public String prenom;
+        public String nom;
+        public String email;
+        public InfoUserValidate(String prenom, String nom, String email) {
+
+            this.prenom=prenom;
+            this.nom=nom;
+            this.email=email;
+        }
+    }
+
     public static class QuizzOverMessage {
 
         private int score;
