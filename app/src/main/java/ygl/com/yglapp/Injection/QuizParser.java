@@ -31,6 +31,7 @@ public class QuizParser {
             ArrayList<Quizz> listQuizz = new ArrayList<>();
             QuizzGroup quizzGroup = new QuizzGroup();
             quizzGroup.setName(groupShot.getKey().toString());
+          //  quizzGroup.setLevel((String)groupShot.child("level").getValue());
             quizzGroup.setIconName(groupShot.child("icon").toString());
 
 
@@ -38,9 +39,10 @@ public class QuizParser {
 
                 Quizz fireQuiz = new Quizz();
                 fireQuiz.setName(quizShot.child("name").toString());
-                fireQuiz.setLevel((long) quizShot.child("level").getValue());
+               // fireQuiz.setLevel((long) quizShot.child("level").getValue());
                 fireQuiz.setDuration((long) quizShot.child("duration").getValue());
                 fireQuiz.setDescription(quizShot.child("description").getValue().toString());
+                fireQuiz.setLevel(quizShot.child("level").getValue().toString());
 
                 ArrayList<Question> questions = new ArrayList<>();
 

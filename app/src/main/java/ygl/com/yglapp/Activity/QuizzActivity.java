@@ -2,6 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,11 +14,14 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Quizz;
+import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
 import ygl.com.yglapp.Utlities.AppUtils;
 
@@ -47,8 +51,10 @@ public class QuizzActivity extends AppCompatActivity {
     TextView scoreQuestionsFreeView;
 
     private Quizz quiz;
+    ArrayList<QuizzGroup> checkedquizzGroup;
     private int quizTotalPoints = 0;
     private boolean quizStarted = false;
+    private static int quizindex = 0;
 
 
     @Override
@@ -60,7 +66,18 @@ public class QuizzActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        quiz = (Quizz) getIntent().getSerializableExtra("quiz");
+
+        checkedquizzGroup = (ArrayList<QuizzGroup>) getIntent().getSerializableExtra("quizgroup");
+        quizindex = 0;
+        if (quizindex < checkedquizzGroup.size() - 1) {
+            backHomeButton.setText(R.string.next_question_test);
+
+        } else
+            backHomeButton.setText(R.string.back_home);
+
+
+        quiz = checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz());
+
 
         setTitle(quiz.getName());
 
@@ -75,15 +92,17 @@ public class QuizzActivity extends AppCompatActivity {
         warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
                 "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
                 "\n\n- " + getString(R.string.quizz_contains_two_types) +
-                "\n\n- " + getString(R.string.dont_getout_of_app) + " !"+
-                "\n\n- " +getString(R.string.can_jump_question) + " ! ");
+                "\n\n- " + getString(R.string.dont_getout_of_app) + " !" +
+                "\n\n- " + getString(R.string.can_jump_question) + " ! ");
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
+
+                //  GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
+                GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                     Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -103,6 +122,7 @@ public class QuizzActivity extends AppCompatActivity {
                     quizStarted = true;
 
                 }
+                quizindex++;
             }
         });
     }
@@ -123,8 +143,47 @@ public class QuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                finish();
+
+                if (quizindex < checkedquizzGroup.size()) {
+                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz())));
+
+                    if (quizindex == checkedquizzGroup.size() - 1) {
+                        backHomeButton.setText(R.string.back_home);
+                    }
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                        Animator anim = AppUtils.initCircularAnim(warningLayout);
+                        anim.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                startQuizz();
+                                quizStarted = true;
+                            }
+                        });
+
+                        anim.start();
+                    } else {
+
+                        startQuizz();
+                        quizStarted = true;
+
+                    }
+                } else {
+                    checkedquizzGroup.clear();
+                    Intent intent = new Intent(QuizzActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    // backHomeButton.setText("Retour à l'acceuil");
+//                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    //   finish();
+                }
+
+
+                quizindex++;
+
+
+                // finish();
             }
         });
 
@@ -159,6 +218,15 @@ public class QuizzActivity extends AppCompatActivity {
         if (!quizStarted) {
             super.onBackPressed();
         }
+
+    }
+
+    @Subscribe
+    public void getMessage(MyEventBus.QuizzGroupReadyMessage quizMessage) {
+
+//        quizzGroup=quizMessage.getQuizz();
+//        quiz =  quizzGroup.getListQuiz().get(0);
+
 
     }
 
