@@ -15,33 +15,32 @@ public class Quizz implements Serializable{
 
     private String description;
     private long duration;
-    private long level;
+
     private String name;
     private ArrayList<Question> questions;
-    boolean isChecked;
+
+    private String level;
+    private int id;
+
 
 
     public Quizz() {
     }
 
 
-    public Quizz(String description, int duration, int level, String name, List<Question> questions) {
+    public Quizz(String description, int duration, String name, List<Question> questions) {
         this.description = description;
         this.duration = duration;
         this.name = name;
 
-        this.level=level;
+
 
 
     }
 
-    public long getLevel() {
-        return level;
-    }
 
-    public void setLevel(long level) {
-        this.level = level;
-    }
+
+
 
 
     public String getName() {
@@ -68,13 +67,7 @@ public class Quizz implements Serializable{
         this.duration = duration;
     }
 
-    public boolean isChecked() {
-        return isChecked;
-    }
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
 
     public ArrayList<Question> getQuestions() {
         return questions;
@@ -82,5 +75,21 @@ public class Quizz implements Serializable{
 
     public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

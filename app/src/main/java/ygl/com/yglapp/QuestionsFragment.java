@@ -32,6 +32,7 @@ import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
 import ygl.com.yglapp.Model.Quizz;
+import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.Utlities.AppUtils;
 
 /**
@@ -80,6 +81,7 @@ public class QuestionsFragment extends Fragment {
     private int nbFreeQuestionsAnswered=0;
     private ArrayList<Question> listAnswersLibres;
     private Quizz myQuizz;
+    private QuizzGroup quizzGroup;
     private  AlphaAnimation alphaAanimation;
 
 
@@ -263,6 +265,8 @@ public class QuestionsFragment extends Fragment {
     @Subscribe
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
 
+        getView().setVisibility(View.VISIBLE);
+        index=0;
         myQuizz=quizMessage.getQuizz();
         countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, timerView);
         countDownTimer.start();

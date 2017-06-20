@@ -1,5 +1,6 @@
 package ygl.com.yglapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
+import ygl.com.yglapp.GlobalBus;
+import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
+    private ArrayList<QuizzGroup> checkedListQuizGroup;
 
 
     @Override
@@ -45,16 +49,16 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Quiz");
 
-        final FireBaseQuizParsing firebaseParser= new FireBaseQuizParsing();
+        final FireBaseQuizParsing firebaseParser = new FireBaseQuizParsing();
 
         // Read from the database
         refQuiz.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                listQuizGroup= firebaseParser.quizParsing(dataSnapshot);
+                listQuizGroup = firebaseParser.quizParsing(dataSnapshot);
 
-                QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
+                QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup, MainActivity.this);
                 myRecyclerView.setAdapter(adapterQuizz);
 
             }
@@ -73,19 +77,34 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
+                // listQuizGroup.size();
+                //  GlobalBus.getBus().post(new MyEventBus.QuizzGroupReadyMessage(listQuizGroup.get(0)));
+
+
+                Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
+                checkedListQuizGroup = new ArrayList<QuizzGroup>();
                 //adapterQuizz.notifyDataSetChanged();
-                //intent.putExtra("quiz", listQuizz[0]);
-                //startActivity(intent);
+                for (QuizzGroup quizgroup : listQuizGroup) {
+                    if (quizgroup.isChecked())
+                        checkedListQuizGroup.add(quizgroup);
+                    intent.putExtra("quizgroup", checkedListQuizGroup);
+                    if (quizgroup.isChecked() ) {
+                        startActivity(intent);
+                    } else if (quizgroup.isChecked() ) {
+                        Toast.makeText(MainActivity.this, "Veuillez sélectionner un Quiz", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Veuillez sélectionner un niveau", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
     }
 
     @Override
-    public void onQuizzGroupClicked(QuizzGroup myQuizzGroup){
+    public void onQuizzGroupClicked(QuizzGroup myQuizzGroup) {
 
-        Toast.makeText(MainActivity.this,"Nbre Quiz : "+myQuizzGroup.getListQuiz().size(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Nbre Quiz : " + myQuizzGroup.getListQuiz().size(), Toast.LENGTH_SHORT).show();
         //Intent intent =new Intent(this,QuizzActivity.class);
         //intent.putExtra("quiz",myQuizzGroup);
         //startActivity(intent);

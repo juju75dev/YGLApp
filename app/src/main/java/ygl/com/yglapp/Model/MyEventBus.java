@@ -8,15 +8,30 @@ import java.util.ArrayList;
 
 public class MyEventBus {
 
+    public static class QuizzGroupReadyMessage {
+
+        private QuizzGroup quizzGroup;
+
+        public QuizzGroupReadyMessage(QuizzGroup quizzGroup) {
+            this.quizzGroup = quizzGroup;
+        }
+
+        public QuizzGroup getQuizz() {
+            return quizzGroup;
+        }
+
+    }
+
     public static class QuizzReadyMessage {
 
-        private Quizz quiz;
+        private Quizz quizz;
 
-        public QuizzReadyMessage(Quizz quiz) {
-            this.quiz = quiz;
+        public QuizzReadyMessage(Quizz quizz) {
+            this.quizz = quizz;
         }
+
         public Quizz getQuizz() {
-            return quiz;
+            return quizz;
         }
 
     }
@@ -35,21 +50,28 @@ public class MyEventBus {
         private int nbFreeQAnswered;
         private ArrayList<Question> listFreeAnswers;
 
-        public QuizzOverMessage(int score, ArrayList<Question>listFQ, int nbFreeQA, long timeR) {
+        public QuizzOverMessage(int score, ArrayList<Question> listFQ, int nbFreeQA, long timeR) {
             this.score = score;
             this.listFreeAnswers = listFQ;
-            this.nbFreeQAnswered=nbFreeQA;
-            this.timeRemaining=timeR;
+            this.nbFreeQAnswered = nbFreeQA;
+            this.timeRemaining = timeR;
         }
 
         public int getScore() {
             return score;
         }
+
         public ArrayList<Question> getFreeAnswers() {
             return listFreeAnswers;
         }
-        public int getNbFreeQAnswered(){return nbFreeQAnswered;}
-        public long getTimeRemaining(){return timeRemaining;}
+
+        public int getNbFreeQAnswered() {
+            return nbFreeQAnswered;
+        }
+
+        public long getTimeRemaining() {
+            return timeRemaining;
+        }
 
     }
 

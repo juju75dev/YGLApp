@@ -1,5 +1,6 @@
 package ygl.com.yglapp.Adapter;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -28,15 +30,19 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     private ArrayList<QuizzGroup> listQuizzGroup;
     private OnQuizzGroupClicked clickCallback;
+    private Context context;
+
+
 
     public QuizzAdapter(ArrayList<QuizzGroup> list, OnQuizzGroupClicked callback) {
         this.listQuizzGroup = list;
-        this.clickCallback=callback;
+        this.clickCallback = callback;
     }
 
     @Override
     public QuestionHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz, viewGroup, false);
+        context=viewGroup.getContext();
         return new QuestionHolder(view);
     }
 
@@ -44,41 +50,56 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     public void onBindViewHolder(QuestionHolder myViewHolder, int position) {
 
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
-        
+        RadioButton radiobutton;
+
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
         ImageView imageView = (ImageView) myViewHolder.itemView.findViewById(R.id.image_cell);
         CheckBox checkBox = (CheckBox) myViewHolder.itemView.findViewById(R.id.checkbox_quiz);
         final RadioGroup radioGroup = (RadioGroup) myViewHolder.itemView.findViewById(R.id.radioGroup);
 
+        for (int i = 0; i <listQuizzGroup.get(position).getListQuiz().size() ; i++) {
+            radiobutton = new RadioButton(context);
+            radiobutton.setText(listQuizzGroup.get(position).getListQuiz().get(i).getLevel());
+            listQuizzGroup.get(position).setIdcheckedQuiz(i);
+            radioGroup.addView(radiobutton);
+        }
+
+
+
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     radioGroup.setVisibility(View.VISIBLE);
-                    //quizz.setChecked(true);
+                    quizzGroup.setChecked(true);
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
                     //if (checkedQuiz.size() != 0)
-                        //quizz.setChecked(false);
+                    quizzGroup.setChecked(false);
 
                 }
             }
         });
 
+
+
+
+
         titleView.setText(quizzGroup.getName());
 
         // Dans le dur pour le moment (Seulement android et java
-        if(quizzGroup.getName().toLowerCase().contains("android")){
+        if (quizzGroup.getName().toLowerCase().contains("android")) {
 
             Glide.with(imageView.getContext()).load("").placeholder(ContextCompat.
-                    getDrawable(imageView.getContext(),R.drawable.android_logo)).into(imageView);
+                    getDrawable(imageView.getContext(), R.drawable.android_logo)).into(imageView);
 
-        }else{
+        } else {
 
             Glide.with(imageView.getContext()).load("").placeholder(ContextCompat.
-                    getDrawable(imageView.getContext(),R.drawable.java_logo)).into(imageView);
+                    getDrawable(imageView.getContext(), R.drawable.java_logo)).into(imageView);
         }
 
         /****/
@@ -103,7 +124,6 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     public int getItemCount() {
         return listQuizzGroup.size();
     }
-
 
 
 }
