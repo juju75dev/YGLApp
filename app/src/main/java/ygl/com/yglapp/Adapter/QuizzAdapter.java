@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
+import ygl.com.yglapp.Model.QuizResult;
+import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
@@ -31,11 +33,10 @@ import ygl.com.yglapp.R;
 
 public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
-    private ArrayList<QuizzGroup> listQuizzGroup=new ArrayList<>();
+    private ArrayList<QuizzGroup> listQuizzGroup = new ArrayList<>();
+    private ArrayList<QuizResult> listQuizzresult = new ArrayList<>();
     private OnQuizzGroupClicked clickCallback;
     private Context context;
-
-
 
 
     public QuizzAdapter() {
@@ -50,12 +51,12 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     @Override
     public QuestionHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz, viewGroup, false);
-        context=viewGroup.getContext();
+        context = viewGroup.getContext();
         return new QuestionHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(QuestionHolder myViewHolder, int position) {
+    public void onBindViewHolder(QuestionHolder myViewHolder, final int position) {
 
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
         RadioButton radiobutton;
@@ -66,14 +67,29 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         CheckBox checkBox = (CheckBox) myViewHolder.itemView.findViewById(R.id.checkbox_quiz);
         final RadioGroup radioGroup = (RadioGroup) myViewHolder.itemView.findViewById(R.id.radioGroup);
 
-        for (int i = 0; i <listQuizzGroup.get(position).getListQuiz().size() ; i++) {
+        for (int i = 0; i < listQuizzGroup.get(position).getListQuiz().size(); i++) {
+
             radiobutton = new RadioButton(context);
             radiobutton.setText(listQuizzGroup.get(position).getListQuiz().get(i).getLevel());
             listQuizzGroup.get(position).setIdcheckedQuiz(i);
+            final int finalI = i;
+            radiobutton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (listQuizzresult.size() != 0) {
+                        listQuizzresult.get(finalI).setSubject(listQuizzGroup.get(position).getName());
+                        listQuizzresult.get(finalI).setLevel(listQuizzGroup.get(position).getListQuiz().get(finalI).getLevel());
+                    }
+                    QuizResultGroup.getInstance().setQuizResults(listQuizzresult);
+                }
+            });
+
             radioGroup.addView(radiobutton);
+
+
+
         }
-
-
 
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -82,18 +98,17 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 if (isChecked) {
                     radioGroup.setVisibility(View.VISIBLE);
                     quizzGroup.setChecked(true);
+                    listQuizzresult.add(position, QuizResult.getInstance());
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
                     //if (checkedQuiz.size() != 0)
                     quizzGroup.setChecked(false);
+                    listQuizzresult.remove(position);
 
                 }
             }
         });
-
-
-
 
 
         titleView.setText(quizzGroup.getName());
@@ -124,7 +139,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
             @Override
             public void onClick(View v) {
 
-                Log.d("listQuizGroup",quizzGroup.toString());
+                Log.d("listQuizGroup", quizzGroup.toString());
                 clickCallback.onQuizzGroupClicked(quizzGroup);
             }
         });

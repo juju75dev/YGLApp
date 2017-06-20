@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.MyEventBus;
+import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
@@ -192,6 +193,7 @@ public class QuizzActivity extends AppCompatActivity {
             scorePercent = score / (((double) quizTotalPoints / 100));
         }
 
+        QuizResultGroup.getInstance().getQuizResults().get(quizindex).setScore_qcm(scorePercent);
         scoreView.setText("Score Qcm : " + scorePercent + "%");
         scoreQuizzNameView.setText(quiz.getName());
         scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(timeRemaining));

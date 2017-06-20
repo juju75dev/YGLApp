@@ -15,11 +15,20 @@ public class QuizResult {
     private String level;
     private String nom;
     private String prenom;
-    private long score_qcm;
+    private double score_qcm;
     private String subject;
     private long time_remaining;
     private long timestamp;
     private ArrayList<Pair> freeAnswers;
+
+    private static final QuizResult ourInstance = new QuizResult();
+
+    public static QuizResult getInstance() {
+        return ourInstance;
+    }
+
+    public QuizResult() {
+    }
 
     public QuizResult(String email, String id_quiz, String level, String nom,
                       String prenom, long score_qcm, String subject, long time_remaining,
@@ -78,11 +87,11 @@ public class QuizResult {
         this.prenom = prenom;
     }
 
-    public long getScore_qcm() {
+    public double getScore_qcm() {
         return score_qcm;
     }
 
-    public void setScore_qcm(long score_qcm) {
+    public void setScore_qcm(double score_qcm) {
         this.score_qcm = score_qcm;
     }
 

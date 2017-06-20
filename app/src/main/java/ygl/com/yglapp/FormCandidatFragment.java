@@ -15,6 +15,7 @@ import com.squareup.otto.Subscribe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.MyEventBus;
+import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Utlities.AppUtils;
 
 /**
@@ -53,10 +54,16 @@ public class FormCandidatFragment extends Fragment {
                     validateInfos(editPrenom.getText().toString(),editNom.getText().toString(),
                             editEmail.getText().toString());
 
+                    QuizResult.getInstance().setNom(editNom.getText().toString());
+                    QuizResult.getInstance().setPrenom(editPrenom.getText().toString());
+                    QuizResult.getInstance().setEmail(editEmail.getText().toString());
+
                 }else{
 
                     Toast.makeText(getActivity(),getString(R.string.fill_all_input),Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });

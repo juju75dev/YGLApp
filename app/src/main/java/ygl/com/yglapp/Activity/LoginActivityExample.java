@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.MyEventBus;
+import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.R;
 
 public class LoginActivityExample extends AppCompatActivity {
@@ -57,43 +58,51 @@ public class LoginActivityExample extends AppCompatActivity {
                         getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(editPassword.getWindowToken(), 0);
 
-                if (!editPassword.getText().toString().equals("")  && !editMail.getText().toString().equals("")) {
+             //   if (!editPassword.getText().toString().equals("")  && !editMail.getText().toString().equals("")) {
+
+                // Sign in success, update UI with the signed-in user's information
+                GlobalBus.getBus().post(new MyEventBus.LoginSuccessMessage());
+                loginForm.setVisibility(View.GONE);
+                Log.d("TAG", "signInWithEmail:success");
+
+
 
                     progressBar.setVisibility(View.VISIBLE);
-                    mAuth.signInWithEmailAndPassword(editMail.getText().toString()
-                            , editPassword.getText().toString())
-                            .addOnCompleteListener(LoginActivityExample.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                    progressBar.setVisibility(View.GONE);
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        GlobalBus.getBus().post(new MyEventBus.LoginSuccessMessage());
-                                        loginForm.setVisibility(View.GONE);
-                                        Log.d("TAG", "signInWithEmail:success");
-                                        //FirebaseUser user = mAuth.getCurrentUser();
-                                        //updateUI(user);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(LoginActivityExample.this, getString(R.string.auth_failed),
-                                                Toast.LENGTH_SHORT).show();
-                                        //updateUI(null);
-                                    }
-
-                                }
-                            });
-                }else{
-
-                    //Toast.makeText(LoginActivityExample.this,getString(R.string.fill_all_input),
-                      //      Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                }
+//                    mAuth.signInWithEmailAndPassword(editMail.getText().toString()
+//                            , editPassword.getText().toString())
+//                            .addOnCompleteListener(LoginActivityExample.this, new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                                    progressBar.setVisibility(View.GONE);
+//                                    if (task.isSuccessful()) {
+//                                        // Sign in success, update UI with the signed-in user's information
+//                                        GlobalBus.getBus().post(new MyEventBus.LoginSuccessMessage());
+//                                        loginForm.setVisibility(View.GONE);
+//                                        Log.d("TAG", "signInWithEmail:success");
+//                                        //FirebaseUser user = mAuth.getCurrentUser();
+//                                        //updateUI(user);
+//                                    } else {
+//                                        // If sign in fails, display a message to the user.
+//                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
+//                                        Toast.makeText(LoginActivityExample.this, getString(R.string.auth_failed),
+//                                                Toast.LENGTH_SHORT).show();
+//                                        //updateUI(null);
+//                                    }
+//
+//                                }
+//                            });
+              //  }
+//                else{
+//
+//                    //Toast.makeText(LoginActivityExample.this,getString(R.string.fill_all_input),
+//                      //      Toast.LENGTH_SHORT).show();
+//
+//                    Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//
+//                }
 
             }
         });
