@@ -2,7 +2,6 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,8 +61,6 @@ public class QuizzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_quizz);
-
-        Log.d("quuu","quuuuuu");
 
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -127,26 +124,12 @@ public class QuizzActivity extends AppCompatActivity {
                 quizindex++;
             }
         });
-    }
-
-    private void startQuizz() {
-
-        quizStarted = true;
-        warningLayout.setVisibility(View.GONE);
-        getSupportActionBar().hide();
-
-    }
-
-
-
-    private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
-
-        quizStarted = false;
 
         backHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Log.d("quuu","quuuuuu");
 
                 if (quizindex < checkedquizzGroup.size()) {
                     GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz())));
@@ -176,8 +159,9 @@ public class QuizzActivity extends AppCompatActivity {
                     }
                 } else {
                     checkedquizzGroup.clear();
-                    Intent intent = new Intent(QuizzActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
+                    //Intent intent = new Intent(QuizzActivity.this, MainActivity.class);
+                    //startActivity(intent);
                     // backHomeButton.setText("Retour à l'acceuil");
 //                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     //   finish();
@@ -190,6 +174,21 @@ public class QuizzActivity extends AppCompatActivity {
                 // finish();
             }
         });
+    }
+
+    private void startQuizz() {
+
+        quizStarted = true;
+        warningLayout.setVisibility(View.GONE);
+        getSupportActionBar().hide();
+
+    }
+
+
+
+    private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
+
+        quizStarted = false;
 
         double scorePercent = 0;
 

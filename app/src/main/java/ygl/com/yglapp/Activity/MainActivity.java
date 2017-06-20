@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("creeee","crrrrr");
+
         QuizParsingComponent component = DaggerQuizParsingComponent.builder().build();
         component.inject(this);
 
@@ -124,24 +126,28 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // listQuizGroup.size();
-                //  GlobalBus.getBus().post(new MyEventBus.QuizzGroupReadyMessage(listQuizGroup.get(0)));
 
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
                 checkedListQuizGroup = new ArrayList<QuizzGroup>();
                 //adapterQuizz.notifyDataSetChanged();
                 for (QuizzGroup quizgroup : listQuizGroup) {
-                    if (quizgroup.isChecked())
+
+                    if(quizgroup.getIdcheckedQuiz()!=-1){
                         checkedListQuizGroup.add(quizgroup);
-                    intent.putExtra("quizgroup", checkedListQuizGroup);
-                    if (quizgroup.isChecked() ) {
-                        startActivity(intent);
-                    } else if (quizgroup.isChecked() ) {
-                        Toast.makeText(MainActivity.this, "Veuillez sélectionner un Quiz", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Veuillez sélectionner un niveau", Toast.LENGTH_SHORT).show();
+
                     }
                 }
+
+                if(checkedListQuizGroup.size()>0 ){
+
+                    intent.putExtra("quizgroup", checkedListQuizGroup);
+                    startActivity(intent);
+                }else{
+
+                    Toast.makeText(MainActivity.this, "Veuillez sélectionner un niveau", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
