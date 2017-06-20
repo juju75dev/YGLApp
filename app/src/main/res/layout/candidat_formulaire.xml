@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="20dp"
-    tools:context="ygl.com.yglapp.Activity.LoginActivityExample">
-
-    <!-- Changer le toolContext pour l'activité connexion ! -->
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:src="@drawable/ygl_drawable"
-        android:scaleType="centerInside"/>
+    android:padding="20dp">
 
 
     <LinearLayout
-        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,13 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
-                android:id="@+id/pseudo"
+            <EditText
+                android:id="@+id/prenom_candidat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YGL"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:hint="Prénom du candidat"
+                android:inputType="textPersonName"
                 android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
@@ -44,51 +32,50 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/nom_candidat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="Nom du candidat"
                 android:imeActionId="@+id/login"
                 android:imeActionLabel="signer pas"
                 android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/email_candidat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email du candidat"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="signer pas"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textEmailAddress"
                 android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
 
 
         <Button
-            android:id="@+id/sign_in_button"
+            android:id="@+id/validate_infos_button"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white"
             android:background="@drawable/button_selector"
-            android:text="Se connecter"
+            android:text="Accéder aux tests"
             android:textStyle="bold" />
 
 
     </LinearLayout>
 
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:visibility="gone"
-        />
-
-
-    <fragment
-        android:name="ygl.com.yglapp.FormCandidatFragment"
-        android:id="@+id/form_candidat_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        />
 
 </LinearLayout>

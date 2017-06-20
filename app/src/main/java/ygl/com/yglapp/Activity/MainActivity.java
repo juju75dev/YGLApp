@@ -17,13 +17,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import ygl.com.yglapp.Adapter.QuizzAdapter;
+import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
+import ygl.com.yglapp.Injection.QuizParser;
+import ygl.com.yglapp.Injection.QuizParsingComponent;
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
-import ygl.com.yglapp.Utlities.FireBaseQuizParsing;
 
 public class MainActivity extends AppCompatActivity implements OnQuizzGroupClicked {
 
@@ -31,21 +36,36 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     RecyclerView myRecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
+
+    @Inject
+    QuizParser firebaseParser;
+    @Inject
+    QuizzAdapter adapterQuizz;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        QuizParsingComponent component = DaggerQuizParsingComponent.builder().build();
+        component.inject(this);
+
         ButterKnife.bind(this);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Quiz");
 
-        final FireBaseQuizParsing firebaseParser= new FireBaseQuizParsing();
+        myRecyclerView.setAdapter(adapterQuizz);
+
+
+        //SET DAGGER2
+        //final FireBaseQuizParsing firebaseParser= new FireBaseQuizParsing();
+        //firebaseParser = DaggerQuizParsingComponent.builder().build().provideQuizParser();
 
         // Read from the database
         refQuiz.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -53,9 +73,13 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 listQuizGroup= firebaseParser.quizParsing(dataSnapshot);
+                adapterQuizz.setListQuizzGroup(listQuizGroup);
+                adapterQuizz.setClickCallback(MainActivity.this);
+                adapterQuizz.notifyDataSetChanged();
 
+                /*
                 QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
-                myRecyclerView.setAdapter(adapterQuizz);
+                myRecyclerView.setAdapter(adapterQuizz);*/
 
             }
 

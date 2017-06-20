@@ -21,6 +21,8 @@
     <string name="title_activity_login_example">LoginActivityExample</string>
     <string name="default_pwd">ygltest</string>
     <string name="wrong_pseudo_or_pwd">Pseudo ou mot de passe incorrect(s)</string>
+    <string name="fill_all_input">Veuillez remplir tous les champs...</string>
+    <string name="auth_failed">Identifiants incorrects...</string>
     <string name="level_1">Level 1</string>
     <string name="level_2">Level 2</string>
     <string name="level_3">Level 3</string>

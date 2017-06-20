@@ -2,6 +2,7 @@ package ygl.com.yglapp.Adapter;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.QuestionHolder;
@@ -26,9 +29,14 @@ import ygl.com.yglapp.R;
 
 public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
-    private ArrayList<QuizzGroup> listQuizzGroup;
+    private ArrayList<QuizzGroup> listQuizzGroup=new ArrayList<>();
     private OnQuizzGroupClicked clickCallback;
 
+
+    public QuizzAdapter() {
+    }
+
+    @Inject
     public QuizzAdapter(ArrayList<QuizzGroup> list, OnQuizzGroupClicked callback) {
         this.listQuizzGroup = list;
         this.clickCallback=callback;
@@ -94,6 +102,8 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("listQuizGroup",quizzGroup.toString());
                 clickCallback.onQuizzGroupClicked(quizzGroup);
             }
         });
@@ -104,6 +114,19 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         return listQuizzGroup.size();
     }
 
+    public OnQuizzGroupClicked getClickCallback() {
+        return clickCallback;
+    }
 
+    public void setClickCallback(OnQuizzGroupClicked clickCallback) {
+        this.clickCallback = clickCallback;
+    }
 
+    public ArrayList<QuizzGroup> getListQuizzGroup() {
+        return listQuizzGroup;
+    }
+
+    public void setListQuizzGroup(ArrayList<QuizzGroup> listQuizzGroup) {
+        this.listQuizzGroup = listQuizzGroup;
+    }
 }

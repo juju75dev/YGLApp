@@ -118,6 +118,7 @@ public class QuizzActivity extends AppCompatActivity {
     private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
 
         quizStarted = false;
+
         backHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

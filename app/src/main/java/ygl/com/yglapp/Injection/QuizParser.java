@@ -1,8 +1,10 @@
-package ygl.com.yglapp.Utlities;
+package ygl.com.yglapp.Injection;
 
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
@@ -10,10 +12,15 @@ import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.QuizzGroup;
 
 /**
- * Created by juju on 16/06/2017.
+ * Created by juju on 20/06/2017.
  */
 
-public class FireBaseQuizParsing {
+public class QuizParser {
+
+    @Inject
+    public QuizParser(){
+
+    }
 
     public ArrayList<QuizzGroup> quizParsing(DataSnapshot dataSnapshot) {
 
@@ -30,7 +37,6 @@ public class FireBaseQuizParsing {
             for (DataSnapshot quizShot : groupShot.getChildren()) {
 
                 Quizz fireQuiz = new Quizz();
-
                 fireQuiz.setName(quizShot.child("name").toString());
                 fireQuiz.setLevel((long) quizShot.child("level").getValue());
                 fireQuiz.setDuration((long) quizShot.child("duration").getValue());
@@ -82,5 +88,4 @@ public class FireBaseQuizParsing {
         return listQuizGroup;
 
     }
-
 }

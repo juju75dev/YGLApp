@@ -28,6 +28,13 @@ public class MyEventBus {
         }
     }
 
+    public static class LoginSuccessMessage {
+
+        public LoginSuccessMessage() {
+
+        }
+    }
+
     public static class QuizzOverMessage {
 
         private int score;
