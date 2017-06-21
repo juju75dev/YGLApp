@@ -215,7 +215,6 @@ public class QuizzActivity extends AppCompatActivity {
     }
 
 
-
     private void displayScore(QuizResult result ) {
 
         scoreLayout.setVisibility(View.VISIBLE);
@@ -226,7 +225,6 @@ public class QuizzActivity extends AppCompatActivity {
         scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(result.getTime_remaining()));
 
     }
-
 
     private void sendResultsToFirebase(QuizResult result){
 

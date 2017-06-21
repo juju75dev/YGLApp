@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-//import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -28,6 +28,8 @@ import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
+
+//import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 /**
  * Created by juju on 06/06/2017.
@@ -89,7 +91,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 }
             });
 
-            listQuizzGroup.get(position).setIdcheckedQuiz(i);
+            //listQuizzGroup.get(position).setIdcheckedQuiz(i);
             final int finalI = i;
             radiobutton.setOnClickListener(new View.OnClickListener() {
 
@@ -104,8 +106,6 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
             });
 
             radioGroup.addView(radiobutton);
-
-
 
         }
 
@@ -130,17 +130,16 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         });
 
 
-
         titleView.setText(quizzGroup.getName());
 
         StorageReference imageRef =  FirebaseStorage.getInstance().
                 getReferenceFromUrl("gs://test-mail-f32c4.appspot.com").
                 child("/" + quizzGroup.getName()+".png");
 
-//        Glide.with(imageView.getContext())
-//                .using(new FirebaseImageLoader())
-//                .load(imageRef)
-//                .into(imageView);
+       Glide.with(imageView.getContext())
+               .using(new FirebaseImageLoader())
+               .load(imageRef)
+               .into(imageView);
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
