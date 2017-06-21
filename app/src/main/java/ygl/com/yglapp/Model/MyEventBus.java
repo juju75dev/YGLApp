@@ -1,7 +1,5 @@
 package ygl.com.yglapp.Model;
 
-import java.util.ArrayList;
-
 /**
  * Created by juju on 19/05/2017.
  */
@@ -65,18 +63,39 @@ public class MyEventBus {
 
     public static class QuizzOverMessage {
 
+        /*
         private int score;
         private long timeRemaining;
         private int nbFreeQAnswered;
-        private ArrayList<Question> listFreeAnswers;
+        private ArrayList<Question> listFreeAnswers;*/
 
-        public QuizzOverMessage(int score, ArrayList<Question> listFQ, int nbFreeQA, long timeR) {
-            this.score = score;
-            this.listFreeAnswers = listFQ;
+        private QuizResult result;
+        private int nbFreeQAnswered;
+
+
+
+
+        public QuizzOverMessage(QuizResult result, int nbFreeQA/*int score, ArrayList<Question> listFQ, int nbFreeQA, long timeR*/) {
+            /*this.score = score;
+
             this.nbFreeQAnswered = nbFreeQA;
-            this.timeRemaining = timeR;
+            this.timeRemaining = timeR;*/
+            this.result=result;
+            this.nbFreeQAnswered = nbFreeQA;
+
         }
 
+        public QuizResult getResult() {
+            return result;
+        }
+
+        public int getNbFreeQAnswered() {
+            return nbFreeQAnswered;
+        }
+
+
+
+        /*
         public int getScore() {
             return score;
         }
@@ -91,7 +110,7 @@ public class MyEventBus {
 
         public long getTimeRemaining() {
             return timeRemaining;
-        }
+        }*/
 
     }
 

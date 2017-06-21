@@ -50,7 +50,7 @@
         android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="Réponses questions libres : 5"
+        android:text="Réponses questions libres : 0"
         android:padding="15dp"/>
 
     <TextView
