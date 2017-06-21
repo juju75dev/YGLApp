@@ -135,7 +135,7 @@ public class QuizzActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (quizindex < checkedquizzGroup.size()) {
-/
+
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
 
@@ -177,7 +177,9 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void showWarning() {
         warningLayout.setVisibility(View.VISIBLE);
+
         getSupportActionBar().show();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
     }
 
