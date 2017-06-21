@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.MyEventBus;
+import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
@@ -51,7 +54,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private Quizz quiz;
     ArrayList<QuizzGroup> checkedquizzGroup;
-    private int quizTotalPoints = 0;
+    //private int quizTotalPoints = 0;
     private boolean quizStarted = false;
     private static int quizindex = 0;
 
@@ -81,11 +84,12 @@ public class QuizzActivity extends AppCompatActivity {
 
         setTitle(quiz.getName());
 
+        /*
         for (int i = 0; i < quiz.getQuestions().size(); i++) {
 
             quizTotalPoints += quiz.getQuestions().get(i).getWeight();
 
-        }
+        }*/
 
         warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
 
@@ -104,7 +108,8 @@ public class QuizzActivity extends AppCompatActivity {
                 if(!quizStarted){
                     quizStarted = true;
 
-                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
+                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().
+                            get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                         Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -193,20 +198,31 @@ public class QuizzActivity extends AppCompatActivity {
 
 
 
-    private void displayScore(int score, int nbFreeQuestionsAnswered, long timeRemaining) {
+    private void displayScore(QuizResult result ) {
 
         quizStarted = false;
 
-        double scorePercent = 0;
+        //double scorePercent = 0;
 
-        if (quizTotalPoints > 0 && score > 0) {
+        /*if (quizTotalPoints > 0 && score > 0) {
             scorePercent = score / (((double) quizTotalPoints / 100));
-        }
+        }*/
 
-        scoreView.setText("Score Qcm : " + scorePercent + "%");
+        scoreView.setText("Score Qcm : " + result.getScore() + "%");
         scoreQuizzNameView.setText(quiz.getName());
-        scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(timeRemaining));
-        scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered) + " : " + nbFreeQuestionsAnswered);
+        scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(result.getTime_remaining()));
+        //scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered) + " : " + nbFreeQuestionsAnswered);
+
+    }
+
+
+    private void sendResultsToFirebase(QuizResult result){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference refQuiz = database.getReference("Historic");
+
+        String postId = refQuiz.push().getKey();
+        refQuiz.child(postId).setValue(result);
 
     }
 
@@ -247,8 +263,9 @@ public class QuizzActivity extends AppCompatActivity {
     @Subscribe
     public void getMessage(MyEventBus.QuizzOverMessage message) {
 
-        displayScore(message.getScore(), message.getNbFreeQAnswered(), message.getTimeRemaining());
+        displayScore(message.getResult());
 
+        sendResultsToFirebase(message.getResult());
     }
 
 }
