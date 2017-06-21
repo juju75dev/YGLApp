@@ -77,8 +77,8 @@ public class QuizzActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         candidat = (Candidat) bundle.getSerializable("candidat");
-
         checkedquizzGroup = (ArrayList<QuizzGroup>) getIntent().getSerializableExtra("quizgroup");
+
         quizindex = 0;
         if (quizindex < checkedquizzGroup.size() - 1) {
             backHomeButton.setText(R.string.next_question_test);
@@ -221,16 +221,9 @@ public class QuizzActivity extends AppCompatActivity {
         scoreLayout.setVisibility(View.VISIBLE);
         quizStarted = false;
 
-        //double scorePercent = 0;
-
-        /*if (quizTotalPoints > 0 && score > 0) {
-            scorePercent = score / (((double) quizTotalPoints / 100));
-        }*/
-
         scoreView.setText("Score Qcm : " + result.getScore() + "%");
         scoreQuizzNameView.setText(quiz.getName());
         scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(result.getTime_remaining()));
-        //scoreQuestionsFreeView.setText(getString(R.string.questions_free_answered) + " : " + nbFreeQuestionsAnswered);
 
     }
 
