@@ -40,7 +40,7 @@ public class QuizParser {
             for (DataSnapshot quizShot : groupShot.getChildren()) {
 
                 Quizz fireQuiz = new Quizz();
-                fireQuiz.setName(quizShot.child("name").toString());
+                fireQuiz.setName(quizShot.child("name").getValue().toString());
                // fireQuiz.setLevel((long) quizShot.child("level").getValue());
                 fireQuiz.setDuration((long) quizShot.child("duration").getValue());
                 fireQuiz.setDescription(quizShot.child("description").getValue().toString());

@@ -54,9 +54,9 @@ public class FormCandidatFragment extends Fragment {
                     validateInfos(editPrenom.getText().toString(),editNom.getText().toString(),
                             editEmail.getText().toString());
 
-                    QuizResult.getInstance().setNom(editNom.getText().toString());
-                    QuizResult.getInstance().setPrenom(editPrenom.getText().toString());
-                    QuizResult.getInstance().setEmail(editEmail.getText().toString());
+//                    QuizResult.getInstance().setNom(editNom.getText().toString());
+//                    QuizResult.getInstance().setPrenom(editPrenom.getText().toString());
+//                    QuizResult.getInstance().setEmail(editEmail.getText().toString());
 
                 }else{
 

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+//import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
@@ -116,14 +116,14 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 if (isChecked) {
                     radioGroup.setVisibility(View.VISIBLE);
                     quizzGroup.setChecked(true);
-                    listQuizzresult.add(position, QuizResult.getInstance());
+                  //  listQuizzresult.add(position, QuizResult.getInstance());
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
                     listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
                     radioGroup.clearCheck();
                     quizzGroup.setChecked(false);
-                    listQuizzresult.remove(position);
+                  //  listQuizzresult.remove(position);
 
                 }
             }
@@ -137,10 +137,10 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 getReferenceFromUrl("gs://test-mail-f32c4.appspot.com").
                 child("/" + quizzGroup.getName()+".png");
 
-        Glide.with(imageView.getContext())
-                .using(new FirebaseImageLoader())
-                .load(imageRef)
-                .into(imageView);
+//        Glide.with(imageView.getContext())
+//                .using(new FirebaseImageLoader())
+//                .load(imageRef)
+//                .into(imageView);
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

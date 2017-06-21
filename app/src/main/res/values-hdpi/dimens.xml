@@ -4,7 +4,7 @@
     <dimen name="textsize">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!--<dimen name="cardviewsize">300dp</dimen>-->
-    <dimen name="cardview_size_enonce">160dp</dimen>
+    <dimen name="cardview_size_enonce">165dp</dimen>
 
 
 </resources>
