@@ -90,15 +90,7 @@ public class QuizzActivity extends AppCompatActivity {
         quiz = checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz());
 
 
-        setTitle(quiz.getName());
-
-        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
-
-        warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
-                "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
-                "\n\n- " + getString(R.string.quizz_contains_two_types) +
-                "\n\n- " + getString(R.string.dont_getout_of_app) + " !" +
-                "\n\n- " + getString(R.string.can_jump_question) + " ! ");
+        setWarningText(0);
 
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
@@ -143,14 +135,14 @@ public class QuizzActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (quizindex < checkedquizzGroup.size()) {
-//                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex)
-//                            .getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
+/
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
 
                         backHomeButton.setText(R.string.back_home);
 
                         showWarning();
+                        setWarningText(quizindex);
                     }
 
 
@@ -167,6 +159,20 @@ public class QuizzActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setWarningText(int i) {
+
+        quiz = checkedquizzGroup.get(i).getListQuiz().get(checkedquizzGroup.get(i).getIdcheckedQuiz());
+        setTitle(quiz.getName());
+
+        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
+
+        warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
+                "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
+                "\n\n- " + getString(R.string.quizz_contains_two_types) +
+                "\n\n- " + getString(R.string.dont_getout_of_app) + " !" +
+                "\n\n- " + getString(R.string.can_jump_question) + " ! ");
     }
 
     private void showWarning() {
