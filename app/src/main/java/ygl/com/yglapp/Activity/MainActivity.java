@@ -27,6 +27,7 @@ import ygl.com.yglapp.Adapter.QuizzAdapter;
 import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
 import ygl.com.yglapp.Injection.QuizParser;
 import ygl.com.yglapp.Injection.QuizParsingComponent;
+import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.QuizzGroup;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
     private ArrayList<QuizzGroup> checkedListQuizGroup;
+    private Candidat candidat;
+
 
     @Inject
     QuizParser firebaseParser;
@@ -57,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("creeee","crrrrr");
+        Bundle bundle = getIntent().getExtras();
+        candidat = (Candidat) bundle.getSerializable("candidat");
 
         QuizParsingComponent component = DaggerQuizParsingComponent.builder().build();
         component.inject(this);
@@ -70,25 +74,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
         DatabaseReference refQuiz = database.getReference("Quiz");
 
         myRecyclerView.setAdapter(adapterQuizz);
-
-        //TEST ENVOI RESULTS BY EMAIL
-        /*Pair pair = new Pair("Comment ça va ?","Bien");
-        ArrayList<Pair> freeAnswers = new ArrayList<>();
-        freeAnswers.add(pair);
-
-        QuizResult r1 = new QuizResult("aaa@aa.aa","ttt","senior","King","Arthur",90,"Android",10000000,
-                1000000,freeAnswers);
-
-        ArrayList<QuizResult> listResults = new ArrayList<>();
-        listResults.add(r1);
-        listResults.add(r1);
-
-        sendResultsToFirebase(listResults);*/
-
-
-        //SET DAGGER2
-        //final FireBaseQuizParsing firebaseParser= new FireBaseQuizParsing();
-        //firebaseParser = DaggerQuizParsingComponent.builder().build().provideQuizParser();
 
         // Read from the database
         refQuiz.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
                 adapterQuizz.notifyDataSetChanged();
 
                 fab.setVisibility(View.VISIBLE);
-
 
                 /*
                 QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
@@ -128,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
+                intent.putExtra("candidat",candidat);
+
                 checkedListQuizGroup = new ArrayList<>();
 
                 for (QuizzGroup quizgroup : listQuizGroup) {
