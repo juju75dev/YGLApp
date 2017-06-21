@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class QuizResult {
 
     private String email;
-    //private String id_quiz;
     private String level;
     private String nom;
     private String prenom;
@@ -19,10 +18,11 @@ public class QuizResult {
     private String subject;
     private long time_remaining;
     private long timestamp;
+    //private String id_quiz;
     private ArrayList<Pair> freeAnswers;
 
-    public QuizResult(String email, String level, String nom,
-                      String prenom, double score_qcm, String subject, long time_remaining,
+    public QuizResult(String email, String level,  String prenom,String nom,
+                      double score_qcm, String subject, long time_remaining,
                       long timestamp, ArrayList<Pair> freeAnswers) {
 
         this.email = email;

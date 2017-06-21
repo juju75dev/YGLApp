@@ -23,6 +23,7 @@ import com.squareup.otto.Subscribe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
+import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.R;
 
@@ -90,6 +91,7 @@ public class LoginActivityExample extends AppCompatActivity {
                       //      Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
+                    intent.putExtra("candidat",new Candidat());
                     startActivity(intent);
                     finish();
 
@@ -104,9 +106,9 @@ public class LoginActivityExample extends AppCompatActivity {
     public void getMessageValidateUser(MyEventBus.InfoUserValidate validateMessage) {
 
         Intent intent = new Intent(LoginActivityExample.this, MainActivity.class);
-        intent.putExtra("prenom",validateMessage.prenom);
-        intent.putExtra("nom",validateMessage.nom);
-        intent.putExtra("email",validateMessage.email);
+
+        Candidat candidat = new Candidat(validateMessage.prenom,validateMessage.nom,validateMessage.email);
+        intent.putExtra("candidat",candidat);
         startActivity(intent);
         finish();
     }

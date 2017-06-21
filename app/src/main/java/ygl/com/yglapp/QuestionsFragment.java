@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
@@ -89,6 +90,7 @@ public class QuestionsFragment extends Fragment {
     private QuizzGroup quizzGroup;
     private  AlphaAnimation alphaAanimation;
     private int quizTotalPoints = 0;
+    private Candidat candidat;
 
 
     @Override
@@ -128,8 +130,9 @@ public class QuestionsFragment extends Fragment {
 
                     //QUIZ TERMINE !!!
 
-                    QuizResult quizResult = new QuizResult("eee",myQuizz.getLevel(),"juju",
-                            "jojo",scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
+                    QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
+                            candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,
+                            new Date().getTime(),pairAnswersLibres);
 
                     GlobalBus.getBus().post(new MyEventBus.
                             QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
@@ -301,6 +304,7 @@ public class QuestionsFragment extends Fragment {
 
         }
 
+        candidat=quizMessage.getCandidat();
         countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, timerView);
         countDownTimer.start();
         setQuestion(index);
@@ -324,10 +328,8 @@ public class QuestionsFragment extends Fragment {
     public void getTimerMessage(MyEventBus.TimeisOver message) {
 
 
-
-        QuizResult quizResult = new QuizResult("eee@ee.ee",myQuizz.getLevel(),"juju",
-                "jojo",scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
-
+        QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
+                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
 
 
         GlobalBus.getBus().post(new MyEventBus.

@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,12 +19,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.GlobalBus;
+import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.R;
 import ygl.com.yglapp.Utlities.AppUtils;
+
+import static android.view.View.GONE;
 
 
 public class QuizzActivity extends AppCompatActivity {
@@ -39,6 +41,9 @@ public class QuizzActivity extends AppCompatActivity {
     TextView warningTitleView;
     @BindView(R.id.warning_desc_view)
     TextView warningDescView;
+
+    @BindView(R.id.score_layout)
+    LinearLayout scoreLayout;
 
     //SCORE LAYOUT
     @BindView(R.id.back_home_button)
@@ -57,7 +62,7 @@ public class QuizzActivity extends AppCompatActivity {
     //private int quizTotalPoints = 0;
     private boolean quizStarted = false;
     private static int quizindex = 0;
-
+    private Candidat candidat;
 
 
     @Override
@@ -69,6 +74,9 @@ public class QuizzActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle bundle = getIntent().getExtras();
+
+        candidat = (Candidat) bundle.getSerializable("candidat");
 
         checkedquizzGroup = (ArrayList<QuizzGroup>) getIntent().getSerializableExtra("quizgroup");
         quizindex = 0;
@@ -83,13 +91,6 @@ public class QuizzActivity extends AppCompatActivity {
 
 
         setTitle(quiz.getName());
-
-        /*
-        for (int i = 0; i < quiz.getQuestions().size(); i++) {
-
-            quizTotalPoints += quiz.getQuestions().get(i).getWeight();
-
-        }*/
 
         warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
 
@@ -109,7 +110,7 @@ public class QuizzActivity extends AppCompatActivity {
                     quizStarted = true;
 
                     GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().
-                            get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
+                            get(checkedquizzGroup.get(0).getIdcheckedQuiz()),candidat));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                         Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -141,10 +142,9 @@ public class QuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.d("quuu","quuuuuu");
-
                 if (quizindex < checkedquizzGroup.size()) {
-                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz())));
+                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex)
+                            .getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
                         backHomeButton.setText(R.string.back_home);
@@ -191,7 +191,8 @@ public class QuizzActivity extends AppCompatActivity {
     private void startQuizz() {
 
         quizStarted = true;
-        warningLayout.setVisibility(View.GONE);
+        scoreLayout.setVisibility(GONE);
+        warningLayout.setVisibility(GONE);
         getSupportActionBar().hide();
 
     }
@@ -200,6 +201,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void displayScore(QuizResult result ) {
 
+        scoreLayout.setVisibility(View.VISIBLE);
         quizStarted = false;
 
         //double scorePercent = 0;

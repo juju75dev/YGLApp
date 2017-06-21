@@ -23,10 +23,17 @@ public class MyEventBus {
     public static class QuizzReadyMessage {
 
         private Quizz quizz;
+        private Candidat candidat;
 
-        public QuizzReadyMessage(Quizz quizz) {
+        public QuizzReadyMessage(Quizz quizz, Candidat candidat) {
             this.quizz = quizz;
+            this.candidat=candidat;
         }
+
+        public Candidat getCandidat() {
+            return candidat;
+        }
+
 
         public Quizz getQuizz() {
             return quizz;
@@ -71,9 +78,6 @@ public class MyEventBus {
 
         private QuizResult result;
         private int nbFreeQAnswered;
-
-
-
 
         public QuizzOverMessage(QuizResult result, int nbFreeQA/*int score, ArrayList<Question> listFQ, int nbFreeQA, long timeR*/) {
             /*this.score = score;
