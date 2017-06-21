@@ -147,7 +147,10 @@ public class QuizzActivity extends AppCompatActivity {
                             .getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
+
                         backHomeButton.setText(R.string.back_home);
+
+                        showWarning();
                     }
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -157,16 +160,23 @@ public class QuizzActivity extends AppCompatActivity {
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 super.onAnimationEnd(animation);
-                                startQuizz();
-                                quizStarted = true;
+
+
+                                showWarning();
+
+//                                startQuizz();
+//                                quizStarted = true;
                             }
                         });
 
                         anim.start();
                     } else {
 
-                        startQuizz();
-                        quizStarted = true;
+
+                        showWarning();
+
+//                        startQuizz();
+//                        quizStarted = true;
 
                     }
                 } else {
@@ -187,6 +197,13 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showWarning() {
+        warningLayout.setVisibility(View.VISIBLE);
+        getSupportActionBar().show();
+
+    }
+
 
     private void startQuizz() {
 
