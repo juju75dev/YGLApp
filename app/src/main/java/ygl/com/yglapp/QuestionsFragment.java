@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -91,6 +92,10 @@ public class QuestionsFragment extends Fragment {
     private  AlphaAnimation alphaAanimation;
     private int quizTotalPoints = 0;
     private Candidat candidat;
+    private Handler handler;
+    private Runnable runnable;
+
+    private boolean enableValidation=true;
 
 
     @Override
@@ -99,6 +104,16 @@ public class QuestionsFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.question_layout, container, false);
         ButterKnife.bind(this,fragmentView);
+
+
+        handler = new Handler();
+
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                enableValidation=true;
+            }
+        };
 
         listAnswersLibres=new ArrayList<>();
         pairAnswersLibres=new ArrayList<>();
@@ -109,43 +124,52 @@ public class QuestionsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                scrollView.scrollTo(0, 0);
+                if(enableValidation){
 
-                if(myQuizz.getQuestions().get(index).getType()==1){
+                    enableValidation=false;
+                    scrollView.scrollTo(0, 0);
 
-                    InputMethodManager imm = (InputMethodManager)getActivity().
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(editAnswerView.getWindowToken(), 0);
+                    if(myQuizz.getQuestions().get(index).getType()==1){
 
-                }
-                checkAnswer(index);
+                        InputMethodManager imm = (InputMethodManager)getActivity().
+                                getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(editAnswerView.getWindowToken(), 0);
 
-                if (index < myQuizz.getQuestions().size() - 1) {
+                    }
+                    checkAnswer(index);
 
-                    radioGroup.clearCheck();
-                    questionLayout.startAnimation(alphaAanimation);
-                    setQuestion(++index);
+                    if (index < myQuizz.getQuestions().size() - 1) {
 
-                } else {
+                        radioGroup.clearCheck();
+                        questionLayout.startAnimation(alphaAanimation);
+                        setQuestion(++index);
 
-                    //QUIZ TERMINE !!!
+                    } else {
 
-                    QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
-                            candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,
-                            new Date().getTime(),pairAnswersLibres);
+                        //QUIZ TERMINE !!!
 
-                    GlobalBus.getBus().post(new MyEventBus.
-                            QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
+                        QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
+                                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,
+                                new Date().getTime(),pairAnswersLibres);
+
+                        GlobalBus.getBus().post(new MyEventBus.
+                                QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
 
                     /*
                     GlobalBus.getBus().post(new MyEventBus.
                             QuizzOverMessage(score,listAnswersLibres,
                             nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
 
-                    countDownTimer.cancel();
-                    hideFragment();
+                        countDownTimer.cancel();
+                        hideFragment();
+
+                    }
+
+                    // 800 MILI SECONDES DE COOLDOWN POUR EVITER LES DOUBLES CLICK
+                    handler.postDelayed(runnable,600);
 
                 }
+
             }
         });
 
@@ -290,7 +314,6 @@ public class QuestionsFragment extends Fragment {
         }
     }
 
-
     @Subscribe
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
 
@@ -311,7 +334,6 @@ public class QuestionsFragment extends Fragment {
         score=0;
 
     }
-
 
     private double scoreTopercent(long myScore){
 

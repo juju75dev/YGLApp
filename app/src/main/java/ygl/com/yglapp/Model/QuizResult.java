@@ -46,7 +46,6 @@ public class QuizResult {
         this.email = email;
     }
 
-
     public String getLevel() {
         return level;
     }

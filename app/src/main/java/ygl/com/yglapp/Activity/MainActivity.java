@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
                 adapterQuizz.setListQuizzGroup(listQuizGroup);
                 adapterQuizz.setClickCallback(MainActivity.this);
                 adapterQuizz.notifyDataSetChanged();
-
                 fab.setVisibility(View.VISIBLE);
 
                 /*
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.d(TAG, "Failed to read value.", error.toException());
                 quizzProgress.setVisibility(View.GONE);
             }
         });
