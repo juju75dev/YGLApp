@@ -109,8 +109,8 @@ public class QuizzActivity extends AppCompatActivity {
                 if(!quizStarted){
                     quizStarted = true;
 
-                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().
-                            get(checkedquizzGroup.get(0).getIdcheckedQuiz()),candidat));
+                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().
+                            get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                         Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -143,8 +143,8 @@ public class QuizzActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (quizindex < checkedquizzGroup.size()) {
-                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex)
-                            .getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
+//                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex)
+//                            .getListQuiz().get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
 
@@ -153,47 +153,18 @@ public class QuizzActivity extends AppCompatActivity {
                         showWarning();
                     }
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                        Animator anim = AppUtils.initCircularAnim(warningLayout);
-                        anim.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-
-
-                                showWarning();
-
-//                                startQuizz();
-//                                quizStarted = true;
-                            }
-                        });
-
-                        anim.start();
-                    } else {
-
-
-                        showWarning();
-
-//                        startQuizz();
-//                        quizStarted = true;
-
-                    }
                 } else {
                     checkedquizzGroup.clear();
                     finish();
-                    //Intent intent = new Intent(QuizzActivity.this, MainActivity.class);
-                    //startActivity(intent);
-                    // backHomeButton.setText("Retour à l'acceuil");
-//                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    //   finish();
+
                 }
 
 
-                quizindex++;
+               // quizindex++;
 
 
-                // finish();
+
             }
         });
     }
