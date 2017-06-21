@@ -56,6 +56,7 @@ public class QuizzActivity extends AppCompatActivity {
     private static int quizindex = 0;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,29 +100,35 @@ public class QuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 //  GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
-                GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                    Animator anim = AppUtils.initCircularAnim(warningLayout);
-                    anim.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            startQuizz();
-                            quizStarted = true;
-                        }
-                    });
-
-                    anim.start();
-                } else {
-
-                    startQuizz();
+                if(!quizStarted){
                     quizStarted = true;
 
+                    GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz())));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                        Animator anim = AppUtils.initCircularAnim(warningLayout);
+                        anim.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                startQuizz();
+                                //quizStarted = true;
+                            }
+                        });
+
+                        anim.start();
+                    } else {
+
+                        startQuizz();
+                        //quizStarted = true;
+
+                    }
+                    quizindex++;
+
+
                 }
-                quizindex++;
+
             }
         });
 
@@ -203,6 +210,11 @@ public class QuizzActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        quizStarted=false;
+    }
 
     @Override
     public void onStart() {
