@@ -1,5 +1,7 @@
 package ygl.com.yglapp.Injection;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -68,8 +70,14 @@ public class QuizParser {
                     ArrayList<Proposition> listProp = new ArrayList<>();
                     for (DataSnapshot propShot : questionShot.child("propositions").getChildren()) {
 
+                        Log.d("zzzzzz","zzzzz"+propShot.getValue());
+
                         Proposition prop = propShot.getValue(Proposition.class);
                         listProp.add(prop);
+
+                       // Log.d("zzzzzz","zzzzz"+prop.getText()+"//"+prop.getKey()+"//"+prop.getTarget()+"//"+prop.getValue());
+
+
 
                     }
 

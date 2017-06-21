@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     @BindView(R.id.quizz_progress)
     ProgressBar quizzProgress;
 
-
-
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
@@ -104,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
                 adapterQuizz.setClickCallback(MainActivity.this);
                 adapterQuizz.notifyDataSetChanged();
 
+                fab.setVisibility(View.VISIBLE);
+
 
                 /*
                 QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
@@ -128,18 +128,16 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
-                checkedListQuizGroup = new ArrayList<QuizzGroup>();
-                //adapterQuizz.notifyDataSetChanged();
+                checkedListQuizGroup = new ArrayList<>();
+
                 for (QuizzGroup quizgroup : listQuizGroup) {
 
                     if(quizgroup.getIdcheckedQuiz()!=-1){
                         checkedListQuizGroup.add(quizgroup);
-
                     }
                 }
 
                 if(checkedListQuizGroup.size()>0 ){
-
                     intent.putExtra("quizgroup", checkedListQuizGroup);
                     startActivity(intent);
                 }else{
@@ -169,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     @Override
     public void onQuizzGroupClicked(QuizzGroup myQuizzGroup) {
 
-        Toast.makeText(MainActivity.this, "Nbre Quiz : " + myQuizzGroup.getListQuiz().size(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Nbre Quiz : " + myQuizzGroup.getListQuiz().size(), Toast.LENGTH_SHORT).show();
         //Intent intent =new Intent(this,QuizzActivity.class);
         //intent.putExtra("quiz",myQuizzGroup);
         //startActivity(intent);

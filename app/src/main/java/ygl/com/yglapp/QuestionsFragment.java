@@ -6,7 +6,9 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +34,7 @@ import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
 import ygl.com.yglapp.Model.Question;
+import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.Quizz;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.Utlities.AppUtils;
@@ -80,9 +84,11 @@ public class QuestionsFragment extends Fragment {
     private int score = 0;
     private int nbFreeQuestionsAnswered=0;
     private ArrayList<Question> listAnswersLibres;
+    private ArrayList<Pair> pairAnswersLibres;
     private Quizz myQuizz;
     private QuizzGroup quizzGroup;
     private  AlphaAnimation alphaAanimation;
+    private int quizTotalPoints = 0;
 
 
     @Override
@@ -93,6 +99,7 @@ public class QuestionsFragment extends Fragment {
         ButterKnife.bind(this,fragmentView);
 
         listAnswersLibres=new ArrayList<>();
+        pairAnswersLibres=new ArrayList<>();
 
         alphaAanimation= AppUtils.initAlphaAnim();
 
@@ -119,9 +126,19 @@ public class QuestionsFragment extends Fragment {
 
                 } else {
 
+                    //QUIZ TERMINE !!!
+
+                    QuizResult quizResult = new QuizResult("eee",myQuizz.getLevel(),"juju",
+                            "jojo",scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
+
+                    GlobalBus.getBus().post(new MyEventBus.
+                            QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
+
+                    /*
                     GlobalBus.getBus().post(new MyEventBus.
                             QuizzOverMessage(score,listAnswersLibres,
-                            nbFreeQuestionsAnswered,countDownTimer.timeRemaining));
+                            nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
+
                     countDownTimer.cancel();
                     hideFragment();
 
@@ -175,20 +192,25 @@ public class QuestionsFragment extends Fragment {
 
             long questionWeight = question.getWeight();
 
-            if (prop1.isChecked() && propositions.get(0).isCorrectResponse() ||
-                    prop2.isChecked() && propositions.get(1).isCorrectResponse() ||
-                    prop3.isChecked() && propositions.get(2).isCorrectResponse() ||
-                    prop4.isChecked() && propositions.get(3).isCorrectResponse()) {
+            if (prop1.isChecked() && propositions.get(0).getValue()==1 ||
+                    prop2.isChecked() && propositions.get(1).getValue()==1 ||
+                    prop3.isChecked() && propositions.get(2).getValue()==1 ||
+                    prop4.isChecked() && propositions.get(3).getValue()==1) {
 
                 //TRUE ANSWER
                 score += questionWeight;
+                Log.d("score","scorescore"+score);
 
             } else {
+
+
                 //WRONG ANSWER
             }
 
         }else{
             //POUR LE TYPE 1
+
+            Log.d("score","scorescoreYYYY"+score);
             if(!editAnswerView.getText().toString().equals(""))
                 nbFreeQuestionsAnswered++;
 
@@ -196,13 +218,16 @@ public class QuestionsFragment extends Fragment {
 
             Proposition proposition = new Proposition();
             proposition.setText(editAnswerView.getText().toString());
-            proposition.setCorrectResponse(true);
+            proposition.setValue(1);// 1 --> true
             proposition.setKey("0");
             proposition.setTarget("2");
 
             List<Proposition> list = Arrays.asList(proposition);
             questionAnswered.setPropositions(list);
             listAnswersLibres.add(questionAnswered);
+
+            Pair pair = new Pair(question.getText(),editAnswerView.getText().toString());
+            pairAnswersLibres.add(pair);
 
         }
 
@@ -262,23 +287,55 @@ public class QuestionsFragment extends Fragment {
         }
     }
 
+
     @Subscribe
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
 
         getView().setVisibility(View.VISIBLE);
         index=0;
         myQuizz=quizMessage.getQuizz();
+
+        for (int i = 0; i < myQuizz.getQuestions().size(); i++) {
+
+            quizTotalPoints += myQuizz.getQuestions().get(i).getWeight();
+
+        }
+
         countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, timerView);
         countDownTimer.start();
         setQuestion(index);
+        score=0;
 
+    }
+
+
+    private double scoreTopercent(long myScore){
+
+        double scorePercent = 0;
+
+        if (quizTotalPoints > 0 && myScore > 0) {
+            scorePercent = myScore / (((double) quizTotalPoints / 100));
+        }
+
+        return scorePercent;
     }
 
     @Subscribe
     public void getTimerMessage(MyEventBus.TimeisOver message) {
 
+
+
+        QuizResult quizResult = new QuizResult("eee@ee.ee",myQuizz.getLevel(),"juju",
+                "jojo",scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
+
+
+
         GlobalBus.getBus().post(new MyEventBus.
-                QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));
+                QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
+
+        /*
+        GlobalBus.getBus().post(new MyEventBus.
+                QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
         countDownTimer.cancel();
         hideFragment();
 

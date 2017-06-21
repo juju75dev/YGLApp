@@ -12,18 +12,17 @@ public class Proposition implements Serializable {
     private String key;
     private String target;
     private String text;
-    private boolean isCorrectResponse;
+    private long value;
 
     public Proposition() {
     }
 
-
-    public boolean isCorrectResponse() {
-        return isCorrectResponse;
+    public long getValue() {
+        return value;
     }
 
-    public void setCorrectResponse(boolean correctResponse) {
-        isCorrectResponse = correctResponse;
+    public void setValue(long value) {
+        this.value = value;
     }
 
     public String getKey() {

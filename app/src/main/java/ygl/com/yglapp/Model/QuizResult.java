@@ -11,35 +11,26 @@ import java.util.ArrayList;
 public class QuizResult {
 
     private String email;
-    private String id_quiz;
+    //private String id_quiz;
     private String level;
     private String nom;
     private String prenom;
-    private double score_qcm;
+    private double score;
     private String subject;
     private long time_remaining;
     private long timestamp;
     private ArrayList<Pair> freeAnswers;
 
-    private static final QuizResult ourInstance = new QuizResult();
-
-    public static QuizResult getInstance() {
-        return ourInstance;
-    }
-
-    public QuizResult() {
-    }
-
-    public QuizResult(String email, String id_quiz, String level, String nom,
-                      String prenom, long score_qcm, String subject, long time_remaining,
+    public QuizResult(String email, String level, String nom,
+                      String prenom, double score_qcm, String subject, long time_remaining,
                       long timestamp, ArrayList<Pair> freeAnswers) {
 
         this.email = email;
-        this.id_quiz = id_quiz;
+        //this.id_quiz = id_quiz;
         this.level = level;
         this.nom = nom;
         this.prenom = prenom;
-        this.score_qcm = score_qcm;
+        this.score = score_qcm;
         this.subject = subject;
         this.time_remaining = time_remaining;
         this.timestamp = timestamp;
@@ -55,13 +46,6 @@ public class QuizResult {
         this.email = email;
     }
 
-    public String getId_quiz() {
-        return id_quiz;
-    }
-
-    public void setId_quiz(String id_quiz) {
-        this.id_quiz = id_quiz;
-    }
 
     public String getLevel() {
         return level;
@@ -87,12 +71,12 @@ public class QuizResult {
         this.prenom = prenom;
     }
 
-    public double getScore_qcm() {
-        return score_qcm;
+    public double getScore() {
+        return score;
     }
 
-    public void setScore_qcm(double score_qcm) {
-        this.score_qcm = score_qcm;
+    public void setScore(double score_qcm) {
+        this.score = score_qcm;
     }
 
     public String getSubject() {

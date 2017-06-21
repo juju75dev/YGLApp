@@ -63,10 +63,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
         RadioButton radiobutton;
 
-
         final int fPosition = position;
-
-
 
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
@@ -87,10 +84,6 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                     if (isChecked) {
 
                         listQuizzGroup.get(fPosition).setIdcheckedQuiz(fIndex);
-
-                    }else{
-
-                        listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
 
                     }
                 }
@@ -128,7 +121,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 } else {
                     radioGroup.setVisibility(View.GONE);
                     listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
-                    //if (checkedQuiz.size() != 0)
+                    radioGroup.clearCheck();
                     quizzGroup.setChecked(false);
                     listQuizzresult.remove(position);
 
