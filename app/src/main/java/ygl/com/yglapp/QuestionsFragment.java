@@ -140,7 +140,6 @@ public class QuestionsFragment extends Fragment {
 
                     if (index < myQuizz.getQuestions().size() - 1) {
 
-                        radioGroup.clearCheck();
                         questionLayout.startAnimation(alphaAanimation);
                         setQuestion(++index);
 
@@ -179,6 +178,7 @@ public class QuestionsFragment extends Fragment {
 
     private void setQuestion(int position) {
 
+        radioGroup.clearCheck();
         question = myQuizz.getQuestions().get(position);
         question_text.setText(String.valueOf(index+1)+" - "+question.getText());
         enonce_text.setText(question.getEnonce());
@@ -319,6 +319,7 @@ public class QuestionsFragment extends Fragment {
 
         getView().setVisibility(View.VISIBLE);
         index=0;
+        quizTotalPoints=0;
         myQuizz=quizMessage.getQuizz();
 
         for (int i = 0; i < myQuizz.getQuestions().size(); i++) {
@@ -326,6 +327,8 @@ public class QuestionsFragment extends Fragment {
             quizTotalPoints += myQuizz.getQuestions().get(i).getWeight();
 
         }
+
+        Log.d("scccc","scccccc"+quizTotalPoints);
 
         candidat=quizMessage.getCandidat();
         countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, timerView);

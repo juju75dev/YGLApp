@@ -48,14 +48,14 @@ public class QuizzActivity extends AppCompatActivity {
     //SCORE LAYOUT
     @BindView(R.id.back_home_button)
     Button backHomeButton;
-    @BindView(R.id.score_quiz_name_view)
-    TextView scoreQuizzNameView;
-    @BindView(R.id.score_time_left)
-    TextView scoreTimeView;
-    @BindView(R.id.score_view)
-    TextView scoreView;
-    @BindView(R.id.score_questions_free_view)
-    TextView scoreQuestionsFreeView;
+    //@BindView(R.id.score_quiz_name_view)
+    //TextView scoreQuizzNameView;
+    //@BindView(R.id.score_time_left)
+    //TextView scoreTimeView;
+    //@BindView(R.id.score_view)
+    //TextView scoreView;
+    //@BindView(R.id.score_questions_free_view)
+    //TextView scoreQuestionsFreeView;
 
     private Quizz quiz;
     ArrayList<QuizzGroup> checkedquizzGroup;
@@ -80,18 +80,10 @@ public class QuizzActivity extends AppCompatActivity {
         checkedquizzGroup = (ArrayList<QuizzGroup>) getIntent().getSerializableExtra("quizgroup");
 
         quizindex = 0;
-        if (quizindex < checkedquizzGroup.size() - 1) {
-            backHomeButton.setText(R.string.next_question_test);
-
-        } else
-            backHomeButton.setText(R.string.back_home);
-
 
         quiz = checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz());
 
-
         setWarningText(0);
-
 
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,19 +126,14 @@ public class QuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (quizindex < checkedquizzGroup.size()) {
-
-
-                    if (quizindex == checkedquizzGroup.size() - 1) {
-
-                        backHomeButton.setText(R.string.back_home);
+               if (quizindex < checkedquizzGroup.size()) {
 
                         showWarning();
                         setWarningText(quizindex);
-                    }
 
 
                 } else {
+
                     checkedquizzGroup.clear();
                     finish();
 
@@ -196,12 +183,18 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void displayScore(QuizResult result ) {
 
+        if(quizindex == checkedquizzGroup.size()){
+            backHomeButton.setText(R.string.back_home);
+        }else{
+
+            backHomeButton.setText(R.string.next_question_test);
+        }
         scoreLayout.setVisibility(View.VISIBLE);
         quizStarted = false;
 
-        scoreView.setText("Score Qcm : " + result.getScore() + "%");
-        scoreQuizzNameView.setText(quiz.getName());
-        scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(result.getTime_remaining()));
+        //scoreView.setText("Score Qcm : " + result.getScore() + "%");
+        //scoreQuizzNameView.setText(quiz.getName());
+        //scoreTimeView.setText(AppUtils.getFormatedTimeRemaining(result.getTime_remaining()));
 
     }
 
