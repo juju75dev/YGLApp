@@ -70,6 +70,16 @@
         android:textStyle="bold"
         android:padding="15dp"/>
 
+        <TextView
+        android:id="@+id/score_time_left"
+        android:textSize="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="30dp"/>
+
     -->
 
 
