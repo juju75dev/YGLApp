@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
 
                 quizzProgress.setVisibility(View.GONE);
 
-                listQuizGroup= firebaseParser.quizParsing(dataSnapshot);
+                listQuizGroup = firebaseParser.quizParsing(dataSnapshot);
                 adapterQuizz.setListQuizzGroup(listQuizGroup);
                 adapterQuizz.setClickCallback(MainActivity.this);
                 adapterQuizz.notifyDataSetChanged();
@@ -111,21 +111,24 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, QuizzActivity.class);
-                intent.putExtra("candidat",candidat);
+                intent.putExtra("candidat", candidat);
 
                 checkedListQuizGroup = new ArrayList<>();
 
                 for (QuizzGroup quizgroup : listQuizGroup) {
 
-                    if(quizgroup.getIdcheckedQuiz()!=-1){
+                    if (quizgroup.getIdcheckedQuiz() != -1) {
                         checkedListQuizGroup.add(quizgroup);
                     }
                 }
 
-                if(checkedListQuizGroup.size()>0 ){
+
+                if (checkedListQuizGroup.size() > 0 && checkedListQuizGroup.size() < 4) {
                     intent.putExtra("quizgroup", checkedListQuizGroup);
                     startActivity(intent);
-                }else{
+                } else if (checkedListQuizGroup.size() > 3) {
+                    Toast.makeText(MainActivity.this, "Le nombre maximum de Quiz est 3", Toast.LENGTH_SHORT).show();
+                } else {
 
                     Toast.makeText(MainActivity.this, "Veuillez sélectionner un niveau", Toast.LENGTH_SHORT).show();
 
@@ -136,11 +139,11 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
 
     }
 
-    private void sendResultsToFirebase(ArrayList<QuizResult> listResults){
+    private void sendResultsToFirebase(ArrayList<QuizResult> listResults) {
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        for(int i=0;i<listResults.size();i++){
+        for (int i = 0; i < listResults.size(); i++) {
 
             String postId = mDatabase.push().getKey();
             mDatabase.child("Historic").child(postId).setValue(listResults.get(i));

@@ -162,7 +162,7 @@ public class QuizzActivity extends AppCompatActivity {
         quiz = checkedquizzGroup.get(i).getListQuiz().get(checkedquizzGroup.get(i).getIdcheckedQuiz());
         setTitle(quiz.getName());
 
-        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
+        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName()+ "\nNiveau: "+quiz.getLevel());
 
         warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
                 "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
@@ -237,9 +237,9 @@ public class QuizzActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!quizStarted) {
-            super.onBackPressed();
-        }
+//        if (!quizStarted) {
+//            super.onBackPressed();
+//        }
 
     }
 
