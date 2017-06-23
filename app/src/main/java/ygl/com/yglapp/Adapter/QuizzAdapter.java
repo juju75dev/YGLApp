@@ -129,7 +129,6 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
             }
         });
 
-
         titleView.setText(quizzGroup.getName());
 
         StorageReference imageRef =  FirebaseStorage.getInstance().

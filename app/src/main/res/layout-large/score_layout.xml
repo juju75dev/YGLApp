@@ -22,7 +22,9 @@
         android:scaleType="centerInside"
         android:src="@drawable/done_logo_big"/>
 
-    <TextView
+    <!--
+
+     <TextView
         android:id="@+id/score_quiz_name_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,15 +56,8 @@
         android:text="Réponses questions libres : 5"
         android:padding="30dp"/>
 
-    <TextView
-        android:id="@+id/score_time_left"
-        android:textSize="26dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:padding="30dp"/>
+    -->
+
 
 
     <TextView
