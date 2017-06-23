@@ -79,13 +79,8 @@ public class QuizzActivity extends AppCompatActivity {
         candidat = (Candidat) bundle.getSerializable("candidat");
         checkedquizzGroup = (ArrayList<QuizzGroup>) getIntent().getSerializableExtra("quizgroup");
 
-        quizindex = 0;
-        if (quizindex < checkedquizzGroup.size() - 1) {
-            backHomeButton.setText(R.string.next_question_test);
 
-        } else
-            backHomeButton.setText(R.string.back_home);
-
+        backHomeButton.setText(R.string.next_question_test);
 
         quiz = checkedquizzGroup.get(0).getListQuiz().get(checkedquizzGroup.get(0).getIdcheckedQuiz());
 
@@ -98,11 +93,11 @@ public class QuizzActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //  GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
-                if(!quizStarted){
+                if (!quizStarted) {
                     quizStarted = true;
 
                     GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().
-                            get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
+                            get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()), candidat));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                         Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -136,13 +131,14 @@ public class QuizzActivity extends AppCompatActivity {
 
                 if (quizindex < checkedquizzGroup.size()) {
 
+                    showWarning();
+                    setWarningText(quizindex);
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
 
                         backHomeButton.setText(R.string.back_home);
 
-                        showWarning();
-                        setWarningText(quizindex);
+
                     }
 
 
@@ -151,11 +147,6 @@ public class QuizzActivity extends AppCompatActivity {
                     finish();
 
                 }
-
-
-               // quizindex++;
-
-
 
             }
         });
@@ -194,7 +185,7 @@ public class QuizzActivity extends AppCompatActivity {
     }
 
 
-    private void displayScore(QuizResult result ) {
+    private void displayScore(QuizResult result) {
 
         scoreLayout.setVisibility(View.VISIBLE);
         quizStarted = false;
@@ -205,7 +196,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     }
 
-    private void sendResultsToFirebase(QuizResult result){
+    private void sendResultsToFirebase(QuizResult result) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Historic");
@@ -218,7 +209,7 @@ public class QuizzActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        quizStarted=false;
+        quizStarted = false;
     }
 
     @Override
