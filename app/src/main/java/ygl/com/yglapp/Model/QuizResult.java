@@ -19,11 +19,14 @@ public class QuizResult {
     private long time_remaining;
     private long timestamp;
     //private String id_quiz;
+    private ArrayList<QCMResultDetails> qcmDetails;
     private ArrayList<Pair> freeAnswers;
 
-    public QuizResult(String email, String level,  String prenom,String nom,
+
+
+    public QuizResult(String email, String level, String prenom, String nom,
                       double score_qcm, String subject, long time_remaining,
-                      long timestamp, ArrayList<Pair> freeAnswers) {
+                      long timestamp, ArrayList<Pair> freeAnswers, ArrayList<QCMResultDetails> qcmDetails) {
 
         this.email = email;
         //this.id_quiz = id_quiz;
@@ -35,7 +38,17 @@ public class QuizResult {
         this.time_remaining = time_remaining;
         this.timestamp = timestamp;
         this.freeAnswers = freeAnswers;
+        this.qcmDetails = qcmDetails;
 
+
+    }
+
+    public ArrayList<QCMResultDetails> getQcmDetails() {
+        return qcmDetails;
+    }
+
+    public void setQcmDetails(ArrayList<QCMResultDetails> qcmDetails) {
+        this.qcmDetails = qcmDetails;
     }
 
     public String getEmail() {

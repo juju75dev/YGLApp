@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     android:padding="20dp"
     tools:context="ygl.com.yglapp.Activity.LoginActivityExample">
 
@@ -13,7 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:src="@drawable/ygl_drawable"
+        android:src="@drawable/ygl_logo_white"
         android:scaleType="centerInside"/>
 
 
