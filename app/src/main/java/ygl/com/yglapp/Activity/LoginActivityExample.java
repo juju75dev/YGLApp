@@ -22,6 +22,7 @@ import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
@@ -100,6 +101,11 @@ public class LoginActivityExample extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Subscribe

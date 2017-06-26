@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/score_layout"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:layout_height="match_parent">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/test_is_over"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
-        android:textStyle="bold"
-        android:text="@string/test_is_over"
-        android:padding="15dp"/>
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:padding="15dp"
-        android:src="@drawable/done_logo"/>
-
+        android:textStyle="bold" />
 
 
     <!--
@@ -84,34 +77,34 @@
 
 
     <TextView
-        android:textSize="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/thanks"/>
+        android:text="@string/thanks"
+        android:textColor="@android:color/white"
+        android:textSize="14dp" />
 
 
     <TextView
-        android:textSize="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/details_sended"/>
+        android:text="@string/details_sended"
+        android:textColor="@android:color/white"
+        android:textSize="14dp" />
 
 
     <Button
         android:id="@+id/back_home_button"
-        android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/validate_selector"
         android:padding="5dp"
-        android:background="@drawable/button_selector"
-        android:textColor="@android:color/white"
-        android:text="@string/go_back_home"/>
-<!-- android:background="@drawable/button_ripple"-->
+        android:text="@string/end"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
+    <!-- android:background="@drawable/button_ripple"-->
 </LinearLayout>

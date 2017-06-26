@@ -69,8 +69,8 @@ public class QuestionsFragment extends Fragment {
 //    CardView cardEditAnswerView;
     @BindView(R.id.edit_answer_view)
     EditText editAnswerView;
-    @BindView(R.id.card_radio_group)
-    CardView cardRadioGroup;
+    @BindView(R.id.radio_group_layout)
+    LinearLayout cardRadioGroup;
     @BindView(R.id.timer_view)
     TextView timerView;
     @BindView(R.id.questions_counter_view)

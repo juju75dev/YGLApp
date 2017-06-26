@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp"
@@ -13,42 +14,46 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:src="@drawable/ygl_drawable"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:src="@drawable/ygl_drawable" />
 
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
             <AutoCompleteTextView
                 android:id="@+id/pseudo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YGL"
+                fontPath="fonts/tahoma.ttf"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="YGL" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+
                 android:imeActionId="@+id/login"
                 android:imeActionLabel="signer pas"
                 android:imeOptions="actionUnspecified"
@@ -60,13 +65,13 @@
 
         <Button
             android:id="@+id/sign_in_button"
-            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@android:color/white"
             android:background="@drawable/button_selector"
             android:text="Se connecter"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
 
@@ -79,13 +84,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 
     <fragment
-        android:name="ygl.com.yglapp.FormCandidatFragment"
         android:id="@+id/form_candidat_fragment"
+        android:name="ygl.com.yglapp.FormCandidatFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 

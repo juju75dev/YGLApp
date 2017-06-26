@@ -1,5 +1,6 @@
 package ygl.com.yglapp.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
 import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
 import ygl.com.yglapp.Injection.QuizParser;
@@ -139,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
 
     }
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     private void sendResultsToFirebase(ArrayList<QuizResult> listResults) {
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

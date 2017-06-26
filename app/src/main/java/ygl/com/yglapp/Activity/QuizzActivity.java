@@ -2,6 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import ygl.com.yglapp.GlobalBus;
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
@@ -135,16 +137,18 @@ public class QuizzActivity extends AppCompatActivity {
 
                     if (quizindex == checkedquizzGroup.size() - 1) {
 
-                        backHomeButton.setText(R.string.back_home);
+                        backHomeButton.setText(R.string.end);
 
 
                     }
 
 
-                } else {
+                }
+                else {
 
                     checkedquizzGroup.clear();
                     finish();
+                    moveTaskToBack(true);
 
                 }
 
@@ -154,6 +158,11 @@ public class QuizzActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     private void setWarningText(int i) {
@@ -192,7 +201,7 @@ public class QuizzActivity extends AppCompatActivity {
     private void displayScore(QuizResult result) {
 
         if (quizindex == checkedquizzGroup.size()) {
-            backHomeButton.setText(R.string.back_home);
+            backHomeButton.setText(R.string.end);
         } else {
 
             backHomeButton.setText(R.string.next_question_test);
@@ -210,7 +219,6 @@ public class QuizzActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Historic");
-
         String postId = refQuiz.push().getKey();
         refQuiz.child(postId).setValue(result);
 
