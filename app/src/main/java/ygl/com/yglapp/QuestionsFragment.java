@@ -22,19 +22,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.squareup.otto.Subscribe;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
+import ygl.com.yglapp.Model.QCMResultDetails;
 import ygl.com.yglapp.Model.Question;
 import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.Quizz;
@@ -86,6 +84,7 @@ public class QuestionsFragment extends Fragment {
     private int score = 0;
     private int nbFreeQuestionsAnswered=0;
     private ArrayList<Question> listAnswersLibres;
+    private ArrayList<QCMResultDetails> listQCMResultsDetails;
     private ArrayList<Pair> pairAnswersLibres;
     private Quizz myQuizz;
     private QuizzGroup quizzGroup;
@@ -94,7 +93,6 @@ public class QuestionsFragment extends Fragment {
     private Candidat candidat;
     private Handler handler;
     private Runnable runnable;
-
     private boolean enableValidation=true;
 
 
@@ -107,6 +105,7 @@ public class QuestionsFragment extends Fragment {
 
 
         handler = new Handler();
+
 
         runnable = new Runnable() {
             @Override
@@ -149,7 +148,7 @@ public class QuestionsFragment extends Fragment {
 
                         QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
                                 candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,
-                                new Date().getTime(),pairAnswersLibres);
+                                new Date().getTime(),pairAnswersLibres,listQCMResultsDetails);
 
                         GlobalBus.getBus().post(new MyEventBus.
                                 QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
@@ -219,20 +218,115 @@ public class QuestionsFragment extends Fragment {
 
             long questionWeight = question.getWeight();
 
-            if (prop1.isChecked() && propositions.get(0).getValue()==1 ||
+            String realAnswer="";
+
+            for(int i=0;i<4;i++){
+
+                if(propositions.get(i).getValue()==1){
+
+                    realAnswer=propositions.get(i).getText();
+                }
+
+            }
+
+            if(prop1.isChecked()){
+
+                QCMResultDetails details;
+
+                if(propositions.get(0).getValue()==1){
+
+                    score += questionWeight;
+                    details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop1.getText().toString(),realAnswer,true);
+
+                }else{
+
+                    details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop1.getText().toString(),realAnswer,false);
+                }
+
+                listQCMResultsDetails.add(details);
+
+
+
+            }else if(prop2.isChecked()){
+
+                QCMResultDetails details;
+                if(propositions.get(1).getValue()==1){
+                    score += questionWeight;
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop2.getText().toString(),realAnswer,true);
+
+                }else{
+
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop2.getText().toString(),realAnswer,false);
+                }
+
+                listQCMResultsDetails.add(details);
+
+
+
+            }else if(prop3.isChecked() && propositions.get(2).getValue()==1 ){
+
+                QCMResultDetails details;
+                if(propositions.get(2).getValue()==1 ){
+
+                    score += questionWeight;
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop3.getText().toString(),realAnswer,true);
+
+                }else{
+
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop3.getText().toString(),realAnswer,false);
+                }
+
+                listQCMResultsDetails.add(details);
+
+
+            }else if(prop4.isChecked()){
+                QCMResultDetails details;
+                if(propositions.get(3).getValue()==1){
+
+                    score += questionWeight;
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop4.getText().toString(),realAnswer,true);
+
+                }else{
+
+                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                            prop4.getText().toString(),realAnswer,false);
+
+                }
+
+                listQCMResultsDetails.add(details);
+
+            }else{
+
+                //NO ANSWER CHECKED
+                QCMResultDetails details = new QCMResultDetails(question.getText(),question.getEnonce(),
+                        "Pas de réponse",realAnswer,false);
+
+                listQCMResultsDetails.add(details);
+
+            }
+
+           /* if (prop1.isChecked() && propositions.get(0).getValue()==1 ||
                     prop2.isChecked() && propositions.get(1).getValue()==1 ||
                     prop3.isChecked() && propositions.get(2).getValue()==1 ||
                     prop4.isChecked() && propositions.get(3).getValue()==1) {
 
                 //TRUE ANSWER
-                score += questionWeight;
+
+               // QCMResultDetails details = new QCMResultDetails(question.getText(),question.getEnonce());
                 Log.d("score","scorescore"+score);
 
             } else {
 
 
                 //WRONG ANSWER
-            }
+            }*/
 
         }else{
             //POUR LE TYPE 1
@@ -321,6 +415,7 @@ public class QuestionsFragment extends Fragment {
         index=0;
         quizTotalPoints=0;
         myQuizz=quizMessage.getQuizz();
+        listQCMResultsDetails=new ArrayList<>();
 
         for (int i = 0; i < myQuizz.getQuestions().size(); i++) {
 
@@ -354,7 +449,8 @@ public class QuestionsFragment extends Fragment {
 
 
         QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
-                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres);
+                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),
+                countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres,listQCMResultsDetails);
 
 
         GlobalBus.getBus().post(new MyEventBus.

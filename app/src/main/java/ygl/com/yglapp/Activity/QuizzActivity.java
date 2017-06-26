@@ -124,6 +124,7 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
+        
         backHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
