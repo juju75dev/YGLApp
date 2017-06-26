@@ -29,5 +29,6 @@
     <string name="next_question_test">Passer le test suivant</string>
     <string name="quiz_selection">Sélection Tests</string>
     <string name="back_home">Retour à l\'acceuil</string>
+    <string name="end">Terminer</string>
 
 </resources>

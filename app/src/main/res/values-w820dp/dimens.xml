@@ -4,6 +4,7 @@
     <dimen name="textsize">30dp</dimen>
     <dimen name="cardviewsize">300dp</dimen>
     <dimen name="cardview_size_enonce">400dp</dimen>
+    <dimen name="cardview_size_prop">400dp</dimen>
 
 
 </resources>

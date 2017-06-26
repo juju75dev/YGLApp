@@ -38,7 +38,7 @@ public class AppUtils {
         }
 
 
-        return "Temps restant : "+ minuString+"min : "+seconString+"sec";
+        return  minuString+" : "+seconString;
     }
 
     public static Animator initCircularAnim(View view){

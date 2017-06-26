@@ -5,6 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <!--<dimen name="cardviewsize">300dp</dimen>-->
     <dimen name="cardview_size_enonce">200dp</dimen>
+    <dimen name="cardview_size_prop">200dp</dimen>
 
 
 </resources>
