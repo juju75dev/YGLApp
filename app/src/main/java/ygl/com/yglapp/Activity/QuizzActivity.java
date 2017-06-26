@@ -90,11 +90,11 @@ public class QuizzActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //  GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
-                if(!quizStarted){
+                if (!quizStarted) {
                     quizStarted = true;
 
                     GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(checkedquizzGroup.get(quizindex).getListQuiz().
-                            get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()),candidat));
+                            get(checkedquizzGroup.get(quizindex).getIdcheckedQuiz()), candidat));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                         Animator anim = AppUtils.initCircularAnim(warningLayout);
@@ -127,10 +127,19 @@ public class QuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               if (quizindex < checkedquizzGroup.size()) {
+                if (quizindex < checkedquizzGroup.size()) {
 
-                        showWarning();
-                        setWarningText(quizindex);
+                    showWarning();
+                    setWarningText(quizindex);
+                    showWarning();
+                    setWarningText(quizindex);
+
+                    if (quizindex == checkedquizzGroup.size() - 1) {
+
+                        backHomeButton.setText(R.string.back_home);
+
+
+                    }
 
 
                 } else {
@@ -141,8 +150,7 @@ public class QuizzActivity extends AppCompatActivity {
                 }
 
 
-               // quizindex++;
-
+                // quizindex++;
 
 
             }
@@ -154,7 +162,7 @@ public class QuizzActivity extends AppCompatActivity {
         quiz = checkedquizzGroup.get(i).getListQuiz().get(checkedquizzGroup.get(i).getIdcheckedQuiz());
         setTitle(quiz.getName());
 
-        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName());
+        warningTitleView.setText(getString(R.string.you_choose) + " : " + quiz.getName() + "\nNiveau: " + quiz.getLevel());
 
         warningDescView.setText("- " + getString(R.string.questions_number) + " : " + quiz.getQuestions().size() +
                 "\n\n- " + getString(R.string.duration) + " : " + quiz.getDuration() + "min" +
@@ -182,11 +190,11 @@ public class QuizzActivity extends AppCompatActivity {
     }
 
 
-    private void displayScore(QuizResult result ) {
+    private void displayScore(QuizResult result) {
 
-        if(quizindex == checkedquizzGroup.size()){
+        if (quizindex == checkedquizzGroup.size()) {
             backHomeButton.setText(R.string.back_home);
-        }else{
+        } else {
 
             backHomeButton.setText(R.string.next_question_test);
         }
@@ -199,7 +207,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     }
 
-    private void sendResultsToFirebase(QuizResult result){
+    private void sendResultsToFirebase(QuizResult result) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refQuiz = database.getReference("Historic");
@@ -212,7 +220,7 @@ public class QuizzActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        quizStarted=false;
+        quizStarted = false;
     }
 
     @Override
@@ -229,7 +237,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!quizStarted) {
+        if (quizindex < 1) {
             super.onBackPressed();
         }
 
