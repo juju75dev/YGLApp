@@ -6,7 +6,6 @@
     android:background="@color/colorPrimary"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
     android:padding="20dp"
     tools:context="ygl.com.yglapp.Activity.LoginActivityExample">
 
