@@ -3,6 +3,7 @@ package ygl.com.yglapp.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -124,7 +125,7 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-        
+
         backHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,12 +145,13 @@ public class QuizzActivity extends AppCompatActivity {
                     }
 
 
-                }
-                else {
+                } else {
 
                     checkedquizzGroup.clear();
-                    finish();
-                    moveTaskToBack(true);
+                    Intent intent = new Intent(QuizzActivity.this, CloseActivity.class);
+//Clear all activities and start new task
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
 
                 }
 
