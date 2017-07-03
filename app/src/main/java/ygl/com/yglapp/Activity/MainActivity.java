@@ -2,6 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -41,15 +42,17 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     RecyclerView myRecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.quizz_progress)
-    ProgressBar quizzProgress;
+    //@BindView(R.id.quizz_progress)
+    //ProgressBar quizzProgress;
+    @BindView(R.id.image_view_loader)
+    ImageView logoView;
 
     private LinearLayoutManager recyclerViewManager;
     private String TAG = "firebasssse";
     private ArrayList<QuizzGroup> listQuizGroup;
     private ArrayList<QuizzGroup> checkedListQuizGroup;
     private Candidat candidat;
-
+    private AnimationDrawable frameAnimation;
 
     @Inject
     QuizParser firebaseParser;
@@ -61,14 +64,23 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        // Load the ImageView that will host the animation and
+        // set its background to our AnimationDrawable XML resource.
+        logoView.setBackgroundResource(R.drawable.animation_logo);
+
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        frameAnimation = (AnimationDrawable) logoView.getBackground();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.start();
 
         Bundle bundle = getIntent().getExtras();
         candidat = (Candidat) bundle.getSerializable("candidat");
 
         QuizParsingComponent component = DaggerQuizParsingComponent.builder().build();
         component.inject(this);
-
-        ButterKnife.bind(this);
 
         getSupportActionBar().setTitle(getString(R.string.quiz_selection));
 
@@ -82,8 +94,9 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                quizzProgress.setVisibility(View.GONE);
-
+                //quizzProgress.setVisibility(View.GONE);
+                frameAnimation.stop();
+                logoView.setVisibility(View.GONE);
                 listQuizGroup = firebaseParser.quizParsing(dataSnapshot);
                 adapterQuizz.setListQuizzGroup(listQuizGroup);
                 adapterQuizz.setClickCallback(MainActivity.this);
@@ -100,7 +113,9 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.d(TAG, "Failed to read value.", error.toException());
-                quizzProgress.setVisibility(View.GONE);
+                //quizzProgress.setVisibility(View.GONE);
+                logoView.getAnimation().cancel();
+                logoView.setVisibility(View.GONE);
             }
         });
 
