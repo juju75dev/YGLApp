@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/ygl_background</item>
+
 
     </style>
 
@@ -13,8 +15,14 @@
         <!--<item name="android:checkMark">@mipmap/checkbox_not_checked</item>-->
     <!--</style>-->
 
+    <style name="LoginTheme" parent="AppTheme.NoActionBar">
+        <item name="colorControlNormal">#FFF</item>
+
+    </style>
+
     <style name="QuizzTheme" parent="AppTheme">
         <item name="windowActionBarOverlay">true</item>
+
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -34,6 +42,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

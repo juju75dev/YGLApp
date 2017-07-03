@@ -2,6 +2,7 @@ package ygl.com.yglapp.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,8 +39,12 @@ public class LoginActivityExample extends AppCompatActivity {
     EditText editMail;
     @BindView(R.id.login_form)
     LinearLayout loginForm;
-    @BindView(R.id.login_progress)
-    ProgressBar progressBar;
+    //@BindView(R.id.login_progress)
+    //ProgressBar progressBar;
+    @BindView(R.id.image_view_loader)
+    ImageView loader;
+
+    private AnimationDrawable frameAnimation;
 
     private FirebaseAuth mAuth;
 
@@ -48,6 +53,9 @@ public class LoginActivityExample extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connexion_layout_example);
         ButterKnife.bind(this);
+
+        loader.setBackgroundResource(R.drawable.animation_logo);
+        frameAnimation = (AnimationDrawable) loader.getBackground();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,14 +69,17 @@ public class LoginActivityExample extends AppCompatActivity {
 
                 if (!editPassword.getText().toString().equals("")  && !editMail.getText().toString().equals("")) {
 
-                    progressBar.setVisibility(View.VISIBLE);
+                    loader.setVisibility(View.VISIBLE);
+                    frameAnimation.start();
+
                     mAuth.signInWithEmailAndPassword(editMail.getText().toString()
                             , editPassword.getText().toString())
                             .addOnCompleteListener(LoginActivityExample.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                    progressBar.setVisibility(View.GONE);
+                                    frameAnimation.stop();
+                                    loader.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         GlobalBus.getBus().post(new MyEventBus.LoginSuccessMessage());

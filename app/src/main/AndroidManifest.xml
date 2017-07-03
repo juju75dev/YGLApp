@@ -42,7 +42,7 @@
             android:name=".Activity.LoginActivityExample"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_login_example"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/LoginTheme"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"></activity>
     </application>

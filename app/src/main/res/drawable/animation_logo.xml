@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Animation frames are wheel0.png through wheel5.png
+    files inside the res/drawable/ folder -->
+<animation-list android:id="@+id/selected"
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/animop" android:duration="70" />
+    <item android:drawable="@drawable/animop1" android:duration="70" />
+    <item android:drawable="@drawable/animop2" android:duration="70" />
+    <item android:drawable="@drawable/animop3" android:duration="70" />
+    <item android:drawable="@drawable/animop4" android:duration="70" />
+    <item android:drawable="@drawable/animop5" android:duration="70" />
+    <item android:drawable="@drawable/animop6" android:duration="70" />
+    <item android:drawable="@drawable/animop7" android:duration="70" />
+    <item android:drawable="@drawable/animop8" android:duration="70" />
+    <item android:drawable="@drawable/animop9" android:duration="70" />
+    <item android:drawable="@drawable/animop10" android:duration="70" />
+    <item android:drawable="@drawable/animop11" android:duration="70" />
+    <item android:drawable="@drawable/animop12" android:duration="70" />
+    <item android:drawable="@drawable/animop11" android:duration="40" />
+    <item android:drawable="@drawable/animop10" android:duration="40" />
+    <item android:drawable="@drawable/animop9" android:duration="40" />
+    <item android:drawable="@drawable/animop8" android:duration="40" />
+    <item android:drawable="@drawable/animop7" android:duration="40" />
+    <item android:drawable="@drawable/animop6" android:duration="40" />
+    <item android:drawable="@drawable/animop5" android:duration="40" />
+    <item android:drawable="@drawable/animop4" android:duration="40" />
+    <item android:drawable="@drawable/animop3" android:duration="40" />
+    <item android:drawable="@drawable/animop2" android:duration="40" />
+    <item android:drawable="@drawable/animop1" android:duration="40" />
+</animation-list>

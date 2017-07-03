@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/ygl_background"
     android:id="@+id/warning_layout"
     android:layout_marginTop="?attr/actionBarSize"
     android:gravity="center_horizontal"

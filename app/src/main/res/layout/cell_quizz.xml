@@ -21,6 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Nom du Quizz"
+            android:textSize="18dp"
+            fontPath="fonts/tahoma.ttf"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
