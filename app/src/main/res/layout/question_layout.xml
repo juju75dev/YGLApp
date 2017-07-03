@@ -3,19 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ygl_background"
+    xmlns:timer="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/timer_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
 
-        android:background="@drawable/time_shape"
-        android:textColor="@android:color/black"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"/>
+
+        <io.github.krtkush.lineartimer.LinearTimerView
+            android:id="@+id/timer_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            timer:radius="50dp"
+            timer:strokeWidth="2dp"
+            timer:startingPoint="270"
+            timer:initialColor="@color/colorPrimary"
+            timer:progressColor="@color/colorInitial"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/timer_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="10dp"-->
+
+        <!--android:background="@drawable/time_shape"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="16dp"-->
+        <!--android:textStyle="bold" />-->
 
     <LinearLayout
         android:id="@+id/question_layout"
@@ -128,6 +159,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="vertical">
 
 

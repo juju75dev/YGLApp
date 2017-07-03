@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.otto.Subscribe;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.krtkush.lineartimer.LinearTimer;
+import io.github.krtkush.lineartimer.LinearTimerView;
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
@@ -43,7 +51,7 @@ import ygl.com.yglapp.Utlities.AppUtils;
  * Created by juju on 09/06/2017.
  */
 
-public class QuestionsFragment extends Fragment {
+public class QuestionsFragment extends Fragment implements LinearTimer.TimerListener {
 
     @BindView(R.id.validate)
     Button validate;
@@ -63,37 +71,45 @@ public class QuestionsFragment extends Fragment {
     ScrollView scrollView;
     @BindView(R.id.question_layout)
     LinearLayout questionLayout;
-//    @BindView(R.id.card_edit_answer_view)
+    //    @BindView(R.id.card_edit_answer_view)
 //    CardView cardEditAnswerView;
     @BindView(R.id.edit_answer_view)
     EditText editAnswerView;
     @BindView(R.id.radio_group_layout)
     LinearLayout cardRadioGroup;
     @BindView(R.id.timer_view)
-    TextView timerView;
+    LinearTimerView linearTimerView;
     @BindView(R.id.questions_counter_view)
     TextView questionsCounterView;
     @BindView(R.id.question_text)
     TextView question_text;
     @BindView(R.id.enonce_text)
     TextView enonce_text;
+    @BindView(R.id.time)
+    TextView time;
 
     private MyCountDownTimer countDownTimer;
     private Question question;
-    private  int index = 0;
+    private int index = 0;
     private int score = 0;
-    private int nbFreeQuestionsAnswered=0;
+    private int nbFreeQuestionsAnswered = 0;
     private ArrayList<Question> listAnswersLibres;
     private ArrayList<QCMResultDetails> listQCMResultsDetails;
     private ArrayList<Pair> pairAnswersLibres;
     private Quizz myQuizz;
     private QuizzGroup quizzGroup;
-    private  AlphaAnimation alphaAanimation;
+    private AlphaAnimation alphaAanimation;
     private int quizTotalPoints = 0;
     private Candidat candidat;
     private Handler handler;
     private Runnable runnable;
-    private boolean enableValidation=true;
+    private boolean enableValidation = true;
+
+    // private LinearTimerView linearTimerView;
+    private LinearTimer linearTimer;
+
+    private long duration;
+    private long timeRemaining =-1;
 
 
     @Override
@@ -101,7 +117,7 @@ public class QuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.question_layout, container, false);
-        ButterKnife.bind(this,fragmentView);
+        ButterKnife.bind(this, fragmentView);
 
 
         handler = new Handler();
@@ -110,27 +126,27 @@ public class QuestionsFragment extends Fragment {
         runnable = new Runnable() {
             @Override
             public void run() {
-                enableValidation=true;
+                enableValidation = true;
             }
         };
 
-        listAnswersLibres=new ArrayList<>();
-        pairAnswersLibres=new ArrayList<>();
+        listAnswersLibres = new ArrayList<>();
+        pairAnswersLibres = new ArrayList<>();
 
-        alphaAanimation= AppUtils.initAlphaAnim();
+        alphaAanimation = AppUtils.initAlphaAnim();
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(enableValidation){
+                if (enableValidation) {
 
-                    enableValidation=false;
+                    enableValidation = false;
                     scrollView.scrollTo(0, 0);
 
-                    if(myQuizz.getQuestions().get(index).getType()==1){
+                    if (myQuizz.getQuestions().get(index).getType() == 1) {
 
-                        InputMethodManager imm = (InputMethodManager)getActivity().
+                        InputMethodManager imm = (InputMethodManager) getActivity().
                                 getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(editAnswerView.getWindowToken(), 0);
 
@@ -146,12 +162,12 @@ public class QuestionsFragment extends Fragment {
 
                         //QUIZ TERMINE !!!
 
-                        QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
-                                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),countDownTimer.timeRemaining,
-                                new Date().getTime(),pairAnswersLibres,listQCMResultsDetails);
+                        QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
+                                candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
+                                new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
 
                         GlobalBus.getBus().post(new MyEventBus.
-                                QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
+                                QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
 
                     /*
                     GlobalBus.getBus().post(new MyEventBus.
@@ -164,7 +180,7 @@ public class QuestionsFragment extends Fragment {
                     }
 
                     // 800 MILI SECONDES DE COOLDOWN POUR EVITER LES DOUBLES CLICK
-                    handler.postDelayed(runnable,600);
+                    handler.postDelayed(runnable, 600);
 
                 }
 
@@ -179,10 +195,10 @@ public class QuestionsFragment extends Fragment {
 
         radioGroup.clearCheck();
         question = myQuizz.getQuestions().get(position);
-        question_text.setText(String.valueOf(index+1)+" - "+question.getText());
+        question_text.setText(String.valueOf(index + 1) + " - " + question.getText());
         enonce_text.setText(question.getEnonce());
 
-        if(question.getType()==2){
+        if (question.getType() == 2) {
 
             editAnswerView.setVisibility(View.GONE);
             radioGroup.setVisibility(View.VISIBLE);
@@ -192,14 +208,14 @@ public class QuestionsFragment extends Fragment {
             prop3.setText(question.getPropositions().get(2).getText());
             prop4.setText(question.getPropositions().get(3).getText());
 
-        }else{
+        } else {
 
             radioGroup.setVisibility(View.GONE);
             editAnswerView.setVisibility(View.VISIBLE);
         }
 
 
-        questionsCounterView.setText(getString(R.string.question)+" "+ String.valueOf(index+1)+"/"+myQuizz.getQuestions().size());
+        questionsCounterView.setText(getString(R.string.question) + " " + String.valueOf(index + 1) + "/" + myQuizz.getQuestions().size());
 
         if (question.getEnonce() == null)
             enonce_layout.setVisibility(View.GONE);
@@ -212,101 +228,99 @@ public class QuestionsFragment extends Fragment {
 
         Question question = myQuizz.getQuestions().get(indexQuestion);
 
-        if(question.getType()==2){
+        if (question.getType() == 2) {
 
             List<Proposition> propositions = question.getPropositions();
 
             long questionWeight = question.getWeight();
 
-            String realAnswer="";
+            String realAnswer = "";
 
-            for(int i=0;i<4;i++){
+            for (int i = 0; i < 4; i++) {
 
-                if(propositions.get(i).getValue()==1){
+                if (propositions.get(i).getValue() == 1) {
 
-                    realAnswer=propositions.get(i).getText();
+                    realAnswer = propositions.get(i).getText();
                 }
 
             }
 
-            if(prop1.isChecked()){
+            if (prop1.isChecked()) {
 
                 QCMResultDetails details;
 
-                if(propositions.get(0).getValue()==1){
+                if (propositions.get(0).getValue() == 1) {
 
                     score += questionWeight;
-                    details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop1.getText().toString(),realAnswer,true);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop1.getText().toString(), realAnswer, true);
 
-                }else{
+                } else {
 
-                    details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop1.getText().toString(),realAnswer,false);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop1.getText().toString(), realAnswer, false);
                 }
 
                 listQCMResultsDetails.add(details);
 
 
-
-            }else if(prop2.isChecked()){
+            } else if (prop2.isChecked()) {
 
                 QCMResultDetails details;
-                if(propositions.get(1).getValue()==1){
+                if (propositions.get(1).getValue() == 1) {
                     score += questionWeight;
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop2.getText().toString(),realAnswer,true);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop2.getText().toString(), realAnswer, true);
 
-                }else{
+                } else {
 
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop2.getText().toString(),realAnswer,false);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop2.getText().toString(), realAnswer, false);
                 }
 
                 listQCMResultsDetails.add(details);
 
 
-
-            }else if(prop3.isChecked() && propositions.get(2).getValue()==1 ){
+            } else if (prop3.isChecked() && propositions.get(2).getValue() == 1) {
 
                 QCMResultDetails details;
-                if(propositions.get(2).getValue()==1 ){
+                if (propositions.get(2).getValue() == 1) {
 
                     score += questionWeight;
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop3.getText().toString(),realAnswer,true);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop3.getText().toString(), realAnswer, true);
 
-                }else{
+                } else {
 
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop3.getText().toString(),realAnswer,false);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop3.getText().toString(), realAnswer, false);
                 }
 
                 listQCMResultsDetails.add(details);
 
 
-            }else if(prop4.isChecked()){
+            } else if (prop4.isChecked()) {
                 QCMResultDetails details;
-                if(propositions.get(3).getValue()==1){
+                if (propositions.get(3).getValue() == 1) {
 
                     score += questionWeight;
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop4.getText().toString(),realAnswer,true);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop4.getText().toString(), realAnswer, true);
 
-                }else{
+                } else {
 
-                     details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                            prop4.getText().toString(),realAnswer,false);
+                    details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                            prop4.getText().toString(), realAnswer, false);
 
                 }
 
                 listQCMResultsDetails.add(details);
 
-            }else{
+            } else {
 
                 //NO ANSWER CHECKED
-                QCMResultDetails details = new QCMResultDetails(question.getText(),question.getEnonce(),
-                        "Pas de réponse",realAnswer,false);
+                QCMResultDetails details = new QCMResultDetails(question.getText(), question.getEnonce(),
+                        "Pas de réponse", realAnswer, false);
 
                 listQCMResultsDetails.add(details);
 
@@ -328,11 +342,11 @@ public class QuestionsFragment extends Fragment {
                 //WRONG ANSWER
             }*/
 
-        }else{
+        } else {
             //POUR LE TYPE 1
 
-            Log.d("score","scorescoreYYYY"+score);
-            if(!editAnswerView.getText().toString().equals(""))
+            Log.d("score", "scorescoreYYYY" + score);
+            if (!editAnswerView.getText().toString().equals(""))
                 nbFreeQuestionsAnswered++;
 
             Question questionAnswered = question;
@@ -347,20 +361,20 @@ public class QuestionsFragment extends Fragment {
             questionAnswered.setPropositions(list);
             listAnswersLibres.add(questionAnswered);
 
-            Pair pair = new Pair(question.getText(),editAnswerView.getText().toString());
+            Pair pair = new Pair(question.getText(), editAnswerView.getText().toString());
             pairAnswersLibres.add(pair);
 
         }
 
     }
 
-    private void hideFragment(){
+    private void hideFragment() {
 
         final View myView = this.getView();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            Animator anim  = AppUtils.initCircularAnim(this.getView());
+            Animator anim = AppUtils.initCircularAnim(this.getView());
             anim.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -392,18 +406,18 @@ public class QuestionsFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(countDownTimer!=null)
-        countDownTimer.cancel();
+        if (countDownTimer != null)
+            countDownTimer.cancel();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(countDownTimer!=null ){
+        if (countDownTimer != null) {
 
-            if(countDownTimer.timeRemaining<=0)
-            GlobalBus.getBus().post(new MyEventBus.TimeisOver());
+            if (countDownTimer.timeRemaining <= 0)
+                GlobalBus.getBus().post(new MyEventBus.TimeisOver());
 
         }
     }
@@ -412,10 +426,10 @@ public class QuestionsFragment extends Fragment {
     public void getMessage(MyEventBus.QuizzReadyMessage quizMessage) {
 
         getView().setVisibility(View.VISIBLE);
-        index=0;
-        quizTotalPoints=0;
-        myQuizz=quizMessage.getQuizz();
-        listQCMResultsDetails=new ArrayList<>();
+        index = 0;
+        quizTotalPoints = 0;
+        myQuizz = quizMessage.getQuizz();
+        listQCMResultsDetails = new ArrayList<>();
 
         for (int i = 0; i < myQuizz.getQuestions().size(); i++) {
 
@@ -423,17 +437,37 @@ public class QuestionsFragment extends Fragment {
 
         }
 
-        Log.d("scccc","scccccc"+quizTotalPoints);
+        Log.d("scccc", "scccccc" + quizTotalPoints);
 
-        candidat=quizMessage.getCandidat();
-        countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, timerView);
-        countDownTimer.start();
+        candidat = quizMessage.getCandidat();
+        duration = myQuizz.getDuration() * 60000;
+
+
+        linearTimer = new LinearTimer.Builder()
+                .linearTimerView(linearTimerView)
+                .duration(duration)
+                .timerListener((this))
+                .getCountUpdate(LinearTimer.COUNT_DOWN_TIMER, 1000)
+                .build();
+
+        // Start the timer.
+
+        try {
+            linearTimer.startTimer();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+        countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, time);
+//        countDownTimer.start();
         setQuestion(index);
-        score=0;
+        score = 0;
 
     }
 
-    private double scoreTopercent(long myScore){
+    private double scoreTopercent(long myScore) {
 
         double scorePercent = 0;
 
@@ -448,13 +482,13 @@ public class QuestionsFragment extends Fragment {
     public void getTimerMessage(MyEventBus.TimeisOver message) {
 
 
-        QuizResult quizResult = new QuizResult(candidat.getEmail(),myQuizz.getLevel(),candidat.getPrenom(),
-                candidat.getNom(),scoreTopercent(score),myQuizz.getName(),
-                countDownTimer.timeRemaining,new Date().getTime(),pairAnswersLibres,listQCMResultsDetails);
+        QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
+                candidat.getNom(), scoreTopercent(score), myQuizz.getName(),
+                countDownTimer.timeRemaining, new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
 
 
         GlobalBus.getBus().post(new MyEventBus.
-                QuizzOverMessage(quizResult,nbFreeQuestionsAnswered));
+                QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
 
         /*
         GlobalBus.getBus().post(new MyEventBus.
@@ -465,4 +499,45 @@ public class QuestionsFragment extends Fragment {
     }
 
 
+    @Override
+    public void animationComplete() {
+        Log.i("Animation", "complete");
+    }
+
+    @Override
+    public void timerTick(long tickUpdateInMillis) {
+
+        timeRemaining=tickUpdateInMillis;
+        String formatedTime = AppUtils.getFormatedTimeRemaining(timeRemaining);
+
+        if (timeRemaining<60000){
+
+            formatedTime="<font color='red'>"+formatedTime+"</font>";
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                time.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                time.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
+            }
+
+        }else{
+
+            time.setText(formatedTime);
+
+        }
+
+//        Log.i("Time left", String.valueOf(tickUpdateInMillis));
+//
+//        String formattedTime = String.format("%2d:%2d",
+//                TimeUnit.MILLISECONDS.toMinutes(tickUpdateInMillis),
+//                TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
+//                        - TimeUnit.MINUTES
+//                        .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
+//
+//        time.setText(formattedTime);
+    }
+
+    @Override
+    public void onTimerReset() {
+        time.setText("");
+    }
 }

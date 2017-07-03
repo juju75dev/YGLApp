@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YGLApp.iml" filepath="$PROJECT_DIR$/YGLApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lineartimer/lineartimer.iml" filepath="$PROJECT_DIR$/lineartimer/lineartimer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lineartimer/lineartimer.iml" filepath="$PROJECT_DIR$/lineartimer/lineartimer.iml" />
     </modules>
   </component>
 </project>

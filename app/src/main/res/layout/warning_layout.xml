@@ -16,19 +16,29 @@
         android:textStyle="bold"
         android:paddingTop="30dp"
         android:textColor="@android:color/white"
-        android:textSize="19dp"
+        android:textSize="18dp"
         android:text="Vous avez choisi le quiz Java"/>
 
 
-    <TextView
-        android:id="@+id/warning_desc_view"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="14dp"
-        android:paddingTop="30dp"
-        android:paddingLeft="5dp"
-        android:text=""/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/warning_desc_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:textSize="13dp" />
+    </android.support.v7.widget.CardView>
 
 
     <Button
@@ -39,7 +49,7 @@
         android:padding="5dp"
         android:background="@drawable/button_selector"
         android:textColor="@android:color/white"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Commencer le test"/>
 
 
