@@ -25,18 +25,19 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcgdv.asia.lib.ticktock.TickTockView;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.krtkush.lineartimer.LinearTimer;
-import io.github.krtkush.lineartimer.LinearTimerView;
+
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
@@ -51,7 +52,7 @@ import ygl.com.yglapp.Utlities.AppUtils;
  * Created by juju on 09/06/2017.
  */
 
-public class QuestionsFragment extends Fragment implements LinearTimer.TimerListener {
+public class QuestionsFragment extends Fragment  {
 
     @BindView(R.id.validate)
     Button validate;
@@ -77,16 +78,16 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
     EditText editAnswerView;
     @BindView(R.id.radio_group_layout)
     LinearLayout cardRadioGroup;
-    @BindView(R.id.timer_view)
-    LinearTimerView linearTimerView;
+//    @BindView(R.id.timer_view)
+//    LinearTimerView linearTimerView;
     @BindView(R.id.questions_counter_view)
     TextView questionsCounterView;
     @BindView(R.id.question_text)
     TextView question_text;
     @BindView(R.id.enonce_text)
     TextView enonce_text;
-    @BindView(R.id.time)
-    TextView time;
+//    @BindView(R.id.time)
+//    TextView time;
 
     private MyCountDownTimer countDownTimer;
     private Question question;
@@ -104,9 +105,10 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
     private Handler handler;
     private Runnable runnable;
     private boolean enableValidation = true;
+    private TickTockView mCountDown = null;
 
-    // private LinearTimerView linearTimerView;
-    private LinearTimer linearTimer;
+
+
 
     private long duration;
     private long timeRemaining =-1;
@@ -117,6 +119,8 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.question_layout, container, false);
+        mCountDown = (TickTockView) fragmentView.findViewById(R.id.view_ticktock_countdown);
+
         ButterKnife.bind(this, fragmentView);
 
 
@@ -134,6 +138,8 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
         pairAnswersLibres = new ArrayList<>();
 
         alphaAanimation = AppUtils.initAlphaAnim();
+
+
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -395,6 +401,7 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
     public void onStart() {
         super.onStart();
         GlobalBus.getBus().register(this);
+
     }
 
     @Override
@@ -442,25 +449,63 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
         candidat = quizMessage.getCandidat();
         duration = myQuizz.getDuration() * 60000;
 
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.MINUTE, (int)myQuizz.getDuration());
+        end.add(Calendar.SECOND, 0);
 
-        linearTimer = new LinearTimer.Builder()
-                .linearTimerView(linearTimerView)
-                .duration(duration)
-                .timerListener((this))
-                .getCountUpdate(LinearTimer.COUNT_DOWN_TIMER, 1000)
-                .build();
+        Calendar start = Calendar.getInstance();
+        start.add(Calendar.MINUTE, -1);
+        if (mCountDown != null) {
+            mCountDown.start(start, end);
+        }
 
-        // Start the timer.
+        Calendar c2 = Calendar.getInstance();
+        c2.add(Calendar.HOUR, 2);
+        c2.set(Calendar.MINUTE, 0);
+        c2.set(Calendar.SECOND, 0);
+        c2.set(Calendar.MILLISECOND, 0);
 
-        try {
-            linearTimer.startTimer();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        //  mCountUp = (TickTockView) findViewById(R.id.view_ticktock_countup);
+        if (mCountDown != null) {
+            mCountDown.setOnTickListener(new TickTockView.OnTickListener() {
+                @Override
+                public String getText(long timeRemaining) {
+                    int seconds = (int) (timeRemaining / 1000) % 60;
+                    int minutes = (int) ((timeRemaining / (1000 * 60)) % 60);
+                    int hours = (int) ((timeRemaining / (1000 * 60 * 60)) % 24);
+                    int days = (int) (timeRemaining / (1000 * 60 * 60 * 24));
+                    boolean hasDays = days > 0;
+                    return String.format("%2$02d%5$s:%3$02d%6$s",
+                            hasDays ? days : hours,
+                            hasDays ? hours : minutes,
+                            hasDays ? minutes : seconds,
+                            hasDays ? "d" : "h",
+                            hasDays ? "h" : "",
+                            hasDays ? "" : "");
+                }
+            });
         }
 
 
-        countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000, time);
+//        linearTimer = new LinearTimer.Builder()
+//                .linearTimerView(linearTimerView)
+//                .duration(duration)
+//                .timerListener((this))
+//                .getCountUpdate(LinearTimer.COUNT_DOWN_TIMER, 1000)
+//                .build();
+
+        // Start the timer.
+
+//        try {
+//            linearTimer.startTimer();
+//        } catch (IllegalStateException e) {
+//            e.printStackTrace();
+//            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//        }
+
+
+        countDownTimer = new MyCountDownTimer(myQuizz.getDuration() * 60000, 1000);
 //        countDownTimer.start();
         setQuestion(index);
         score = 0;
@@ -499,45 +544,40 @@ public class QuestionsFragment extends Fragment implements LinearTimer.TimerList
     }
 
 
-    @Override
-    public void animationComplete() {
-        Log.i("Animation", "complete");
-    }
 
-    @Override
-    public void timerTick(long tickUpdateInMillis) {
 
-        timeRemaining=tickUpdateInMillis;
-        String formatedTime = AppUtils.getFormatedTimeRemaining(timeRemaining);
 
-        if (timeRemaining<60000){
-
-            formatedTime="<font color='red'>"+formatedTime+"</font>";
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                time.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                time.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
-            }
-
-        }else{
-
-            time.setText(formatedTime);
-
-        }
-
-//        Log.i("Time left", String.valueOf(tickUpdateInMillis));
+//    @Override
+//    public void timerTick(long tickUpdateInMillis) {
 //
-//        String formattedTime = String.format("%2d:%2d",
-//                TimeUnit.MILLISECONDS.toMinutes(tickUpdateInMillis),
-//                TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
-//                        - TimeUnit.MINUTES
-//                        .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
+//        timeRemaining=tickUpdateInMillis;
+//        String formatedTime = AppUtils.getFormatedTimeRemaining(timeRemaining);
 //
-//        time.setText(formattedTime);
-    }
+//        if (timeRemaining<60000){
+//
+//            formatedTime="<font color='red'>"+formatedTime+"</font>";
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                time.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
+//            } else {
+//                time.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
+//            }
+//
+//        }else{
+//
+//            time.setText(formatedTime);
+//
+//        }
+//
+////        Log.i("Time left", String.valueOf(tickUpdateInMillis));
+////
+////        String formattedTime = String.format("%2d:%2d",
+////                TimeUnit.MILLISECONDS.toMinutes(tickUpdateInMillis),
+////                TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
+////                        - TimeUnit.MINUTES
+////                        .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
+////
+////        time.setText(formattedTime);
+//    }
 
-    @Override
-    public void onTimerReset() {
-        time.setText("");
-    }
+
 }

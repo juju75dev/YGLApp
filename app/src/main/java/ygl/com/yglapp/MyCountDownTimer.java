@@ -13,12 +13,12 @@ import ygl.com.yglapp.Utlities.AppUtils;
 
 public class MyCountDownTimer extends CountDownTimer {
 
-    private TextView countTextView;
+  //  private TextView countTextView;
     public long timeRemaining=-1;
 
-    public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView nCountTextView) {
+    public MyCountDownTimer(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
-        countTextView = nCountTextView;
+      //  countTextView = nCountTextView;
 
     }
 
@@ -27,27 +27,27 @@ public class MyCountDownTimer extends CountDownTimer {
         timeRemaining=millisUntilFinished;
         String formatedTime = AppUtils.getFormatedTimeRemaining(timeRemaining);
 
-        if (timeRemaining<60000){
+//        if (timeRemaining<60000){
+//
+//            formatedTime="<font color='red'>"+formatedTime+"</font>";
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                countTextView.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
+//            } else {
+//                countTextView.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
+//            }
+//
+//        }else{
 
-            formatedTime="<font color='red'>"+formatedTime+"</font>";
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                countTextView.setText(Html.fromHtml(formatedTime,Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                countTextView.setText(Html.fromHtml(formatedTime), TextView.BufferType.SPANNABLE);
-            }
-
-        }else{
-
-            countTextView.setText(formatedTime);
-
-        }
+//            countTextView.setText(formatedTime);
+//
+//        }
 
     }
 
     @Override
     public void onFinish() {
 
-        countTextView.setText(R.string.finished);
+       // countTextView.setText(R.string.finished);
         timeRemaining=0;
         GlobalBus.getBus().post(new MyEventBus.TimeisOver());
 

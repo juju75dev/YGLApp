@@ -1,55 +1,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:timer="http://schemas.android.com/tools"
     android:background="@drawable/time_shape"
     android:orientation="vertical">
 
     <!--<RelativeLayout-->
-        <!--android:id="@+id/timer"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="10dp">-->
+    <!--android:id="@+id/timer"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="10dp">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/time"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:visibility="invisible"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_centerHorizontal="true"/>-->
+    <!--<TextView-->
+    <!--android:id="@+id/time"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:visibility="invisible"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_centerHorizontal="true"/>-->
 
-        <!--<io.github.krtkush.lineartimer.LinearTimerView-->
-            <!--android:id="@+id/timer_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--timer:radius="20dp"-->
-            <!--timer:strokeWidth="2dp"-->
-            <!--timer:startingPoint="270"-->
-            <!--timer:initialColor="@color/colorPrimary"-->
-            <!--timer:progressColor="@color/colorInitial"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true" />-->
+    <!--<io.github.krtkush.lineartimer.LinearTimerView-->
+    <!--android:id="@+id/timer_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--timer:radius="20dp"-->
+    <!--timer:strokeWidth="2dp"-->
+    <!--timer:startingPoint="270"-->
+    <!--timer:initialColor="@color/colorPrimary"-->
+    <!--timer:progressColor="@color/colorInitial"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_centerHorizontal="true" />-->
 
     <!--</RelativeLayout>-->
 
 
-
-
     <!--<TextView-->
-        <!--android:id="@+id/timer_view"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:background="@android:color/white"-->
-        <!--android:padding="10dp"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="20dp"-->
-        <!--android:textStyle="bold" />-->
+    <!--android:id="@+id/timer_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:padding="10dp"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold" />-->
 
     <!--<TextView-->
     <!--android:id="@+id/questions_counter_view"-->
@@ -65,40 +63,41 @@
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10"
+
         android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <RelativeLayout
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"/>
+        <com.bcgdv.asia.lib.ticktock.TickTockView
+            android:id="@+id/view_ticktock_countdown"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            app:tickCircleDuration="total_time" />
 
-        <io.github.krtkush.lineartimer.LinearTimerView
-            android:id="@+id/timer_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            timer:radius="20dp"
-            timer:strokeWidth="2dp"
-            timer:startingPoint="270"
-            timer:initialColor="@color/colorPrimary"
-            timer:progressColor="@color/colorInitial"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
 
-        </RelativeLayout>
+        <!--<TextView-->
+        <!--android:id="@+id/time"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_centerHorizontal="true"/>-->
+
+        <!--<io.github.krtkush.lineartimer.LinearTimerView-->
+        <!--android:id="@+id/timer_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--timer:radius="20dp"-->
+        <!--timer:strokeWidth="2dp"-->
+        <!--timer:startingPoint="270"-->
+        <!--timer:initialColor="@color/colorPrimary"-->
+        <!--timer:progressColor="@color/colorInitial"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,8 +220,11 @@
                         android:id="@+id/prop1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@drawable/radio_shape"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+
 
                         android:textSize="@dimen/textsize"
 
@@ -234,8 +236,10 @@
                         android:id="@+id/prop2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@drawable/radio_shape"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
 
                         android:textSize="@dimen/textsize"
 
@@ -246,8 +250,10 @@
                         android:id="@+id/prop3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@drawable/radio_shape"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
 
                         android:textSize="@dimen/textsize"
 
@@ -258,8 +264,10 @@
                         android:id="@+id/prop4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@drawable/radio_shape"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
 
                         android:textSize="@dimen/textsize"
 
