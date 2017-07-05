@@ -454,7 +454,7 @@ public class QuestionsFragment extends Fragment  {
         end.add(Calendar.SECOND, 0);
 
         Calendar start = Calendar.getInstance();
-        start.add(Calendar.MINUTE, -1);
+        start.add(Calendar.MINUTE, 0);
         if (mCountDown != null) {
             mCountDown.start(start, end);
         }
