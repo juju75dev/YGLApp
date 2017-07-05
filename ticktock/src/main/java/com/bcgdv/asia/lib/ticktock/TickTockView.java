@@ -206,7 +206,7 @@ public class TickTockView extends View {
 
         //The fill
         if (!mCounterClockwise) {
-            mCanvas.drawArc(mArc, 250, angle, true, mFillPaint);
+            mCanvas.drawArc(mArc, 270, angle, true, mFillPaint);
         } else {
             mCanvas.drawArc(mArc, 270, 360 - angle, true, mFillPaint);
         }
@@ -234,7 +234,7 @@ public class TickTockView extends View {
     }
 
     private void drawDot() {
-        float centerX = (mCanvas.getWidth() / 2 - 35);
+        float centerX = (mCanvas.getWidth() / 2 );
         float centerY = mDotRadius + mRingThickness / 2;
         mCanvas.drawCircle(centerX, centerY, mDotRadius, mFillPaint);
     }
