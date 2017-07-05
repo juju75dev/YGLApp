@@ -51,7 +51,7 @@ public class TickTockView extends View {
     private int mFillRingColor = Color.parseColor("#ed9e02");
     private int mMiddleColor = Color.TRANSPARENT;
     private int mTextColor = Color.WHITE;
-    private float mTextSize = 30;
+    private float mTextSize = 25;
 
     private boolean mCounterClockwise = false;
     private boolean mAutoFitText = true;
