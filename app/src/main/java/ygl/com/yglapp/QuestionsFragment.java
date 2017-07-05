@@ -539,7 +539,7 @@ public class QuestionsFragment extends Fragment  {
         GlobalBus.getBus().post(new MyEventBus.
                 QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
         countDownTimer.cancel();
-        hideFragment();
+    //    hideFragment();
 
     }
 

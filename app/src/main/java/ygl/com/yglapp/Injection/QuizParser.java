@@ -51,10 +51,10 @@ public class QuizParser {
                 for (DataSnapshot questionShot : quizShot.child("questions").getChildren()) {
 
                     Question question = new Question();
-                    question.setKey(questionShot.child("key").getValue().toString());
+                    question.setKey(questionShot.getKey());
                     question.setType((long) questionShot.child("type").getValue());
                     question.setWeight((long) questionShot.child("weight").getValue());
-                    question.setKey(questionShot.child("key").getValue().toString());
+                   // question.setKey(questionShot.child("key").getValue().toString());
                     question.setText(questionShot.child("text").getValue().toString());
 
                     if (questionShot.child("enonce").getValue() != null) {

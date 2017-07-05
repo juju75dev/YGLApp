@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +35,7 @@ public class LoginActivityExample extends AppCompatActivity {
     @BindView(R.id.sign_in_button)
     Button signInButton;
     @BindView(R.id.password)
-    EditText editPassword;
+    TextView editPassword;
     @BindView(R.id.pseudo)
     EditText editMail;
     @BindView(R.id.login_form)
