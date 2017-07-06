@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/validate_selector"
             android:gravity="center"
             android:padding="10dp"
             android:textSize="30dp"

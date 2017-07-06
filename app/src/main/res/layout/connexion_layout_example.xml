@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/validate_selector"
             android:text="Se connecter"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

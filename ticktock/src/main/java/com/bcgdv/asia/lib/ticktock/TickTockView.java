@@ -94,7 +94,7 @@ public class TickTockView extends View {
         mDotRadius *= multi;
         mTextPadding *= multi;
 
-         ta = context.obtainStyledAttributes(attrs, R.styleable.TickTockView, 0, 0);
+        ta = context.obtainStyledAttributes(attrs, R.styleable.TickTockView, 0, 0);
         try {
             mEmptyRingColor = ta.getColor(R.styleable.TickTockView_tickEmptyRingColor, mEmptyRingColor);
             mFillRingColor = ta.getColor(R.styleable.TickTockView_tickFillRingColor, mFillRingColor);
@@ -234,7 +234,7 @@ public class TickTockView extends View {
     }
 
     private void drawDot() {
-        float centerX = (mCanvas.getWidth() / 2 );
+        float centerX = (mCanvas.getWidth() / 2);
         float centerY = mDotRadius + mRingThickness / 2;
         mCanvas.drawCircle(centerX, centerY, mDotRadius, mFillPaint);
     }
@@ -270,7 +270,10 @@ public class TickTockView extends View {
 
             @Override
             public void onFinish() {
+
+
                 updateText(0);
+
                 invalidate();
             }
         }.start();
