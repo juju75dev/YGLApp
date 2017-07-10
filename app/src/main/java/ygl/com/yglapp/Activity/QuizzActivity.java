@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +47,7 @@ public class QuizzActivity extends AppCompatActivity {
     TextView warningDescView;
 
     @BindView(R.id.score_layout)
-    LinearLayout scoreLayout;
+    RelativeLayout scoreLayout;
 
     //SCORE LAYOUT
     @BindView(R.id.back_home_button)

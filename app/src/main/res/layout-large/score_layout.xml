@@ -1,91 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/score_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ygl_background"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="60dp"
-        android:text="@string/test_is_over"
-        android:textColor="@color/colorAccent"
-        android:textSize="36dp"
-        android:textStyle="bold" />
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-    <!--
-
-     <TextView
-        android:id="@+id/score_quiz_name_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="30dp"
-        />
-
-    <TextView
-        android:id="@+id/score_view"
-        android:textSize="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:padding="30dp"/>
-
-    <TextView
-        android:id="@+id/score_questions_free_view"
-        android:textSize="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="Réponses questions libres : 5"
-        android:padding="30dp"/>
-
-    -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/test_is_over"
+            android:textColor="@color/colorAccent"
+            android:textSize="36dp"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="20dp"
-        android:textColor="@android:color/white"
-        android:text="@string/thanks"
-
-        android:textSize="24dp" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/details_sended"
-        android:textColor="@android:color/white"
-        android:textSize="24dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/thanks"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
 
 
-    <Button
-        android:id="@+id/back_home_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/validate_selector"
-        android:padding="10dp"
-        android:text="@string/end"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="30dp" />
-    <!-- android:background="@drawable/button_ripple"-->
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/details_sended"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+
+        <Button
+            android:id="@+id/back_home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/validate_selector"
+            android:padding="5dp"
+            android:text="@string/end"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+        <!-- android:background="@drawable/button_ripple"-->
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -9,8 +9,9 @@
     <com.bcgdv.asia.lib.ticktock.TickTockView
         android:id="@+id/view_ticktock_countdown"
         app:tickCircleDuration="total_time"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+
         android:layout_gravity="center_horizontal" />
 
 

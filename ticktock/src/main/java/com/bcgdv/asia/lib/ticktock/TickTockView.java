@@ -51,7 +51,7 @@ public class TickTockView extends View {
     private int mFillRingColor = Color.parseColor("#ed9e02");
     private int mMiddleColor = Color.TRANSPARENT;
     private int mTextColor = Color.WHITE;
-    private float mTextSize = 25;
+    private float mTextSize = 35;
 
     private boolean mCounterClockwise = false;
     private boolean mAutoFitText = true;
@@ -125,7 +125,9 @@ public class TickTockView extends View {
         }
 
         mTextPaint.setColor(mTextColor);
+
         mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setFakeBoldText(true);
 
         if (isInEditMode()) {
             fitText(mText);
@@ -227,9 +229,15 @@ public class TickTockView extends View {
         }
 
         if (!TextUtils.isEmpty(mText)) {
+            if (mTimeRemaining < 120000) {
+                mTextColor = Color.RED;
+            }
             mTextPaint.setColor(mTextColor);
             mTextPaint.setTextSize(mTextSize);
-            canvas.drawText(mText.toString(), mCenter.x - 30, mCenter.y + 10, mTextPaint);
+
+            canvas.drawText(mText.toString(), mCenter.x - 40, mCenter.y + 10, mTextPaint);
+
+
         }
     }
 
@@ -263,6 +271,7 @@ public class TickTockView extends View {
         mTimer = new CountDownTimer(endTime.getTimeInMillis() - System.currentTimeMillis(), 16) {
             @Override
             public void onTick(long millisUntilFinished) {
+
                 mTimeRemaining = millisUntilFinished;
                 updateText(mTimeRemaining);
                 invalidate();
@@ -293,14 +302,19 @@ public class TickTockView extends View {
         start(endTime);
     }
 
-    private void updateText(long timeRemaining) {
+    public void updateText(long timeRemaining) {
         if (mTickListener != null) {
             String text = mTickListener.getText(timeRemaining);
             if (!TextUtils.isEmpty(text)) {
                 if (mText != null && mText.length() != text.length()) {
                     mTextPaint.getTextBounds(text, 0, text.length(), mTextBounds);
                 }
+
+                if (mTimeRemaining < 60000)
+                    mTextPaint.setColor(Color.RED);
                 mText = text;
+
+
             }
         }
     }
@@ -350,5 +364,7 @@ public class TickTockView extends View {
 
     public interface OnTickListener {
         String getText(long timeRemainingInMillis);
+
+
     }
 }
