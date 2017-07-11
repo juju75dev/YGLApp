@@ -21,6 +21,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Ali Muzaffar on 10/03/2016.
@@ -229,7 +230,7 @@ public class TickTockView extends View {
         }
 
         if (!TextUtils.isEmpty(mText)) {
-            if (mTimeRemaining < 120000) {
+            if (mTimeRemaining < 300000) {
                 mTextColor = Color.RED;
             }
             mTextPaint.setColor(mTextColor);
@@ -284,6 +285,7 @@ public class TickTockView extends View {
                 updateText(0);
 
                 invalidate();
+                mTickListener.TerminateTest();
             }
         }.start();
     }
@@ -310,7 +312,7 @@ public class TickTockView extends View {
                     mTextPaint.getTextBounds(text, 0, text.length(), mTextBounds);
                 }
 
-                if (mTimeRemaining < 60000)
+                if (mTimeRemaining < 300000)
                     mTextPaint.setColor(Color.RED);
                 mText = text;
 
@@ -364,6 +366,8 @@ public class TickTockView extends View {
 
     public interface OnTickListener {
         String getText(long timeRemainingInMillis);
+
+        void TerminateTest();
 
 
     }

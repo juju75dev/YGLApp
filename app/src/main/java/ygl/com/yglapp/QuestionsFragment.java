@@ -52,7 +52,7 @@ import ygl.com.yglapp.Utlities.AppUtils;
  * Created by juju on 09/06/2017.
  */
 
-public class QuestionsFragment extends Fragment  {
+public class QuestionsFragment extends Fragment {
 
     @BindView(R.id.validate)
     Button validate;
@@ -78,7 +78,7 @@ public class QuestionsFragment extends Fragment  {
     EditText editAnswerView;
     @BindView(R.id.radio_group_layout)
     LinearLayout cardRadioGroup;
-//    @BindView(R.id.timer_view)
+    //    @BindView(R.id.timer_view)
 //    LinearTimerView linearTimerView;
     @BindView(R.id.questions_counter_view)
     TextView questionsCounterView;
@@ -108,10 +108,8 @@ public class QuestionsFragment extends Fragment  {
     private TickTockView mCountDown = null;
 
 
-
-
     private long duration;
-    private long timeRemaining =-1;
+    private long timeRemaining = -1;
 
 
     @Override
@@ -138,7 +136,6 @@ public class QuestionsFragment extends Fragment  {
         pairAnswersLibres = new ArrayList<>();
 
         alphaAanimation = AppUtils.initAlphaAnim();
-
 
 
         validate.setOnClickListener(new View.OnClickListener() {
@@ -168,20 +165,26 @@ public class QuestionsFragment extends Fragment  {
 
                         //QUIZ TERMINE !!!
 
+                        // TODO: 10/07/2017 intrface for that ..
+
+
+                     //   TerminateTest();
+
                         QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
                                 candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
                                 new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
 
                         GlobalBus.getBus().post(new MyEventBus.
                                 QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
+                        hideFragment();
 
                     /*
                     GlobalBus.getBus().post(new MyEventBus.
                             QuizzOverMessage(score,listAnswersLibres,
                             nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
 
-                        countDownTimer.cancel();
-                        hideFragment();
+                        //countDownTimer.cancel();
+
 
                     }
 
@@ -195,6 +198,16 @@ public class QuestionsFragment extends Fragment  {
 
         return fragmentView;
     }
+
+//    public void TerminateTest() {
+//        QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
+//                candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
+//                new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
+//
+//        GlobalBus.getBus().post(new MyEventBus.
+//                QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
+//        hideFragment();
+//    }
 
 
     private void setQuestion(int position) {
@@ -450,7 +463,7 @@ public class QuestionsFragment extends Fragment  {
         duration = myQuizz.getDuration() * 60000;
 
         Calendar end = Calendar.getInstance();
-        end.add(Calendar.MINUTE, (int)myQuizz.getDuration());
+        end.add(Calendar.MINUTE, (int) myQuizz.getDuration());
         end.add(Calendar.SECOND, 0);
 
         Calendar start = Calendar.getInstance();
@@ -483,6 +496,19 @@ public class QuestionsFragment extends Fragment  {
                             hasDays ? "d" : "h",
                             hasDays ? "h" : "",
                             hasDays ? "" : "");
+                }
+
+                @Override
+                public void TerminateTest() {
+
+                    QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
+                            candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
+                            new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
+
+                    GlobalBus.getBus().post(new MyEventBus.
+                            QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
+                    hideFragment();
+
                 }
             });
         }
@@ -539,12 +565,9 @@ public class QuestionsFragment extends Fragment  {
         GlobalBus.getBus().post(new MyEventBus.
                 QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
         countDownTimer.cancel();
-    //    hideFragment();
+        //    hideFragment();
 
     }
-
-
-
 
 
 //    @Override
