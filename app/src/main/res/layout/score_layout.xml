@@ -34,14 +34,14 @@
             android:textSize="14dp" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/details_sended"
-            android:textColor="@android:color/white"
-            android:textSize="14dp" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="10dp"-->
+            <!--android:text="@string/details_sended"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="14dp" />-->
 
 
         <Button

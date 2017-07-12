@@ -10,6 +10,10 @@
 
     </style>
 
+    <style name="TextAppearance.Widget.ActionBar.Title"
+        parent="@android:style/TextAppearance.Large">
+    </style>
+
     <!--<style name="CustomCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">-->
         <!--<item name="android:button">@mipmap/checkbox_notchecked</item>-->
         <!--<item name="android:checkMark">@mipmap/checkbox_not_checked</item>-->

@@ -236,7 +236,7 @@ public class TickTockView extends View {
             mTextPaint.setColor(mTextColor);
             mTextPaint.setTextSize(mTextSize);
 
-            canvas.drawText(mText.toString(), mCenter.x - 40, mCenter.y + 10, mTextPaint);
+            canvas.drawText(mText.toString(), mCenter.x - 42, mCenter.y + 10, mTextPaint);
 
 
         }

@@ -1,6 +1,9 @@
 package ygl.com.yglapp.Adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +31,7 @@ import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.QuizzGroup;
 import ygl.com.yglapp.QuestionHolder;
 import ygl.com.yglapp.R;
+import ygl.com.yglapp.Utlities.AppUtils;
 
 //import com.firebase.ui.storage.images.FirebaseImageLoader;
 
@@ -59,13 +63,15 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
         return new QuestionHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(QuestionHolder myViewHolder, final int position) {
 
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
-        RadioButton radiobutton;
+        AppCompatRadioButton radiobutton;
 
         final int fPosition = position;
+
 
         TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
         //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
@@ -75,10 +81,14 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
         for (int i = 0; i < listQuizzGroup.get(position).getListQuiz().size(); i++) {
 
-            radiobutton = new RadioButton(context);
+            radiobutton = new AppCompatRadioButton(context);
+            if (AppUtils.size(context) > 3)
+                radiobutton.setTextSize(26);
             radiobutton.setText(listQuizzGroup.get(position).getListQuiz().get(i).getLevel());
 
-            final int fIndex=i;
+
+
+            final int fIndex = i;
 
             radiobutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -116,14 +126,14 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
                 if (isChecked) {
                     radioGroup.setVisibility(View.VISIBLE);
                     quizzGroup.setChecked(true);
-                  //  listQuizzresult.add(position, QuizResult.getInstance());
+                    //  listQuizzresult.add(position, QuizResult.getInstance());
 
                 } else {
                     radioGroup.setVisibility(View.GONE);
                     listQuizzGroup.get(fPosition).setIdcheckedQuiz(-1);
                     radioGroup.clearCheck();
                     quizzGroup.setChecked(false);
-                  //  listQuizzresult.remove(position);
+                    //  listQuizzresult.remove(position);
 
                 }
             }
@@ -131,14 +141,14 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
         titleView.setText(quizzGroup.getName());
 
-        StorageReference imageRef =  FirebaseStorage.getInstance().
+        StorageReference imageRef = FirebaseStorage.getInstance().
                 getReferenceFromUrl("gs://test-mail-f32c4.appspot.com").
-                child("/" + quizzGroup.getName()+".png");
+                child("/" + quizzGroup.getName() + ".png");
 
-       Glide.with(imageView.getContext())
-               .using(new FirebaseImageLoader())
-               .load(imageRef)
-               .into(imageView);
+        Glide.with(imageView.getContext())
+                .using(new FirebaseImageLoader())
+                .load(imageRef)
+                .into(imageView);
 
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

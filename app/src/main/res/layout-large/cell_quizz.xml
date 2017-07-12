@@ -31,14 +31,17 @@
                 android:layout_gravity="center"
                 android:text="Nom du Quizz"
                 fontPath="fonts/tahoma.ttf"
-                android:textColor="@color/colorPrimary"
-                android:textSize="24dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="32dp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/image_cell"
