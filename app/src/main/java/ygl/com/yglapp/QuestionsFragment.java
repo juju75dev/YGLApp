@@ -168,7 +168,7 @@ public class QuestionsFragment extends Fragment {
                         // TODO: 10/07/2017 intrface for that ..
 
 
-                     //   TerminateTest();
+                        //   TerminateTest();
 
                         QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
                                 candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
@@ -177,6 +177,7 @@ public class QuestionsFragment extends Fragment {
                         GlobalBus.getBus().post(new MyEventBus.
                                 QuizzOverMessage(quizResult, nbFreeQuestionsAnswered));
                         hideFragment();
+                        mCountDown.stop();
 
                     /*
                     GlobalBus.getBus().post(new MyEventBus.
