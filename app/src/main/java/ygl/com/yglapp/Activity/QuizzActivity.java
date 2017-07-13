@@ -46,6 +46,9 @@ public class QuizzActivity extends AppCompatActivity {
     @BindView(R.id.warning_desc_view)
     TextView warningDescView;
 
+    @BindView(R.id.question_layout)
+    LinearLayout questionLayout;
+
     @BindView(R.id.score_layout)
     RelativeLayout scoreLayout;
 
@@ -92,6 +95,8 @@ public class QuizzActivity extends AppCompatActivity {
         startQuizzButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                questionLayout.setVisibility(View.VISIBLE);
 
                 //  GlobalBus.getBus().post(new MyEventBus.QuizzReadyMessage(quiz));
                 if (!quizStarted) {

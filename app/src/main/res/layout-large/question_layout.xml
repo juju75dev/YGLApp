@@ -63,10 +63,11 @@
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="@drawable/ygl_background"
+
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
         <com.bcgdv.asia.lib.ticktock.TickTockView
