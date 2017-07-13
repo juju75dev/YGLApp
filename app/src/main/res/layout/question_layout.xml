@@ -1,253 +1,263 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ygl_background"
     android:orientation="vertical">
 
-    <com.bcgdv.asia.lib.ticktock.TickTockView
-        android:id="@+id/view_ticktock_countdown"
-        app:tickCircleDuration="total_time"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-
-        android:layout_gravity="center_horizontal" />
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/time"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:visibility="invisible"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:layout_centerHorizontal="true"/>-->
-
-    <!--<io.github.krtkush.lineartimer.LinearTimerView-->
-    <!--android:id="@+id/timer_view"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--timer:radius="50dp"-->
-    <!--timer:strokeWidth="2dp"-->
-    <!--timer:startingPoint="270"-->
-    <!--timer:initialColor="@color/colorPrimary"-->
-    <!--timer:progressColor="@color/colorInitial"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_centerHorizontal="true" />-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/timer_view"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginTop="10dp"-->
-
-    <!--android:background="@drawable/time_shape"-->
-    <!--android:textColor="@android:color/black"-->
-    <!--android:textSize="16dp"-->
-    <!--android:textStyle="bold" />-->
-
     <LinearLayout
         android:id="@+id/question_layout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10"
+        android:background="@drawable/ygl_background"
+
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <com.bcgdv.asia.lib.ticktock.TickTockView
+            android:id="@+id/view_ticktock_countdown"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/question_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="16dp"
-                android:textStyle="bold"
+            app:tickCircleDuration="total_time" />
 
 
-                />
-
-
-        </LinearLayout>
-
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/enonce_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cardview_size_enonce"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-
-            card_view:cardCornerRadius="10dp"
-            card_view:cardElevation="3sp"
-            card_view:cardUseCompatPadding="true">
-
-            <ScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                >
-
-                <TextView
-                    android:id="@+id/enonce_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="sdssd \n sd  sd\n sdsd \n saas\nas \n ]n ]n asa"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/textsize"
-                    android:textStyle="italic" />
-
-            </ScrollView>
-
-        </android.support.v7.widget.CardView>
-
-        <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/card_edit_answer_view"-->
+        <!--<TextView-->
+        <!--android:id="@+id/time"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:gravity="center"-->
-        <!--card_view:cardElevation="4sp"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
-        <!--card_view:cardUseCompatPadding="true">-->
+        <!--<io.github.krtkush.lineartimer.LinearTimerView-->
+        <!--android:id="@+id/timer_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--timer:radius="50dp"-->
+        <!--timer:strokeWidth="2dp"-->
+        <!--timer:startingPoint="270"-->
+        <!--timer:initialColor="@color/colorPrimary"-->
+        <!--timer:progressColor="@color/colorInitial"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
 
-        <!--</android.support.v7.widget.CardView>-->
+        <!--<TextView-->
+        <!--android:id="@+id/timer_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="10dp"-->
 
+        <!--android:background="@drawable/time_shape"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="16dp"-->
+        <!--android:textStyle="bold" />-->
 
         <LinearLayout
+
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:id="@+id/radio_group_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cardview_size_prop"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edit_answer_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="@android:color/white"
+                <TextView
+                    android:id="@+id/question_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
                     android:gravity="center"
-                    android:hint="Saisissez votre réponse ici"
-                    android:padding="5dp"
-                    android:textSize="14dp"
-                    android:visibility="gone" />
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
 
-                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/radio_group"
+
+                    />
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/enonce_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_size_enonce"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="3sp"
+                card_view:cardUseCompatPadding="true">
+
+                <ScrollView
+                    android:id="@+id/scrollView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/enonce_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="sdssd \n sd  sd\n sdsd \n saas\nas \n ]n ]n asa"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="italic" />
+
+                </ScrollView>
+
+            </android.support.v7.widget.CardView>
+
+            <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/card_edit_answer_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:gravity="center"-->
+            <!--card_view:cardElevation="4sp"-->
+
+            <!--card_view:cardUseCompatPadding="true">-->
+
+
+            <!--</android.support.v7.widget.CardView>-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/radio_group_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cardview_size_prop"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
 
+                    <EditText
+                        android:id="@+id/edit_answer_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
 
-                    <ygl.com.yglapp.ToggleRadioButton
-                        android:id="@+id/prop1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:hint="Saisissez votre réponse ici"
+                        android:padding="5dp"
+                        android:textSize="14dp"
+                        android:visibility="gone" />
+
+                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/radio_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/radio_shape"
-
-                        android:textSize="@dimen/textsize"
-
-
-                        />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
 
 
-                    <ygl.com.yglapp.ToggleRadioButton
-                        android:id="@+id/prop2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/radio_shape"
+                        <ygl.com.yglapp.ToggleRadioButton
+                            android:id="@+id/prop1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/radio_shape"
 
-                        android:textSize="@dimen/textsize"
-
-
-                        />
-
-                    <ygl.com.yglapp.ToggleRadioButton
-                        android:id="@+id/prop3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/radio_shape"
-
-                        android:textSize="@dimen/textsize"
+                            android:textSize="@dimen/textsize"
 
 
-                        />
-
-                    <ygl.com.yglapp.ToggleRadioButton
-                        android:id="@+id/prop4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/radio_shape"
-
-                        android:textSize="@dimen/textsize"
+                            />
 
 
-                        />
-                </RadioGroup>
+                        <ygl.com.yglapp.ToggleRadioButton
+                            android:id="@+id/prop2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/radio_shape"
+
+                            android:textSize="@dimen/textsize"
+
+
+                            />
+
+                        <ygl.com.yglapp.ToggleRadioButton
+                            android:id="@+id/prop3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/radio_shape"
+
+                            android:textSize="@dimen/textsize"
+
+
+                            />
+
+                        <ygl.com.yglapp.ToggleRadioButton
+                            android:id="@+id/prop4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/radio_shape"
+
+                            android:textSize="@dimen/textsize"
+
+
+                            />
+                    </RadioGroup>
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/validate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/validate_selector"
+                    android:text="Valider"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/questions_counter_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+
             </LinearLayout>
 
 
-            <Button
-                android:id="@+id/validate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-
-                android:layout_marginTop="5dp"
-                android:background="@drawable/validate_selector"
-                android:text="Valider"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/questions_counter_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:padding="5dp"
-                android:textColor="@android:color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 
