@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcgdv.asia.lib.ticktock.TickTockView;
 import com.squareup.otto.Subscribe;
@@ -33,11 +31,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import ygl.com.yglapp.Model.Candidat;
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Model.Proposition;
@@ -78,7 +74,7 @@ public class QuestionsFragment extends Fragment {
     EditText editAnswerView;
     @BindView(R.id.radio_group_layout)
     LinearLayout cardRadioGroup;
-    //    @BindView(R.id.timer_view)
+//    @BindView(R.id.timer_view)
 //    LinearTimerView linearTimerView;
     @BindView(R.id.questions_counter_view)
     TextView questionsCounterView;
@@ -109,7 +105,7 @@ public class QuestionsFragment extends Fragment {
 
 
     private long duration;
-    private long timeRemaining = -1;
+    private long myTimeRemaining =-1;
 
 
     @Override
@@ -171,7 +167,7 @@ public class QuestionsFragment extends Fragment {
                         //   TerminateTest();
 
                         QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
-                                candidat.getNom(), scoreTopercent(score), myQuizz.getName(), countDownTimer.timeRemaining,
+                                candidat.getNom(), scoreTopercent(score), myQuizz.getName(), myTimeRemaining,
                                 new Date().getTime(), pairAnswersLibres, listQCMResultsDetails);
 
                         GlobalBus.getBus().post(new MyEventBus.
@@ -485,6 +481,7 @@ public class QuestionsFragment extends Fragment {
             mCountDown.setOnTickListener(new TickTockView.OnTickListener() {
                 @Override
                 public String getText(long timeRemaining) {
+                    myTimeRemaining=timeRemaining;
                     int seconds = (int) (timeRemaining / 1000) % 60;
                     int minutes = (int) ((timeRemaining / (1000 * 60)) % 60);
                     int hours = (int) ((timeRemaining / (1000 * 60 * 60)) % 24);
@@ -566,9 +563,12 @@ public class QuestionsFragment extends Fragment {
         GlobalBus.getBus().post(new MyEventBus.
                 QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
         countDownTimer.cancel();
-        //    hideFragment();
+    //    hideFragment();
 
     }
+
+
+
 
 
 //    @Override
