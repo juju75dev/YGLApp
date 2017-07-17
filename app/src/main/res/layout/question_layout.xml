@@ -12,8 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/ygl_background"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <com.bcgdv.asia.lib.ticktock.TickTockView
             android:id="@+id/view_ticktock_countdown"
@@ -70,17 +69,27 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                card_view:cardBackgroundColor="@color/colorAccent"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4sp"
+
+                card_view:cardUseCompatPadding="true">
 
                 <TextView
                     android:id="@+id/question_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+
                     android:gravity="center"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
@@ -90,7 +99,7 @@
                     />
 
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
