@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -18,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
@@ -107,6 +111,8 @@ public class QuestionsFragment extends Fragment {
     private long duration;
     private long myTimeRemaining =-1;
 
+    private ProgressBar mProgressBar;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,6 +120,7 @@ public class QuestionsFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.question_layout, container, false);
         mCountDown = (TickTockView) fragmentView.findViewById(R.id.view_ticktock_countdown);
+        mProgressBar = ((ProgressBar) fragmentView.findViewById(R.id.progress));
 
         ButterKnife.bind(this, fragmentView);
 
@@ -133,12 +140,20 @@ public class QuestionsFragment extends Fragment {
 
         alphaAanimation = AppUtils.initAlphaAnim();
 
+//        setProgress();
+
+
+
+
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (enableValidation) {
+                    mProgressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(getActivity(),R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+                    mProgressBar.setMax(myQuizz.getQuestions().size()-1);
+                    setProgress(index+1);
 
                     enableValidation = false;
                     scrollView.scrollTo(0, 0);
@@ -195,6 +210,16 @@ public class QuestionsFragment extends Fragment {
 
         return fragmentView;
     }
+
+    private void setProgress(int currentQuizPosition) {
+        if (!isAdded()) {
+            return;
+        }
+//        mProgressText
+//                .setText(getString(R.string.quiz_of_quizzes, currentQuizPosition, mQuizSize));
+        mProgressBar.setProgress(currentQuizPosition);
+    }
+
 
 //    public void TerminateTest() {
 //        QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),

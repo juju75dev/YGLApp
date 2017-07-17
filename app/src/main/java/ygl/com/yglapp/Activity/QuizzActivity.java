@@ -72,6 +72,7 @@ public class QuizzActivity extends AppCompatActivity {
     private Candidat candidat;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

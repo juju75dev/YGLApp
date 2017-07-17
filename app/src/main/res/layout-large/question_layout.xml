@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/ygl_background"
     android:orientation="vertical">
 
@@ -123,7 +124,7 @@
                 android:gravity="center"
                 android:text="testtttttttttttt \n sdssd"
                 android:textColor="@android:color/white"
-                android:textSize="32dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
 
 
@@ -297,6 +298,18 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="30dp" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
+                android:layout_marginRight="@dimen/spacing_double"
+                android:layout_marginLeft="@dimen/spacing_double"
+                android:progressTint="@color/colorAccent"
+                tools:ignore="UnusedAttribute" />
+
 
             <TextView
                 android:id="@+id/questions_counter_view"

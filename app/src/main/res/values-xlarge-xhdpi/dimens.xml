@@ -3,6 +3,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="textsize">20dp</dimen>
     <dimen name="textsize_enonce">28dp</dimen>
+    <dimen name="spacing_double">24dp</dimen>
     <dimen name="cardviewsize">300dp</dimen>
     <dimen name="cardview_size_enonce">400dp</dimen>
     <dimen name="cardview_size_prop">400dp</dimen>
