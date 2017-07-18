@@ -14,7 +14,8 @@
         android:background="@drawable/ygl_background"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="gone">
+
+        >
 
         <com.bcgdv.asia.lib.ticktock.TickTockView
             android:id="@+id/view_ticktock_countdown"
@@ -74,8 +75,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 card_view:cardBackgroundColor="@color/colorAccent"
@@ -161,7 +162,8 @@
                 <LinearLayout
                     android:id="@+id/radio_group_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/cardview_size_prop"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
@@ -229,7 +231,6 @@
                             android:id="@+id/prop4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
                             android:background="@drawable/radio_shape"
 
                             android:textSize="@dimen/textsize"
@@ -244,9 +245,9 @@
                     android:id="@+id/validate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center"
-
+                    android:layout_gravity="center"
                     android:layout_marginTop="5dp"
+
                     android:background="@drawable/validate_selector"
                     android:text="Valider"
                     android:textAllCaps="false"
@@ -259,6 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_double"
                     android:layout_marginRight="@dimen/spacing_double"
+                    android:layout_marginTop="5dp"
                     android:progressTint="?android:colorAccent"
                     tools:ignore="UnusedAttribute" />
 
@@ -273,7 +275,8 @@
                     android:padding="5dp"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

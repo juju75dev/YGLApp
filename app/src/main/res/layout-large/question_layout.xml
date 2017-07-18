@@ -194,7 +194,7 @@
             <LinearLayout
                 android:id="@+id/radio_group_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cardviewsize"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="40dp"
@@ -217,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
+
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
 
@@ -274,8 +274,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/radio_shape"
-                        android:paddingBottom="10dp"
+
                         android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
 
                         android:textSize="@dimen/textsize"
 
@@ -289,9 +290,9 @@
                 android:id="@+id/validate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/validate_selector"
                 android:padding="10dp"
                 android:text="Valider"
@@ -319,6 +320,7 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
+                android:visibility="gone"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
