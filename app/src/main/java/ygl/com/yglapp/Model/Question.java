@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Question implements Serializable {
 
-
-
     private String key;
     private long type;
     private String text;

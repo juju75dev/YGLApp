@@ -484,8 +484,6 @@ public class QuestionsFragment extends Fragment {
 
         }
 
-        Log.d("scccc", "scccccc" + quizTotalPoints);
-
         candidat = quizMessage.getCandidat();
         duration = myQuizz.getDuration() * 60000;
 

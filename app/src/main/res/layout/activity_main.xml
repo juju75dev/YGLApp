@@ -6,6 +6,7 @@
     android:background="@drawable/ygl_background"
     tools:context="ygl.com.yglapp.Activity.MainActivity">
 
+
     <ImageView
         android:id="@+id/image_view_loader"
         android:layout_width="120dp"
