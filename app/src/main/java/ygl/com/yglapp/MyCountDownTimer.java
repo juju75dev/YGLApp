@@ -1,8 +1,6 @@
 package ygl.com.yglapp;
 
 import android.os.CountDownTimer;
-import android.text.Html;
-import android.widget.TextView;
 
 import ygl.com.yglapp.Model.MyEventBus;
 import ygl.com.yglapp.Utlities.AppUtils;

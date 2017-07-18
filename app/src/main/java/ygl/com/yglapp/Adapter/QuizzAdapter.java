@@ -1,8 +1,6 @@
 package ygl.com.yglapp.Adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -85,8 +82,6 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
             if (AppUtils.size(context) > 3)
                 radiobutton.setTextSize(26);
             radiobutton.setText(listQuizzGroup.get(position).getListQuiz().get(i).getLevel());
-
-
 
             final int fIndex = i;
 

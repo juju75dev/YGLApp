@@ -1,7 +1,5 @@
 package ygl.com.yglapp.Injection;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -36,7 +34,6 @@ public class QuizParser {
           //  quizzGroup.setLevel((String)groupShot.child("level").getValue());
             quizzGroup.setIconName(groupShot.child("icon").toString());
 
-
             for (DataSnapshot quizShot : groupShot.getChildren()) {
 
                 Quizz fireQuiz = new Quizz();
@@ -54,7 +51,6 @@ public class QuizParser {
                     question.setKey(questionShot.getKey());
                     question.setType((long) questionShot.child("type").getValue());
                     question.setWeight((long) questionShot.child("weight").getValue());
-                   // question.setKey(questionShot.child("key").getValue().toString());
                     question.setText(questionShot.child("text").getValue().toString());
 
                     if (questionShot.child("enonce").getValue() != null) {
@@ -70,14 +66,8 @@ public class QuizParser {
                     ArrayList<Proposition> listProp = new ArrayList<>();
                     for (DataSnapshot propShot : questionShot.child("propositions").getChildren()) {
 
-                        Log.d("zzzzzz","zzzzz"+propShot.getValue());
-
                         Proposition prop = propShot.getValue(Proposition.class);
                         listProp.add(prop);
-
-                       // Log.d("zzzzzz","zzzzz"+prop.getText()+"//"+prop.getKey()+"//"+prop.getTarget()+"//"+prop.getValue());
-
-
 
                     }
 
