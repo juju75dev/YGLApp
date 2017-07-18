@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -18,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
@@ -74,7 +78,7 @@ public class QuestionsFragment extends Fragment {
     EditText editAnswerView;
     @BindView(R.id.radio_group_layout)
     LinearLayout cardRadioGroup;
-//    @BindView(R.id.timer_view)
+    //    @BindView(R.id.timer_view)
 //    LinearTimerView linearTimerView;
     @BindView(R.id.questions_counter_view)
     TextView questionsCounterView;
@@ -105,7 +109,9 @@ public class QuestionsFragment extends Fragment {
 
 
     private long duration;
-    private long myTimeRemaining =-1;
+    private long myTimeRemaining = -1;
+
+    private ProgressBar mProgressBar;
 
 
     @Override
@@ -114,6 +120,7 @@ public class QuestionsFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.question_layout, container, false);
         mCountDown = (TickTockView) fragmentView.findViewById(R.id.view_ticktock_countdown);
+        mProgressBar = ((ProgressBar) fragmentView.findViewById(R.id.progress));
 
         ButterKnife.bind(this, fragmentView);
 
@@ -134,11 +141,18 @@ public class QuestionsFragment extends Fragment {
         alphaAanimation = AppUtils.initAlphaAnim();
 
 
+
+//        setProgress();
+
+
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (enableValidation) {
+
+
+                    setProgress(index+2);
 
                     enableValidation = false;
                     scrollView.scrollTo(0, 0);
@@ -165,6 +179,8 @@ public class QuestionsFragment extends Fragment {
 
 
                         //   TerminateTest();
+
+                        setProgress(1);
 
                         QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
                                 candidat.getNom(), scoreTopercent(score), myQuizz.getName(), myTimeRemaining,
@@ -195,6 +211,16 @@ public class QuestionsFragment extends Fragment {
 
         return fragmentView;
     }
+
+    private void setProgress(int currentQuizPosition) {
+        if (!isAdded()) {
+            return;
+        }
+//        mProgressText
+//                .setText(getString(R.string.quiz_of_quizzes, currentQuizPosition, mQuizSize));
+        mProgressBar.setProgress(currentQuizPosition);
+    }
+
 
 //    public void TerminateTest() {
 //        QuizResult quizResult = new QuizResult(candidat.getEmail(), myQuizz.getLevel(), candidat.getPrenom(),
@@ -448,6 +474,10 @@ public class QuestionsFragment extends Fragment {
         myQuizz = quizMessage.getQuizz();
         listQCMResultsDetails = new ArrayList<>();
 
+        mProgressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        mProgressBar.setMax(myQuizz.getQuestions().size() );
+        setProgress(1);
+
         for (int i = 0; i < myQuizz.getQuestions().size(); i++) {
 
             quizTotalPoints += myQuizz.getQuestions().get(i).getWeight();
@@ -479,7 +509,7 @@ public class QuestionsFragment extends Fragment {
             mCountDown.setOnTickListener(new TickTockView.OnTickListener() {
                 @Override
                 public String getText(long timeRemaining) {
-                    myTimeRemaining=timeRemaining;
+                    myTimeRemaining = timeRemaining;
                     int seconds = (int) (timeRemaining / 1000) % 60;
                     int minutes = (int) ((timeRemaining / (1000 * 60)) % 60);
                     int hours = (int) ((timeRemaining / (1000 * 60 * 60)) % 24);
@@ -561,12 +591,9 @@ public class QuestionsFragment extends Fragment {
         GlobalBus.getBus().post(new MyEventBus.
                 QuizzOverMessage(score,listAnswersLibres,nbFreeQuestionsAnswered,countDownTimer.timeRemaining));*/
         countDownTimer.cancel();
-    //    hideFragment();
+        //    hideFragment();
 
     }
-
-
-
 
 
 //    @Override
