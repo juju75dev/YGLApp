@@ -26,7 +26,7 @@ import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.QuizzGroup;
-import ygl.com.yglapp.QuestionHolder;
+import ygl.com.yglapp.QuizGroupHolder;
 import ygl.com.yglapp.R;
 import ygl.com.yglapp.Utlities.AppUtils;
 
@@ -36,12 +36,13 @@ import ygl.com.yglapp.Utlities.AppUtils;
  * Created by juju on 06/06/2017.
  */
 
-public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
+public class QuizzAdapter extends RecyclerView.Adapter<QuizGroupHolder> {
 
     private ArrayList<QuizzGroup> listQuizzGroup = new ArrayList<>();
     private ArrayList<QuizResult> listQuizzresult = new ArrayList<>();
     private OnQuizzGroupClicked clickCallback;
     private Context context;
+    private AppCompatRadioButton radiobutton;
 
 
     public QuizzAdapter() {
@@ -54,27 +55,23 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     }
 
     @Override
-    public QuestionHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+    public QuizGroupHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz, viewGroup, false);
         context = viewGroup.getContext();
-        return new QuestionHolder(view);
+        return new QuizGroupHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(QuestionHolder myViewHolder, final int position) {
+    public void onBindViewHolder(QuizGroupHolder myViewHolder, final int position) {
 
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
-        AppCompatRadioButton radiobutton;
 
         final int fPosition = position;
-
-
-        TextView titleView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_name_view);
-        //TextView descView = (TextView) myViewHolder.itemView.findViewById(R.id.quizz_description_view);
-        ImageView imageView = (ImageView) myViewHolder.itemView.findViewById(R.id.image_cell);
-        CheckBox checkBox = (CheckBox) myViewHolder.itemView.findViewById(R.id.checkbox_quiz);
-        final RadioGroup radioGroup = (RadioGroup) myViewHolder.itemView.findViewById(R.id.radioGroup);
+        TextView titleView = myViewHolder.titleView;
+        ImageView imageView = myViewHolder.imageView;
+        CheckBox checkBox = myViewHolder.checkBox;
+        final RadioGroup radioGroup = myViewHolder.radioGroup;
 
         for (int i = 0; i < listQuizzGroup.get(position).getListQuiz().size(); i++) {
 
