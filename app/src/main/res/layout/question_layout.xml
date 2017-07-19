@@ -14,6 +14,7 @@
         android:background="@drawable/ygl_background"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:visibility="gone"
 
         >
 
@@ -57,10 +58,10 @@
         <!--android:layout_gravity="center"-->
         <!--android:layout_marginTop="10dp"-->
 
-    <!--android:background="@drawable/time_shape"-->
-    <!--android:textColor="@android:color/black"-->
-    <!--android:textSize="16dp"-->
-    <!--android:textStyle="bold" />-->
+        <!--android:background="@drawable/time_shape"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="16dp"-->
+        <!--android:textStyle="bold" />-->
 
         <LinearLayout
 
@@ -162,7 +163,7 @@
                 <LinearLayout
                     android:id="@+id/radio_group_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/cardview_size_prop"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -171,10 +172,12 @@
                     <EditText
                         android:id="@+id/edit_answer_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
+                        android:layout_height="@dimen/cardview_size_prop"
+                        android:layout_gravity="center_vertical"
                         android:background="@android:color/white"
                         android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:hint="Saisissez votre réponse ici"
                         android:padding="5dp"
                         android:textSize="14dp"
@@ -241,28 +244,44 @@
                 </LinearLayout>
 
 
-                <Button
-                    android:id="@+id/validate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-
-                    android:background="@drawable/validate_selector"
-                    android:text="Valider"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white" />
-
-                <ProgressBar
-                    android:id="@+id/progress"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_double"
-                    android:layout_marginRight="@dimen/spacing_double"
-                    android:layout_marginTop="5dp"
-                    android:progressTint="?android:colorAccent"
-                    tools:ignore="UnusedAttribute" />
+                    android:layout_height="match_parent"
+
+                    android:layout_gravity="bottom"
+
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/validate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/progress"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+
+                        android:background="@drawable/validate_selector"
+                        android:padding="5dp"
+                        android:text="Valider"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="16dp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/spacing_double"
+                        android:layout_marginRight="@dimen/spacing_double"
+                        android:progressTint="@color/colorAccent"
+                        tools:ignore="UnusedAttribute" />
+
+                </RelativeLayout>
 
 
                 <TextView

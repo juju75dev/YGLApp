@@ -26,7 +26,7 @@ import ygl.com.yglapp.Model.OnQuizzGroupClicked;
 import ygl.com.yglapp.Model.QuizResult;
 import ygl.com.yglapp.Model.QuizResultGroup;
 import ygl.com.yglapp.Model.QuizzGroup;
-import ygl.com.yglapp.QuestionHolder;
+import ygl.com.yglapp.QuizGroupHolder;
 import ygl.com.yglapp.R;
 import ygl.com.yglapp.Utlities.AppUtils;
 
@@ -36,7 +36,7 @@ import ygl.com.yglapp.Utlities.AppUtils;
  * Created by juju on 06/06/2017.
  */
 
-public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
+public class QuizzAdapter extends RecyclerView.Adapter<QuizGroupHolder> {
 
     private ArrayList<QuizzGroup> listQuizzGroup = new ArrayList<>();
     private ArrayList<QuizResult> listQuizzresult = new ArrayList<>();
@@ -54,15 +54,15 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuestionHolder> {
     }
 
     @Override
-    public QuestionHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+    public QuizGroupHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_quizz, viewGroup, false);
         context = viewGroup.getContext();
-        return new QuestionHolder(view);
+        return new QuizGroupHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(QuestionHolder myViewHolder, final int position) {
+    public void onBindViewHolder(QuizGroupHolder myViewHolder, final int position) {
 
         final QuizzGroup quizzGroup = listQuizzGroup.get(position);
         AppCompatRadioButton radiobutton;
