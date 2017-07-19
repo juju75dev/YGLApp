@@ -4,13 +4,17 @@ package ygl.com.yglapp;
  * Created by juju on 18/07/2017.
  */
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,16 +36,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 @LargeTest
 public class MainInstrumentedTest {
 
-
+    private FirebaseIdlingResource fireIdlingResource;
     Candidat c1 = new Candidat("juju","soso","soso@so.so");
     public MainInstrumentedTest(){
 
     }
-/*
-    @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
-            MainActivity.class,false,false);*/
+    @Before
+    public void registerIntentServiceIdlingResource() {
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        fireIdlingResource = new FirebaseIdlingResource(instrumentation.getTargetContext());
+        Espresso.registerIdlingResources(fireIdlingResource);
+    }
 
+    @After
+    public void unregisterIntentServiceIdlingResource() {
+        Espresso.unregisterIdlingResources(fireIdlingResource);
+    }
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<MainActivity>(

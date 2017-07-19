@@ -70,7 +70,7 @@ public class QuizzAdapter extends RecyclerView.Adapter<QuizGroupHolder> {
         final int fPosition = position;
         TextView titleView = myViewHolder.titleView;
         ImageView imageView = myViewHolder.imageView;
-        CheckBox checkBox = myViewHolder.checkBox; 
+        CheckBox checkBox = myViewHolder.checkBox;
         final RadioGroup radioGroup = myViewHolder.radioGroup;
 
         for (int i = 0; i < listQuizzGroup.get(position).getListQuiz().size(); i++) {

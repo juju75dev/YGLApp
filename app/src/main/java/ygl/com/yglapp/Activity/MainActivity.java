@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import ygl.com.yglapp.Adapter.QuizzAdapter;
+import ygl.com.yglapp.IdleTesting;
 import ygl.com.yglapp.Injection.DaggerQuizParsingComponent;
 import ygl.com.yglapp.Injection.QuizParser;
 import ygl.com.yglapp.Injection.QuizParsingComponent;
@@ -42,8 +43,6 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     RecyclerView myRecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    //@BindView(R.id.quizz_progress)
-    //ProgressBar quizzProgress;
     @BindView(R.id.image_view_loader)
     ImageView logoView;
 
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
     private ArrayList<QuizzGroup> checkedListQuizGroup;
     private Candidat candidat;
     private AnimationDrawable frameAnimation;
+
 
     @Inject
     QuizParser firebaseParser;
@@ -102,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements OnQuizzGroupClick
                 adapterQuizz.setClickCallback(MainActivity.this);
                 adapterQuizz.notifyDataSetChanged();
                 fab.setVisibility(View.VISIBLE);
+
+
+                IdleTesting.espressoIdling=false;
 
                 /*
                 QuizzAdapter adapterQuizz = new QuizzAdapter(listQuizGroup,MainActivity.this);
